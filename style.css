@@ -375,19 +375,6 @@ header {
   color: #ffcc00;
 }
 
-<<<<<<< HEAD
-=======
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-top: 2rem;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
->>>>>>> 3e6175b054e9fe8616f88d8bb62c04c127a70036
 form input,
 form textarea {
   padding: 0.75rem;
@@ -414,22 +401,6 @@ form button:hover {
   background-color: #333;
 }
 
-<<<<<<< HEAD
-=======
-#form-message {
-  text-align: center;
-  margin-top: 1rem;
-  font-weight: bold;
-}
-
-.contact-infos {
-  margin-top: 2rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  text-align: center;
-}
-
->>>>>>> 3e6175b054e9fe8616f88d8bb62c04c127a70036
 .contact-infos a {
   color: #1e1e2f;
   text-decoration: underline;
@@ -1609,11 +1580,7 @@ footer {
   margin-bottom: 1.5rem;
 }
 
-<<<<<<< HEAD
 .about-description::before{
-=======
-#about p::before{
->>>>>>> 3e6175b054e9fe8616f88d8bb62c04c127a70036
   content: "♟";
   padding-right: 5px;
   color: #ffcc00;
@@ -1957,7 +1924,6 @@ footer p::before{
     font-size: 1.4rem;
     letter-spacing: 3px;
   }
-<<<<<<< HEAD
 }
 
 .map{
@@ -2222,6 +2188,4 @@ footer p::before{
 @keyframes fly {
   from { transform: translateX(0); }
   to { transform: translateX(4px); }
-=======
->>>>>>> 3e6175b054e9fe8616f88d8bb62c04c127a70036
 }

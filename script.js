@@ -642,12 +642,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     return new Date();
   }
-<<<<<<< HEAD
 
   document.getElementById('contact-form').addEventListener('submit', function() {
     this.classList.add('sending');
     setTimeout(() => this.classList.remove('sending'), 2000);
   });
-=======
->>>>>>> 3e6175b054e9fe8616f88d8bb62c04c127a70036
 });
