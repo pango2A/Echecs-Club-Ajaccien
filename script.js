@@ -3,9 +3,9 @@
 document.addEventListener('DOMContentLoaded', () => {
   const CONFIG = {
     emailjs: {
-      serviceId: "service_uuayncs",
-      templateId: "template_s9jbs2i",
-      publicKey: "IrEBdlM7jzwuAPsPX"
+      serviceId: "service_kabww1n",// Mis à jour pour eca
+      templateId: "template_1pqx1u7",// Mis à jour pour eca
+      publicKey: "0_ltfLFqvokgONo8-"// Mis à jour pour eca
     },
     stats: {
       licencies: 125,
