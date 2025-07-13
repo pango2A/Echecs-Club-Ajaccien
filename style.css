@@ -2188,3 +2188,45 @@ footer p::before{
   from { transform: translateX(0); }
   to { transform: translateX(4px); }
 }
+
+.about-content-wrapper {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.about-text {
+  flex: 0 1 70%;
+}
+
+.about-logo-container {
+  flex: 0 1 30%;
+  text-align: center;
+}
+
+.about-logo {
+  max-width: 180px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.about-logo:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .about-content-wrapper {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .about-text, 
+  .about-logo-container {
+    flex: 1 1 100%;
+  }
+  .about-logo {
+    max-width: 150px;
+  }
+}
