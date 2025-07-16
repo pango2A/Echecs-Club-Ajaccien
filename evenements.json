@@ -1,16 +1,9 @@
 [
   {
-    "date": "2025-07-15",
-    "titre": "Open d'été du Corsica Chess Club",
-    "description": "Ce tournoi homologué Classique, réunit tout les ages et niveaux, ainsi que les passionnés des 64 cases venus de tous les horizons. Le Corsica chess club met à disposition ces salles climatisées afin d'être dans les meilleures conditions !",
-    "image": "./images/Event_Temporaire/Open_CCC.jpg",
-    "lien": "https://www.corse-echecs.com/Open-d-Ete-du-Corsica-Chess-Club-du-15-07-au-18-07-2025_a4647.html"
-  },
-  {
     "date": "2025-08-02",
     "titre": "Tournoi de Blitz de Ciamannacce",
     "description": "Le dernier tournois Corse de blitz de l'été se déroule à Ciamannacce, au local communal, le tournoi commencera à 11h et finira vers 17h, Après cette journée de reflexion, une soirée grillade sera organisée.",
-    "image": "./images/Event_Temporaire/Ciamanace.jpg",
+    "image": "images/Event_Temporaire/Ciamanace.jpg",
     "lien": "https://www.corse-echecs.com/Tournoi-de-Blitz-de-Ciamannacce-Samedi-2-aout-2025_a4650.html"
   },
   {

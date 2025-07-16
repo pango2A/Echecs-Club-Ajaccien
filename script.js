@@ -26,6 +26,34 @@ document.addEventListener("DOMContentLoaded", () => {
   setupArchivesFilter();
 
   /* ==================== */
+  /* FONCTIONS SÉCURITÉ */
+  /* ==================== */
+
+  function escapeHtml(unsafe) {
+    return String(unsafe)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function sanitizeUrl(url) {
+    const allowedProtocols = ["https:", "http:", "mailto:", "tel:"];
+    try {
+      const parsed = new URL(url);
+      return allowedProtocols.includes(parsed.protocol) ? url : "#";
+    } catch {
+      return "#";
+    }
+  }
+
+  function sanitizeImageUrl(url) {
+    if (url.startsWith("images/" || "./images/")) return url;
+    return sanitizeUrl(url); // Réutilise la validation existante
+  }
+
+  /* ==================== */
   /* FONCTIONS PRINCIPALES */
   /* ==================== */
 
@@ -290,7 +318,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Configuration du bouton solution
         solutionBtn.style.display = "inline-block";
         solutionBtn.onclick = () => {
-          window.open(escapeHtml(data.url), "_blank", "noopener,noreferrer");
+          window.open(sanitizeUrl(data.url), "_blank", "noopener,noreferrer");
         };
       })
       .catch((error) => {
@@ -440,7 +468,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const startAutoRotation = () => {
       stopAutoRotation();
-      intervalId = setInterval(nextSlide, 5000);
+      intervalId = setInterval(nextSlide, 10000);
     };
 
     const stopAutoRotation = () => {
@@ -520,16 +548,7 @@ document.addEventListener("DOMContentLoaded", () => {
   /* FONCTIONS UTILITAIRES */
   /* ==================== */
 
-  function escapeHtml(unsafe) {
-    return String(unsafe)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-  }
-
-  async function fetchData(path, fallback = []) {
+  async function fetchData(path = []) {
     const jsonPaths = [`./${path}`, path, `/${path}`, `./data/${path}`];
 
     for (const jsonPath of jsonPaths) {
@@ -584,7 +603,7 @@ document.addEventListener("DOMContentLoaded", () => {
           ${event.images
             .map(
               (img) => `
-            <img src="${escapeHtml(img)}" 
+            <img src="${sanitizeImageUrl(escapeHtml(img))}" 
                  alt="${escapeHtml(event.title)}" 
                  class="gallery-img">
           `
@@ -616,7 +635,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .map(
         (actu) => `
     <div class="actualite-card">
-      <img src="${escapeHtml(actu.image)}" 
+      <img src="${sanitizeImageUrl(escapeHtml(actu.image))}" 
            alt="${escapeHtml(actu.titre)}" 
            class="actualite-image" 
            loading="lazy">
@@ -624,11 +643,11 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="actualite-date">${escapeHtml(formatDate(actu.date))}</div>
         <h3>${escapeHtml(actu.titre)}</h3>
         <p>${escapeHtml(actu.description)}</p>
-        <a href="${escapeHtml(actu.lien)}" 
+        <a href="${sanitizeUrl(actu.lien)}" 
            target="_blank" 
            rel="noopener noreferrer" 
            class="actualite-link">
-          Lire la suite 
+          En Savoir Plus 
         </a>
       </div>
     </div>
@@ -648,7 +667,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <div class="carousel-item">
       <div class="carousel-card">
         <div class="carousel-image-container">
-          <img src="${escapeHtml(evt.image)}" 
+          <img src="${sanitizeImageUrl(escapeHtml(evt.image))}" 
                alt="${escapeHtml(evt.titre)}" 
                class="carousel-image" 
                loading="lazy">
@@ -657,11 +676,11 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="carousel-date">${escapeHtml(formatDate(evt.date))}</div>
           <h3>${escapeHtml(evt.titre)}</h3>
           <p>${escapeHtml(evt.description)}</p>
-          <a href="${escapeHtml(evt.lien)}" 
+          <a href="${sanitizeUrl(evt.lien)}" 
              target="_blank" 
              rel="noopener noreferrer" 
              class="carousel-link">
-            Plus d'informations
+            En Savoir Plus
           </a>
         </div>
       </div>
@@ -757,14 +776,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const monthNumber = monthMap[month] || "01";
       return new Date(`${year}-${monthNumber}-${day.padStart(2, "0")}`);
     }
-
     return new Date();
   }
-
-  document
-    .getElementById("contact-form")
-    .addEventListener("submit", function () {
-      this.classList.add("sending");
-      setTimeout(() => this.classList.remove("sending"), 2000);
-    });
 });
