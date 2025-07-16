@@ -47,4 +47,4 @@ L’objectif est de fournir une plateforme moderne, intuitive et accessible pour
 - [LinkedIn](https://www.linkedin.com/authwall?trk=bf&trkInfo=AQGfoHv6VCCo_wAAAZgU3mko2c6nvi7apUOfKaPny4L6nef65F4sSF2qTuQub4-03GJ7CW42yoLcQADyckbON4n0Qo-qu1RxRvFbB_51V8Y1sqYdEERXR45uxDeia-Um2uO09AA=&original_referer=&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Fechecs-club-ajaccien%2F)  
 - [YouTube](https://www.youtube.com/channel/UC_8pVEkZwRdBriemfRA-vLw)  
 - [Instagram](https://www.instagram.com/i_scacchi_aiaccini/#)  
-- [Dépôt GitHub](https://github.com/pango2A/Echecs)  
+- [Dépôt GitHub](https://github.com/pango2A/Echecs-Club-Ajaccien)
