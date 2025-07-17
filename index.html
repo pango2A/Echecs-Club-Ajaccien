@@ -9,7 +9,7 @@
   <title>Échecs Club Ajaccien</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="images/Logo_du_club.jpeg">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"  integrity="sha512-..." crossorigin="anonymous">
 </head>
 <body>
   <header>
@@ -28,7 +28,8 @@
       <ul class="nav-links" id="nav-links">
         <li><a href="#evenements">Événements</a></li>
         <li><a href="#actualites">Actualités</a></li>
-        <li><a href="#contact">Inscription & Contact</a></li>
+        <li><a href="#inscription">Inscription</a></li> 
+        <li><a href="#contact">Contact</a></li>
         <li><a href="#horaires">Horaires</a></li>
         <li><a href="#probleme-semaine">Problèmes</a></li>
         <li><a href="#gallery">Galerie</a></li>
@@ -107,24 +108,27 @@
     </div>
   </section>
 
-  <section id="contact" class="section">
+  <section id="inscription" class="section">
     <div class="header">
-      <h2>Inscription & Contact</h2>
-      <p>Nous serions ravis d'échanger avec vous. N'hésitez pas à nous contacter pour toute question ou pour rejoindre notre club.</p>
+      <h2>Inscription en ligne</h2>
+      <p>Rejoignez le club en quelques clics et découvrez nos tarifs pour la saison</p>
     </div>
 
     <div class="inscription-banner">
       <div class="inscription-content">
-        <h2>Inscription en ligne</h2>
-        <p>Rejoignez le club en quelques clics !</p>
+        <h2>Devenez membre</h2>
+        <p>Accédez à tous les avantages du club toute l'année</p>
         <div style="text-align: center;">
-          <a href="https://echecs-club-ajaccien.assoconnect.com/collect/description/456708-x-inscriptions-eca-2024-2025" target="_blank" class="inscription-btn" rel="noopener noreferrer">
+          <a href="https://echecs-club-ajaccien.assoconnect.com/collect/description/456708-x-inscriptions-eca-2024-2025" 
+             target="_blank" 
+             class="inscription-btn" 
+             rel="noopener noreferrer">
             S'inscrire maintenant
           </a>
         </div>
       </div>
       <div class="inscription-image">
-        <img src="./images/Inscription.jpg" alt="Joueurs d'échecs">
+        <img src="./images/Inscription.jpg" alt="Joueurs d'échecs" loading="lazy">
       </div>
     </div>
 
@@ -139,7 +143,6 @@
             <li>Accès à tous les cours</li>
             <li>Participation aux tournois</li>
             <li>Licence FFE incluse</li>
-            <li>Accès libre aux séances</li>
           </ul>
         </div>
         <div class="tarif-card">
@@ -150,7 +153,6 @@
             <li>Cours spécifiques adultes</li>
             <li>Accès à tous les événements</li>
             <li>Licence FFE incluse</li>
-            <li>Accès libre aux séances</li>
           </ul>
         </div>
         <div class="tarif-card">
@@ -158,24 +160,30 @@
           <div class="tarif-price">250€</div>
           <div class="tarif-period">pour la saison</div>
           <ul class="tarif-features">
-            <li>-50% sur l'inscription d'un deuxieme membre de la famille</li>
+            <li>Réduction famille</li>
             <li>Licences FFE incluses</li>
             <li>Accès à tous les cours</li>
-            <li>Réduction sur les stages</li>
           </ul>
         </div>
       </div>
       <div class="fermeture-alert" style="margin-top: 2rem;">
         <div class="fermeture-content">
           <h3>Modalités de paiement</h3>
-          <p>Paiement possible en 3 fois sans frais.</p>
+          <p>Paiement possible en 3 fois sans frais. Contactez-nous pour les aides financières.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="header">
+      <h2>Nous contacter</h2>
+      <p>Contactez-nous rapidement par mail ou telephone et suivez nous sur les résaux !</p>
     </div>
 
     <div class="contact-grid">
       <div class="contact-infos-card">
-        <h3>Nos coordonnées</h3>
+        <h3>Coordonnées du club</h3>
         
         <div class="contact-info-item">
           <div class="contact-info-icon">
@@ -183,7 +191,7 @@
           </div>
           <div class="contact-info-content">
             <h4>Adresse</h4>
-            <p>Lieu Dit la Fontaine du Vittulu<br>route du Vittulu<br>20090 AJACCIO</p>
+            <p><a href="https://www.google.com/maps/place/%C3%89checs+Club+Ajaccien/@41.928365,8.724375,16z/data=!4m6!3m5!1s0x12da6985ff8c702d:0x22bb8195314699d9!8m2!3d41.9283651!4d8.7243749!16s%2Fg%2F1tg3dtf1?hl=fr&entry=ttu&g_ep=EgoyMDI1MDcxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">Lieu Dit la Fontaine du Vittulu<br>route du Vittulu<br>20090 AJACCIO</a></p>
           </div>
         </div>
         
@@ -208,18 +216,50 @@
         </div>
         
         <div class="map">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2968.3481807752464!2d8.721799976185556!3d41.92836906226512!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12da6985ff8c702d%3A0x22bb8195314699d9!2s%C3%89checs%20Club%20Ajaccien!5e0!3m2!1sfr!2sfr!4v1751565547643!5m2!1sfr!2sfr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"   referrerpolicy="no-referrer-when-downgrade" sandbox="allow-same-origin allow-scripts">></iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2968.3481807752464!2d8.721799976185556!3d41.92836906226512!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12da6985ff8c702d%3A0x22bb8195314699d9!2s%C3%89checs%20Club%20Ajaccien!5e0!3m2!1sfr!2sfr!4v1751565547643!5m2!1sfr!2sfr" 
+                  width="100%" 
+                  height="100%" 
+                  style="border:0;" 
+                  allowfullscreen="" 
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
         </div>
       </div>
     </div>
+
     <div class="social-media-bar">
       <div class="social-media-container">
-        <h3 class="social-media-title">Suivez-nous sur les réseaux sociaux</h3>
+        <h3 class="social-media-title">Suivez notre actualité</h3>
         <div class="social-media-links">
-          <a href="https://www.facebook.com/people/I-Scacchi-Aiaccini-%C3%89checs-Club-Ajaccien/100064347833591/?rdid=ElxUrTXQebdSWPpt&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2FYLdvAjugmbdn96ix%2F" target="_blank" class="social-media-link" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
-          <a href="https://www.linkedin.com/company/echecs-club-ajaccien/" target="_blank" class="social-media-link" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
-          <a href="https://www.youtube.com/channel/UC_8pVEkZwRdBriemfRA-vLw" target="_blank" class="social-media-link" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
-          <a href="https://www.instagram.com/i_scacchi_aiaccini/#" target="_blank" class="social-media-link" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.facebook.com/people/I-Scacchi-Aiaccini-%C3%89checs-Club-Ajaccien/100064347833591/" 
+             target="_blank" 
+             class="social-media-link" 
+             rel="noopener noreferrer"
+             aria-label="Facebook">
+            <i class="fab fa-facebook"></i>
+          </a>
+          <a href="https://www.instagram.com/i_scacchi_aiaccini/#" 
+             target="_blank" 
+             class="social-media-link" 
+             rel="noopener noreferrer"
+             aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://www.youtube.com/channel/UC_8pVEkZwRdBriemfRA-vLw" 
+             target="_blank" 
+             class="social-media-link" 
+             rel="noopener noreferrer"
+             aria-label="YouTube">
+            <i class="fab fa-youtube"></i>
+          </a>
+          <a href="https://www.linkedin.com/company/echecs-club-ajaccien/" 
+             target="_blank" 
+             class="social-media-link" 
+             rel="noopener noreferrer"
+             aria-label="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+          </a>
         </div>
       </div>
     </div>
