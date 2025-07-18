@@ -201,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (futureEvents.length > 0) {
         displayEvenements(futureEvents);
         setupCarousel();
-      setupCountdown(futureEvents);
+        setupCountdown(futureEvents);
       } else {
         const carouselContainer = document.querySelector(".carousel-container");
         if (carouselContainer) {
@@ -554,7 +554,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (diff <= 0) {
         clearInterval(countdownInterval);
         countdownContainer.innerHTML = `
-        <h3 class="countdown-title">L'événement "${escapeHtml(nextEvent.titre)}" a commencé !</h3>
+        <h3 class="countdown-title">L'événement "${escapeHtml(
+          nextEvent.titre
+        )}" a commencé !</h3>
         <p>Rejoignez-nous dès maintenant !</p>
       `;
         return;
@@ -596,11 +598,16 @@ document.addEventListener("DOMContentLoaded", () => {
       document
         .querySelectorAll(".event-section, .actualite-card")
         .forEach((el) => {
-          const elYear =
-            el.dataset.year ||
-            el
-              .querySelector(".actualite-date")
-              ?.textContent?.match(/\d{4}/)?.[0];
+          const elDate = el.querySelector(".actualite-date")?.textContent;
+          let elYear;
+
+          if (elDate) {
+            const match = elDate.match(/\d{4}/);
+            elYear = match ? match[0] : null;
+          } else {
+            elYear = el.dataset.year;
+          }
+
           el.style.display = elYear === year ? "" : "none";
         });
     }
@@ -695,28 +702,31 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     container.innerHTML = actualites
-      .map(
-        (actu) => `
-    <div class="actualite-card">
-      <img src="${sanitizeImageUrl(escapeHtml(actu.image))}" 
-           alt="${escapeHtml(actu.titre)}" 
-           class="actualite-image" 
-           loading="lazy"
-           data-lightbox="true">
-      <div class="actualite-content">
-        <div class="actualite-date">${escapeHtml(formatDate(actu.date))}</div>
-        <h3>${escapeHtml(actu.titre)}</h3>
-        <p>${escapeHtml(actu.description)}</p>
-        <a href="${sanitizeUrl(actu.lien)}" 
-           target="_blank" 
-           rel="noopener noreferrer" 
-           class="actualite-link">
-          En Savoir Plus 
-        </a>
-      </div>
-    </div>
-  `
-      )
+      .map((actu) => {
+        const year = new Date(actu.date).getFullYear();
+        return `
+        <div class="actualite-card" data-year="${year}">
+          <img src="${sanitizeImageUrl(escapeHtml(actu.image))}" 
+               alt="${escapeHtml(actu.titre)}" 
+               class="actualite-image" 
+               loading="lazy"
+               data-lightbox="true">
+          <div class="actualite-content">
+            <div class="actualite-date">${escapeHtml(
+              formatDate(actu.date)
+            )}</div>
+            <h3>${escapeHtml(actu.titre)}</h3>
+            <p>${escapeHtml(actu.description)}</p>
+            <a href="${sanitizeUrl(actu.lien)}" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="actualite-link">
+              En Savoir Plus 
+            </a>
+          </div>
+        </div>
+      `;
+      })
       .join("");
     setupLightbox();
   }
