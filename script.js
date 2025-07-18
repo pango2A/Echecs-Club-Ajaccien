@@ -201,6 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (futureEvents.length > 0) {
         displayEvenements(futureEvents);
         setupCarousel();
+      setupCountdown(futureEvents);
       } else {
         const carouselContainer = document.querySelector(".carousel-container");
         if (carouselContainer) {
@@ -360,26 +361,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!lightbox || !lightboxImg || !lightboxClose) return;
 
-    document
-      .querySelectorAll(
-        ".gallery img, .event-gallery img, .actualite-image, .carousel-image, .about-logo, #probleme-image"
-      )
-      .forEach((img) => {
-        img.addEventListener("click", () => {
-          const isValidImage =
-            img.src.includes("/images/") ||
-            img.src.includes("./images/") ||
-            img.src.includes("images/") ||
-            img.src.startsWith("data:image/");
+    document.querySelectorAll('img[data-lightbox="true"]').forEach((img) => {
+      img.addEventListener("click", () => {
+        const isValidImage =
+          img.src.includes("/images/") ||
+          img.src.includes("./images/") ||
+          img.src.includes("images/") ||
+          img.src.startsWith("data:image/");
 
-          if (!isValidImage) return;
+        if (!isValidImage) return;
 
-          lightbox.style.display = "flex";
-          document.body.style.overflow = "hidden";
-          lightboxImg.src = img.src;
-          lightboxImg.alt = img.alt || "";
-        });
+        lightbox.style.display = "flex";
+        document.body.style.overflow = "hidden";
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt || "";
       });
+    });
 
     const closeLightbox = () => {
       lightbox.style.display = "none";
@@ -523,6 +520,71 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  function setupCountdown(events) {
+    const countdownContainer = document.querySelector(".countdown-container");
+    if (!countdownContainer || !events || events.length === 0) {
+      countdownContainer.style.display = "none";
+      return;
+    }
+
+    const now = new Date();
+    const futureEvents = events.filter((event) => {
+      try {
+        const eventDate = new Date(event.date);
+        return eventDate > now;
+      } catch {
+        return false;
+      }
+    });
+
+    if (futureEvents.length === 0) {
+      countdownContainer.style.display = "none";
+      return;
+    }
+
+    const nextEvent = futureEvents[0];
+    const nextEventDate = new Date(nextEvent.date);
+    const nextEventTitle = document.getElementById("next-event-title");
+    nextEventTitle.textContent = `avant "${nextEvent.titre}"`;
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = nextEventDate - now;
+
+      if (diff <= 0) {
+        clearInterval(countdownInterval);
+        countdownContainer.innerHTML = `
+        <h3 class="countdown-title">L'événement "${nextEvent.titre}" a commencé !</h3>
+        <p>Rejoignez-nous dès maintenant !</p>
+      `;
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown-days").textContent = days
+        .toString()
+        .padStart(2, "0");
+      document.getElementById("countdown-hours").textContent = hours
+        .toString()
+        .padStart(2, "0");
+      document.getElementById("countdown-minutes").textContent = minutes
+        .toString()
+        .padStart(2, "0");
+      document.getElementById("countdown-seconds").textContent = seconds
+        .toString()
+        .padStart(2, "0");
+    }
+
+    updateCountdown();
+    const countdownInterval = setInterval(updateCountdown, 1000);
+  }
+
   function filterArchivesByYear(year) {
     if (year === "all") {
       document
@@ -605,7 +667,8 @@ document.addEventListener("DOMContentLoaded", () => {
               (img) => `
             <img src="${sanitizeImageUrl(escapeHtml(img))}" 
                  alt="${escapeHtml(event.title)}" 
-                 class="gallery-img">
+                 class="gallery-img"
+                 data-lightbox="true">
           `
             )
             .join("")}
@@ -638,7 +701,8 @@ document.addEventListener("DOMContentLoaded", () => {
       <img src="${sanitizeImageUrl(escapeHtml(actu.image))}" 
            alt="${escapeHtml(actu.titre)}" 
            class="actualite-image" 
-           loading="lazy">
+           loading="lazy"
+           data-lightbox="true">
       <div class="actualite-content">
         <div class="actualite-date">${escapeHtml(formatDate(actu.date))}</div>
         <h3>${escapeHtml(actu.titre)}</h3>
@@ -670,7 +734,8 @@ document.addEventListener("DOMContentLoaded", () => {
           <img src="${sanitizeImageUrl(escapeHtml(evt.image))}" 
                alt="${escapeHtml(evt.titre)}" 
                class="carousel-image" 
-               loading="lazy">
+               loading="lazy"
+               data-lightbox="true">
         </div>
         <div class="carousel-content">
           <div class="carousel-date">${escapeHtml(formatDate(evt.date))}</div>

@@ -16,7 +16,7 @@
     <div class="navbar">
       <div class="logo">
         <img src="./images/Logo_du_club.jpeg" alt="Logo ECA" class="logo-img">
-        <a href="#home">
+        <a href="#">
         <span class="logo-text">Echecs Club Ajaccien</span>
         </a>
       </div>
@@ -72,7 +72,7 @@
         <p class="about-description">Notre club, fondé en 1991, s'engage à développer la pratique des échecs pour tous les âges et tous les niveaux, avec une attention particulière pour les jeunes joueurs.</p>
       </div>
       <div class="about-logo-container">
-        <img src="./images/Logo_du_club.jpeg" alt="Logo du club" class="about-logo">
+        <img src="./images/Logo_du_club.jpeg" alt="Logo du club" class="about-logo" data-lightbox="true">
       </div>
     </div>
   </section>
@@ -82,15 +82,38 @@
       <h2>Événements à venir</h2>
       <p>Découvrez les prochains rendez-vous où stratégie et convivialité s'entremêlent</p>
     </div>
-    </div>
     <div class="carousel-container">
       <button class="carousel-btn prev-btn" aria-label="Précédent"><i class="fas fa-chevron-left"></i></button>   
-      <div class="carousel">
-    
-      </div>
+      <div class="carousel"></div>
       <button class="carousel-btn next-btn" aria-label="Suivant"><i class="fas fa-chevron-right"></i></button>
     </div>  
     <div class="carousel-dots"></div>
+    <div class="countdown-container">
+      <div class="countdown-header">
+        <i class="fas fa-chess-knight countdown-chess-icon"></i>
+        <h3 class="countdown-title">Prochain événement dans :</h3>
+        <i class="fas fa-chess-queen countdown-chess-icon"></i>
+      </div>
+      <div class="countdown-timer">
+        <div class="countdown-unit">
+          <span class="countdown-value" id="countdown-days">00</span>
+          <span class="countdown-label">Jours</span>
+        </div>
+        <div class="countdown-unit">
+          <span class="countdown-value" id="countdown-hours">00</span>
+          <span class="countdown-label">Heures</span>
+        </div>
+        <div class="countdown-unit">
+          <span class="countdown-value" id="countdown-minutes">00</span>
+          <span class="countdown-label">Minutes</span>
+        </div>
+        <div class="countdown-unit">
+          <span class="countdown-value" id="countdown-seconds">00</span>
+          <span class="countdown-label">Secondes</span>
+        </div>
+      </div>
+      <div class="countdown-event" id="next-event-title"></div>
+    </div>
   </section>
   
   <section id="actualites" class="section">
@@ -128,7 +151,7 @@
         </div>
       </div>
       <div class="inscription-image">
-        <img src="./images/Inscription.jpg" alt="Joueurs d'échecs" loading="lazy">
+        <img src="./images/Inscription.jpg" alt="Joueurs d'échecs" loading="lazy" data-lightbox="true">
       </div>
     </div>
 
@@ -171,6 +194,21 @@
           <h3>Modalités de paiement</h3>
           <p>Paiement possible en 3 fois sans frais. Contactez-nous pour les aides financières.</p>
         </div>
+      </div>
+    </div>
+    <div class="boutique-section">
+      <div class="boutique-header">
+        <i class="fas fa-chess-pawn fa-2x"></i>
+        <h3 class="boutique-title">Notre Boutique</h3>
+        <i class="fas fa-chess-knight fa-2x"></i>
+      </div>
+      <p class="boutique-text">Découvrez notre sélection d'accessoires aux couleurs du club</p>
+      <a href="#" class="boutique-link">Visiter la boutique</a>
+      <div class="boutique-images">
+        <img src="./images/Boutique/Tshirt.jpg" alt="T-shirt du club" class="boutique-decoration" data-lightbox="true">
+        <img src="./images/Boutique/Veste.jpg" alt="Veste du club" class="boutique-decoration" data-lightbox="true">
+        <img src="./images/Boutique/Gourde.jpg" alt="Gourde du club" class="boutique-decoration" data-lightbox="true">
+        <img src="./images/Boutique/Casquette.jpg" alt="Casquette du club" class="boutique-decoration" data-lightbox="true">
       </div>
     </div>
   </section>
@@ -320,14 +358,14 @@
       <p>Quelques clichés de notre vie échiquéenne</p>
     </div>
     <div class="gallery">
-      <img src="./images/Gallerie/Photo_Jeune.jpg" alt="Photo de nos Jeunes"/>
-      <img src="./images/Gallerie/Qualif_Corse.jpg" alt="Qualification Championnat de Corse"/>
-      <img src="./images/Gallerie/Echecs_Pat.jpg" alt="Championnat Scolaire"/>
-      <img src="./images/Gallerie/Porticciu_2024.jpg" alt="Porticciu 2024"/>
-      <img src="./images/Gallerie/Noel.jpg" alt="Tournoi_Noel"/>
-      <img src="./images/Gallerie/Blitz_Pizza.jpg" alt="Soirée club"/>
-      <img src="./images/Gallerie/Tournoi_Fin_anné_ancien.jpg" alt="Tournoi de fin d'anné 2024"/>
-      <img src="./images/Gallerie/Blitz_a_quatre.jpg" alt="Partie de blitz a quatre"/>
+      <img src="./images/Gallerie/Photo_Jeune.jpg" alt="Photo de nos Jeunes" data-lightbox="true"/>
+      <img src="./images/Gallerie/Qualif_Corse.jpg" alt="Qualification Championnat de Corse" data-lightbox="true"/>
+      <img src="./images/Gallerie/Echecs_Pat.jpg" alt="Championnat Scolaire" data-lightbox="true"/>
+      <img src="./images/Gallerie/Porticciu_2024.jpg" alt="Porticciu 2024" data-lightbox="true"/>
+      <img src="./images/Gallerie/Noel.jpg" alt="Tournoi_Noel" data-lightbox="true"/>
+      <img src="./images/Gallerie/Blitz_Pizza.jpg" alt="Soirée club" data-lightbox="true"/>
+      <img src="./images/Gallerie/Tournoi_Fin_anné_ancien.jpg" alt="Tournoi de fin d'anné 2024" data-lightbox="true"/>
+      <img src="./images/Gallerie/Blitz_a_quatre.jpg" alt="Partie de blitz a quatre" data-lightbox="true"/>
     </div>
   <div style="text-align: center; margin-top: 3rem;">
     <a href="archives-photos.html" class="archive-link" style="display: inline-block;">
@@ -368,32 +406,32 @@
     </div>
     <div class="team">
       <div class="member">
-        <img src="./images/Team/Marie-paul.jpg" alt="Président" />
+        <img src="./images/Team/Marie-paul.jpg" alt="Président" data-lightbox="true"/>
         <h3>Marie-Paule TOMASI</h3>
         <p>Présidente</p>
       </div>
       <div class="member">
-        <img src="./images/Team/Lauren.jpg" alt="Entraîneur" />
+        <img src="./images/Team/Lauren.jpg" alt="Entraîneur" data-lightbox="true"/>
         <h3>Lauren GIUDICELLI</h3>
         <p>Trésorière</p>
       </div>
       <div class="member">
-        <img src="./images/Team/Xavier.jpg" alt="Animateur" />
+        <img src="./images/Team/Xavier.jpg" alt="Animateur" data-lightbox="true"/>
         <h3>Xavier CARROLAGGI</h3>
         <p>Secrétaire</p>
       </div>
       <div class="member">
-        <img src="./images/Team/Thomas.jpg" alt="Animateur" />
+        <img src="./images/Team/Thomas.jpg" alt="Animateur" data-lightbox="true"/>
         <h3>Thomas CHOKBENGBOUN</h3>
         <p>Animateur</p>
       </div>
       <div class="member">
-        <img src="./images/Team/Guillaume.jpg" alt="Formateur" />
+        <img src="./images/Team/Guillaume.jpg" alt="Formateur" data-lightbox="true"/>
         <h3>Guillaume PAOLI</h3>
         <p>Formateur</p>
       </div>
       <div class="member">
-        <img src="./images/Team/Patrick.jpg" alt="Formateur" />
+        <img src="./images/Team/Patrick.jpg" alt="Formateur" data-lightbox="true"/>
         <h3>Patrick SOETEWEY</h3>
         <p>Formateur</p>
       </div>

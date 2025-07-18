@@ -1099,6 +1099,7 @@ footer {
 
 .carousel-link {
   display: inline-block;
+  margin-top: 1rem;
   color: #1e1e2f;
   font-weight: 600;
   text-decoration: none;
@@ -2088,3 +2089,185 @@ footer p::before{
   background: #ffcc00;
   border-radius: 3px;
 }
+
+.boutique-section {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+  text-align: center;
+  max-width: 1000px;
+  margin: 3rem auto;
+  position: relative;
+}
+
+.boutique-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.boutique-header i {
+  color: #1e1e2f;
+}
+
+.boutique-header i:last-child {
+  color: #ffcc00;
+}
+
+.boutique-title {
+  font-size: 2rem;
+  color: #1e1e2f;
+  margin: 0;
+}
+
+.boutique-text {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.boutique-link {
+  display: inline-block;
+  background-color: #ffcc00;
+  color: #1e1e2f;
+  padding: 0.75rem 1.8rem;
+  border-radius: 30px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  font-size: 1.05rem;
+  margin-bottom: 1.5rem;
+}
+
+.boutique-link:hover {
+  background-color: #1e1e2f;
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(255, 204, 0, 0.3);
+}
+
+.boutique-images {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+.boutique-decoration {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.boutique-decoration:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 600px) {
+  .boutique-decoration {
+    width: 120px;
+    height: 120px;
+  }
+
+  .boutique-title {
+    font-size: 1.6rem;
+  }
+
+  .boutique-text {
+    font-size: 1rem;
+  }
+}
+
+.countdown-container {
+  background: linear-gradient(135deg, #1e1e2f 0%, #3a3a5e 100%);
+  color: white;
+  padding: 1rem; 
+  border-radius: 12px;
+  margin-top: 1.5rem;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.countdown-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem; 
+  color: #ffcc00;
+}
+
+.countdown-timer {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 0.5rem 0;
+}
+
+.countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.countdown-value {
+  font-size: 1.8rem; 
+  font-weight: bold;
+  color: #ffcc00;
+  line-height: 1;
+}
+
+.countdown-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.countdown-event {
+  font-size: 1rem; 
+  margin-top: 0.8rem; 
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .countdown-timer {
+    gap: 0.8rem; 
+  }
+  
+  .countdown-value {
+    font-size: 1.5rem; 
+  }
+  
+  .countdown-label {
+    font-size: 0.7rem; 
+  }
+}
+
+.countdown-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 0.8rem;
+}
+
+.countdown-chess-icon {
+  font-size: 1.4rem;
+  color: #ffcc00;
+  opacity: 0.8;
+  transform: rotate(-15deg);
+  transition: transform 0.3s ease;
+}
+
+.countdown-chess-icon:last-child {
+  transform: rotate(15deg);
+}
+
+.countdown-chess-icon:hover {
+  transform: rotate(0deg) scale(1.2);
+  opacity: 1;
+}
+
