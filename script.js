@@ -545,7 +545,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const nextEvent = futureEvents[0];
     const nextEventDate = new Date(nextEvent.date);
     const nextEventTitle = document.getElementById("next-event-title");
-    nextEventTitle.textContent = `avant "${nextEvent.titre}"`;
+    nextEventTitle.textContent = ` "${escapeHtml(nextEvent.titre)}"`;
 
     function updateCountdown() {
       const now = new Date();
@@ -554,7 +554,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (diff <= 0) {
         clearInterval(countdownInterval);
         countdownContainer.innerHTML = `
-        <h3 class="countdown-title">L'événement "${nextEvent.titre}" a commencé !</h3>
+        <h3 class="countdown-title">L'événement "${escapeHtml(nextEvent.titre)}" a commencé !</h3>
         <p>Rejoignez-nous dès maintenant !</p>
       `;
         return;
