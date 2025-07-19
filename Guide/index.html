@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Guide d'Entretien - Échecs Club Ajaccien</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header>
+    <h1>Guide d'Entretien du Site Web</h1>
+    <p><strong>Échecs Club Ajaccien</strong></p>
+  </header>
+
+  <nav>
+    <h2>Table des matières</h2>
+    <ul>
+      <li><a href="#taches-annuelles">I. Tâches Annuelles</a></li>
+      <li><a href="#taches-hebdo">II. Tâches Hebdomadaires</a></li>
+      <li><a href="#ajouter-annee">III. Ajouter une Nouvelle Année</a></li>
+      <li><a href="#bonnes-pratiques">IV. Bonnes Pratiques</a></li>
+      <li><a href="#depannage">V. Dépannage Rapide</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="taches-annuelles" class="section">
+      <h2>I. Tâches Annuelles</h2>
+      <h3>1. Mise à jour des tarifs</h3>
+      <ul>
+        <li>Fichier : <code>index.html</code></li>
+        <li>Étapes :
+          <ol>
+            <li>Ouvrir <code>index.html</code></li>
+            <li>Rechercher <code>tarifs-container</code></li>
+            <li>Modifier les prix dans <code>&lt;div class="tarif-price"&gt;</code></li>
+            <li>Mettre à jour les descriptions dans <code>&lt;ul class="tarif-features"&gt;</code></li>
+          </ol>
+        </li>
+      </ul>
+
+      <h3>2. Changement des horaires</h3>
+      <ul>
+        <li>Fichier : <code>index.html</code></li>
+        <li>Étapes :
+          <ol>
+            <li>Localiser la section <code>&lt;section id="horaires"&gt;</code></li>
+            <li>Modifier les créneaux dans les balises <code>&lt;p&gt;</code> sous chaque <code>&lt;h3&gt;</code></li>
+          </ol>
+        </li>
+      </ul>
+
+      <h3>3. Mise à jour des statistiques</h3>
+      <ul>
+        <li>Fichier : <code>script.js</code></li>
+        <li>Étapes :
+          <pre><code>const CONFIG = {
+  stats: {
+    licencies: 125,
+    jeunes: 86,
+    animateurs: 6
+  }
+};</code></pre>
+        </li>
+      </ul>
+    </section>
+
+    <section id="taches-hebdo" class="section">
+      <h2>II. Tâches Hebdomadaires</h2>
+
+      <h3>1. Ajouter une actualité</h3>
+      <pre><code>{
+  "date": "AAAA-MM-JJ",
+  "titre": "Titre de l'actualité",
+  "description": "Description complète...",
+  "image": "chemin/vers/image.jpg",
+  "lien": "https://lien-externe.com"
+}</code></pre>
+      <p><strong>Tips :</strong></p>
+      <ul>
+        <li>Placer les nouvelles actualités en <strong>haut</strong> du fichier</li>
+        <li>Les images doivent être ajoutées dans <code>images/Actu/</code></li>
+      </ul>
+
+      <h3>2. Ajouter un événement à venir</h3>
+      <pre><code>{
+  "date": "AAAA-MM-JJ",
+  "titre": "Nom de l'événement",
+  "description": "Détails...",
+  "image": "chemin/vers/image.jpg",
+  "lien": "https://lien-inscription.com"
+}</code></pre>
+
+      <h3>3. Ajouter des archives photos</h3>
+      <pre><code>{
+  "year": "2025",
+  "events": [
+    {
+      "title": "Nom de l'événement",
+      "date": "JJ Mois AAAA",
+      "description": "Description...",
+      "images": ["chemin/photo1.jpg", "chemin/photo2.jpg"]
+    }
+  ]
+}</code></pre>
+      <ul>
+        <li><strong>Important :</strong></li>
+        <li>Créer un nouveau dossier dans <code>images/Tournoi_AAAA/</code> pour les photos</li>
+        <li>Utiliser le même nom de dossier dans le JSON</li>
+      </ul>
+    </section>
+
+    <section id="ajouter-annee" class="section">
+      <h2>III. Ajouter une Nouvelle Année</h2>
+
+      <h3>Pour les archives photos :</h3>
+      <ol>
+        <li>Ouvrir <code>archives-photos.json</code></li>
+        <li>Ajouter un nouveau bloc en haut :
+          <pre><code>{
+  "year": "2026",
+  "events": []
+}</code></pre>
+        </li>
+      </ol>
+
+      <h3>Pour le filtre d’année :</h3>
+      <ul>
+        <li>Fichiers : <code>archives-actualites.html</code> et <code>archives-photos.html</code></li>
+        <li>Étapes :
+          <pre><code>&lt;button class="archive-year-btn" data-year="2026"&gt;2026&lt;/button&gt;</code></pre>
+        </li>
+      </ul>
+    </section>
+
+    <section id="bonnes-pratiques" class="section">
+      <h2>IV. Bonnes Pratiques</h2>
+      <ul>
+        <li><strong>Validation des liens :</strong></li>
+        <ul>
+          <li>Tester tous les liens après modification</li>
+          <li>Utiliser des URL complètes (<code>https://...</code>)</li>
+        </ul>
+        <li><strong>Gestion des images :</strong></li>
+        <ul>
+          <li>Taille max : 1MB par image</li>
+          <li>Formats acceptés : JPG, PNG</li>
+          <li>Nommer les fichiers sans espaces (ex: <code>tournoi_noel_2025.jpg</code>)</li>
+        </ul>
+        <li><strong>Sauvegardes :</strong></li>
+        <ul>
+          <li>Toujours faire une copie des fichiers avant modification</li>
+          <li>Utiliser des commentaires dans le JSON pour se repérer :
+            <pre><code>// 2025 - Tournoi d'été
+{ ... }</code></pre>
+          </li>
+        </ul>
+      </ul>
+    </section>
+
+    <section id="depannage" class="section">
+      <h2>V. Dépannage Rapide</h2>
+      <table>
+        <tr><th>Problème</th><th>Solution</th></tr>
+        <tr><td>Image non affichée</td><td>Vérifier le chemin dans le JSON</td></tr>
+        <tr><td>Date incorrecte</td><td>Respecter le format <code>AAAA-MM-JJ</code></td></tr>
+        <tr><td>Bouton filtre manquant</td><td>Vérifier l’attribut <code>data-year</code></td></tr>
+        <tr><td>Texte mal formaté</td><td>Éviter les caractères spéciaux</td></tr>
+      </table>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>Support Technique :</strong> <a href="mailto:andria.appietto2011@gmail.com">andria.appietto2011@gmail.com</a></p>
+    <p>Joindre le fichier modifié et une capture d'écran</p>
+  </footer>
+</body>
+</html>
