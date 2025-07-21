@@ -1,98 +1,184 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>Guide d'Entretien - Échecs Club Ajaccien</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./style.css">
-</head>
-<body>
-  <header>
-    <h1>Guide d'Entretien du Site Web</h1>
-    <p><strong>Échecs Club Ajaccien</strong></p>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Guide d'Entretien - Échecs Club Ajaccien</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="../images/Logo_du_club.jpeg" />
+  </head>
+  <body>
+    <header>
+      <h1>Guide d'Entretien du Site Web</h1>
+      <p><strong>Échecs Club Ajaccien</strong></p>
+    </header>
 
-  <nav>
-    <h2>Table des matières</h2>
-    <ul>
-      <li><a href="#taches-annuelles">I. Tâches Annuelles</a></li>
-      <li><a href="#taches-hebdo">II. Tâches Hebdomadaires</a></li>
-      <li><a href="#ajouter-annee">III. Ajouter une Nouvelle Année</a></li>
-      <li><a href="#bonnes-pratiques">IV. Bonnes Pratiques</a></li>
-      <li><a href="#depannage">V. Dépannage Rapide</a></li>
-    </ul>
-  </nav>
+    <section class="section"><nav>
+      <h2>Table des matières</h2>
+      <div class="nav-grid">
+        <ul>
+          <li><a href="#prérequis">I. Prérequi pour coder</a></li>
+          <li><a href="#taches-annuelles">II. Tâches Annuelles</a></li>
+          <li><a href="#taches-hebdo">III. Tâches Hebdomadaires</a></li>
+          <li><a href="#ajouter-annee">IV. Ajouter une Nouvelle Année</a></li>
+          <li><a href="#bonnes-pratiques">V. Bonnes Pratiques</a></li>
+          <li><a href="#depannage">VI. Dépannage Rapide</a></li>
+        </ul>
+        <img src="../images/Logo_du_club.jpeg" alt="logo du club" data-lightbox="true">
+      </div>
+    </nav></section>
 
-  <main>
-    <section id="taches-annuelles" class="section">
-      <h2>I. Tâches Annuelles</h2>
-      <h3>1. Mise à jour des tarifs</h3>
-      <ul>
-        <li>Fichier : <code>index.html</code></li>
-        <li>Étapes :
+    <main>
+      <section id="prérequis" class="section">
+        <h2>I. Prérequis pour Coder</h2>
+        <h3>1. Installation de VSCODE</h3>
+        <ul>
+          <li>Outil : <code class="fichier">Un moteur de recherche</code></li>
+          <li>Etapes :</li>
           <ol>
-            <li>Ouvrir <code>index.html</code></li>
-            <li>Rechercher <code>tarifs-container</code></li>
-            <li>Modifier les prix dans <code>&lt;div class="tarif-price"&gt;</code></li>
-            <li>Mettre à jour les descriptions dans <code>&lt;ul class="tarif-features"&gt;</code></li>
+            <li>Rechercher VSCODE sur votre moteur de recherche, Cliquer sur le premier site puis sur le boutton download</li>
+            <li>Choisiser la version adapter à votre ordinateur</li>
+            <li>Suiver les Étapes de téléchargement, puis une fois fini, sur la barre de navigation de VSCODE se situant à droite, cliqué sur extensiont (petit cube)</li>
+            <li>Rechercher les extensionts suivantes et téléchargés les <code>LiveServeur</code><code>GitLens</code></li>
           </ol>
-        </li>
-      </ul>
-
-      <h3>2. Changement des horaires</h3>
-      <ul>
-        <li>Fichier : <code>index.html</code></li>
-        <li>Étapes :
+        </ul>
+        <h3>2. Récupération du code Source</h3>
+        <ul>
+          <li>Outils : <code class="fichier">GitHub</code></li>
+          <li>Etapes</li>
           <ol>
-            <li>Localiser la section <code>&lt;section id="horaires"&gt;</code></li>
-            <li>Modifier les créneaux dans les balises <code>&lt;p&gt;</code> sous chaque <code>&lt;h3&gt;</code></li>
+            <li>Rechercher GitHub et cliquer sur le premier lien</li>
+            <li>Si ce n'est pas déja fait, creer un compte</li>
+            <li>Rechercher dans la barre de navigation GitHub "Echecs-Club-Ajaccien"</li>
+            <li>Parmis les résultats, cliquer sur Dépot, vous devrier trouver notre site</li>
+            <li>Cliquer sur le boutton "Code" puis "Télécharger le ZIP", une fois télécharger décompresser le fichier</li>
           </ol>
-        </li>
-      </ul>
+        </ul>
+        <h3>3. Afficher le code</h3>
+        <ul>
+          <li>Ouvrer VSCODE et cliquer sur "Open Folder" et Choisiser le dossier décompresser</li>
+        </ul>
+      </section>
+      <section id="taches-annuelles" class="section">
+        <h2>II. Tâches Annuelles</h2>
+        <h3>1. Remplacement des liens</h3>
+        <ul>
+          <li>Fichiers : <code class="fichier">index.html</code><code class="fichier">evenement.json</code><code class="fichier">actualites.json</code></li>
+          <li>Etapes pour index.html :</li>
+          <ol>
+            <li>Chercher la balise "a" contenant le lien qu'on souhaite remplacer 
+            <code>&lt;a href="https://exemple"&gt;le texte qui apparait sur la page&lt;/a&gt;</code></li>
+            <li>Remplacer l'attribut href par le nouveau lien, ainsi que le texte si nescessaire
+            <code>&lt;a href="nouveau https://"&gt;Nouveau text&lt;/a&gt;</code></li>
+          </ol>
+          <li>Etapes pour les fichiers JSON :</li>
+          <ol>
+            <li>Chercher l'attribut "lien" contenant le lien qu'on souhaite modifier 
+            <code>"lien": "https://exemple</code></li>
+            <li>Remplacer le lien que l'attribut contient
+            <code>"lien": "nouveau https://</code></li>
+          </ol>
+        </ul>
+        <h3>2. Mise à jour des tarifs</h3>
+        <ul>
+          <li>Fichier : <code class="fichier">index.html</code></li>
+          <li>
+            Étapes :
+            <ol>
+              <li>Rechercher <code>tarifs-container</code></li>
+              <li>
+                Modifier les prix dans
+                <code>&lt;div class="tarif-price"&gt;</code>
+              </li>
+              <li>
+                Mettre à jour les descriptions dans
+                <code>&lt;ul class="tarif-features"&gt;</code>
+              </li>
+            </ol>
+          </li>
+        </ul>
 
-      <h3>3. Mise à jour des statistiques</h3>
-      <ul>
-        <li>Fichier : <code>script.js</code></li>
-        <li>Étapes :
-          <pre><code>const CONFIG = {
-  stats: {
+        <h3>3. Changement des horaires</h3>
+        <ul>
+          <li>Fichier : <code class="fichier">index.html</code></li>
+          <li>
+            Étapes :
+            <ol>
+              <li>
+                Localiser la section <code>&lt;section id="horaires"&gt;</code>
+              </li>
+              <li>
+                Modifier les créneaux dans les balises
+                <code>&lt;p&gt;</code> sous chaque <code>&lt;h3&gt;</code>
+              </li>
+            </ol>
+          </li>
+        </ul>
+
+        <h3>4. Mise à jour des statistiques</h3>
+        <ul>
+          <li>Fichiers : <code class="fichier">script.js</code> <code class="fichier">index.html</code></li>
+          <li>
+            Étapes :
+            <ol>
+            <li>repérer dans cette section dans <code class="fichier">script.js</code></li>
+            <code>const CONFIG = {
+    stats: {
     licencies: 125,
     jeunes: 86,
     animateurs: 6
   }
-};</code></pre>
-        </li>
-      </ul>
-    </section>
+};</code></li>
+            <li>Modifier le nombre de licencies, de jeune et d'animateur à la demande</li>
+            <li>puis aller dans <code class="fichier">index.html</code>
+            <li>localiser puis modifier egalement les statiqtique presentent dans <code>&lt;section id="horaires"&gt;</code><code>&lt;div class="stats-banner"&gt;</code></li></ol>
+        </ul>
+      </section>
 
-    <section id="taches-hebdo" class="section">
-      <h2>II. Tâches Hebdomadaires</h2>
+      <section id="taches-hebdo" class="section">
+        <h2>III. Tâches Hebdomadaires</h2>
 
-      <h3>1. Ajouter une actualité</h3>
-      <pre><code>{
+        <h3>1. Ajouter une actualité</h3>
+        <code class="fichier">actualites.JSON</code>
+        <code>{
   "date": "AAAA-MM-JJ",
   "titre": "Titre de l'actualité",
   "description": "Description complète...",
   "image": "chemin/vers/image.jpg",
   "lien": "https://lien-externe.com"
-}</code></pre>
-      <p><strong>Tips :</strong></p>
-      <ul>
-        <li>Placer les nouvelles actualités en <strong>haut</strong> du fichier</li>
-        <li>Les images doivent être ajoutées dans <code>images/Actu/</code></li>
-      </ul>
+}</code>
+        <p><strong>Tips :</strong></p>
+        <ul>
+          <li>
+            Placer les nouvelles actualités en <strong>haut</strong> du fichier
+          </li>
+          <li>
+            Les images doivent être ajoutées dans <code>images/Actu/</code>
+          </li>
+        </ul>
 
-      <h3>2. Ajouter un événement à venir</h3>
-      <pre><code>{
+        <h3>2. Ajouter un événement à venir</h3>
+        <code class="fichier">evenements.JSON</code>
+        <code>{
   "date": "AAAA-MM-JJ",
   "titre": "Nom de l'événement",
   "description": "Détails...",
   "image": "chemin/vers/image.jpg",
   "lien": "https://lien-inscription.com"
-}</code></pre>
+}</code>
+        <p><strong>Tips :</strong></p>
+        <ul>
+          <li>
+            Placer les nouveaux événements en <strong>haut</strong> du fichier et <strong>supprimé les évenements passé</strong>
+          </li>
+          <li>
+            Les images doivent être ajoutées dans <code>images/Event_Temporaire/</code>
+          </li>
+        </ul>
 
-      <h3>3. Ajouter des archives photos</h3>
-      <pre><code>{
+        <h3>3. Ajouter des archives photos</h3>
+        <code class="fichier">archives-photos.JSON</code>
+        <code>{
   "year": "2025",
   "events": [
     {
@@ -102,77 +188,110 @@
       "images": ["chemin/photo1.jpg", "chemin/photo2.jpg"]
     }
   ]
-}</code></pre>
-      <ul>
-        <li><strong>Important :</strong></li>
-        <li>Créer un nouveau dossier dans <code>images/Tournoi_AAAA/</code> pour les photos</li>
-        <li>Utiliser le même nom de dossier dans le JSON</li>
-      </ul>
-    </section>
+}</code>
+        <ul>
+          <li><strong>Important :</strong></li>
+          <li>
+            Pour les photos, créer un nouveau dossier dans <code>images/Tournoi_AAAA/Nom_Tournoi</code> 
+          </li>
+          <li>Utiliser le même nom de dossier dans le JSON</li>
+        </ul>
+      </section>
 
-    <section id="ajouter-annee" class="section">
-      <h2>III. Ajouter une Nouvelle Année</h2>
+      <section id="ajouter-annee" class="section">
+        <h2>IV. Ajouter une Nouvelle Année</h2>
 
-      <h3>Pour les archives photos :</h3>
-      <ol>
-        <li>Ouvrir <code>archives-photos.json</code></li>
-        <li>Ajouter un nouveau bloc en haut :
-          <pre><code>{
+        <h3>Pour les archives photos :</h3>
+        <ul>
+          <li>Ouvrir <code class="fichier">archives-photos.json</code></li>
+          <li>
+            Ajouter un nouveau bloc en haut :
+            <code>{
   "year": "2026",
   "events": []
-}</code></pre>
-        </li>
-      </ol>
-
-      <h3>Pour le filtre d’année :</h3>
-      <ul>
-        <li>Fichiers : <code>archives-actualites.html</code> et <code>archives-photos.html</code></li>
-        <li>Étapes :
-          <pre><code>&lt;button class="archive-year-btn" data-year="2026"&gt;2026&lt;/button&gt;</code></pre>
-        </li>
-      </ul>
-    </section>
-
-    <section id="bonnes-pratiques" class="section">
-      <h2>IV. Bonnes Pratiques</h2>
-      <ul>
-        <li><strong>Validation des liens :</strong></li>
-        <ul>
-          <li>Tester tous les liens après modification</li>
-          <li>Utiliser des URL complètes (<code>https://...</code>)</li>
+}</code>
+          </li>
+          <ul>
+            <li>Puis ajouter les événement entre les crochets</li>
+          </ul>
         </ul>
-        <li><strong>Gestion des images :</strong></li>
+
+        <h3>Pour le filtre d’année :</h3>
         <ul>
-          <li>Taille max : 1MB par image</li>
-          <li>Formats acceptés : JPG, PNG</li>
-          <li>Nommer les fichiers sans espaces (ex: <code>tournoi_noel_2025.jpg</code>)</li>
-        </ul>
-        <li><strong>Sauvegardes :</strong></li>
-        <ul>
-          <li>Toujours faire une copie des fichiers avant modification</li>
-          <li>Utiliser des commentaires dans le JSON pour se repérer :
-            <pre><code>// 2025 - Tournoi d'été
-{ ... }</code></pre>
+          <li>
+            Fichiers : <code class="fichier">archives-actualites.html</code><code class="fichier">archives-photos.html</code>
+          </li>
+          <li>
+            Étapes :
+            <code>&lt;button class="archive-year-btn" data-year="2026"&gt;2026&lt;/button&gt;</code>
           </li>
         </ul>
-      </ul>
-    </section>
+      </section>
 
-    <section id="depannage" class="section">
-      <h2>V. Dépannage Rapide</h2>
-      <table>
-        <tr><th>Problème</th><th>Solution</th></tr>
-        <tr><td>Image non affichée</td><td>Vérifier le chemin dans le JSON</td></tr>
-        <tr><td>Date incorrecte</td><td>Respecter le format <code>AAAA-MM-JJ</code></td></tr>
-        <tr><td>Bouton filtre manquant</td><td>Vérifier l’attribut <code>data-year</code></td></tr>
-        <tr><td>Texte mal formaté</td><td>Éviter les caractères spéciaux</td></tr>
-      </table>
-    </section>
-  </main>
+      <section id="bonnes-pratiques" class="section">
+        <h2>V. Bonnes Pratiques</h2>
+        <ul>
+          <li><strong>Validation des liens :</strong></li>
+          <ul>
+            <li>Tester tous les liens après modification</li>
+            <li>Utiliser des URL complètes <code>https://...</code></li>
+          </ul>
+          <li><strong>Gestion des images :</strong></li>
+          <ul>
+            <li>Taille max : 1MB par image</li>
+            <li>Formats acceptés : JPG, PNG, JPEG</li>
+            <li>
+              Nommer les fichiers sans espaces (ex:
+              <code>tournoi_noel_2025.jpg</code>)
+            </li>
+          </ul>
+          <li><strong>Sauvegardes :</strong></li>
+          <ul>
+            <li>Toujours faire une copie des fichiers avant modification</li>
+            <li>
+              Utiliser des commentaires dans le JSON pour se repérer :
+              <code>// 2025 - Tournoi d'été
+{ ... }</code>
+            </li>
+          </ul>
+        </ul>
+      </section>
 
-  <footer>
-    <p><strong>Support Technique :</strong> <a href="mailto:andria.appietto2011@gmail.com">andria.appietto2011@gmail.com</a></p>
-    <p>Joindre le fichier modifié et une capture d'écran</p>
-  </footer>
-</body>
+      <section id="depannage" class="section">
+        <h2>VI. Dépannage Rapide</h2>
+        <table>
+          <tr>
+            <th>Problème</th>
+            <th>Solution</th>
+          </tr>
+          <tr>
+            <td>Image non affichée</td>
+            <td>Vérifier le chemin dans le JSON</td>
+          </tr>
+          <tr>
+            <td>Date incorrecte</td>
+            <td>Respecter le format <code>AAAA-MM-JJ</code></td>
+          </tr>
+          <tr>
+            <td>Bouton filtre manquant</td>
+            <td>Vérifier l’attribut <code>data-year</code></td>
+          </tr>
+          <tr>
+            <td>Texte mal formaté</td>
+            <td>Éviter les caractères spéciaux</td>
+          </tr>
+        </table>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        <strong>Support Technique :</strong>
+        <a href="mailto:andria.appietto2011@gmail.com"
+          >andria.appietto2011@gmail.com</a
+        >
+      </p>
+      <p>Joindre le fichier modifié et une capture d'écran</p>
+    </footer>
+  </body>
 </html>

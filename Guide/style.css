@@ -1,9 +1,50 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+  line-height: 1.6;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+html::selection {
+  background: #e6b800af;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   font-family: Arial, sans-serif;
   margin: 40px;
-  max-width: 900px;
   background: #f9f9f9;
   color: #333;
+}
+
+header h1{
+  text-align: center;
+}
+
+header p{
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.nav-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+}
+
+nav ul li{
+  color: #2c3e50;
+  text-decoration: none;
+  list-style: none;
 }
 
 .section {
@@ -19,21 +60,28 @@ h1, h2, h3 {
   color: #2c3e50;
 }
 
+h2{
+  border-bottom: #ffcc00 solid 2px;
+}
+
+h3{
+  text-decoration: underline;
+}
+
 code, pre {
-    border-radius: 4px;
-  background: #eef;
+  display: inline-block;
+  border-radius: 4px;
+  background: rgb(244, 243, 237);
   padding: 0.5em;
   display: block;
   white-space: pre-wrap;
-  border-left: 4px solid #3498db;
+  border-left: 4px solid #ffcc00;
   margin: 1em 0;
 }
 
-.tip {
-  background: #e8f5e9;
-  border-left: 4px solid #2e7d32;
-  padding: 0.5em 1em;
-  margin: 1em 0;
+.fichier{
+  border-left: 4px solid #0080ff;
+  background: #e8eff6
 }
 
 table {
