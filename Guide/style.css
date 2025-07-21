@@ -168,3 +168,20 @@ footer a:hover {
     gap: 1.5rem !important;
   }
 }
+
+.guide-link {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.8rem 1.8rem;
+  background-color: #1e1e2f;
+  color: white;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.guide-link:hover {
+  background-color: #ffcc00;
+  color: #1e1e2f;
+}
