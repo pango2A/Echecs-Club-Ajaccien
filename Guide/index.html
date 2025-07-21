@@ -12,55 +12,35 @@
       <h1>Guide d'Entretien du Site Web</h1>
       <p><strong>Échecs Club Ajaccien</strong></p>
     </header>
-
+    <div class="code-alert" style="margin-top: 2rem;">
+      <div class="code-content">
+        <h3>Attention</h3>
+        <ul>
+          <li>Pour pouvoir faire des modifications sur le site, il faut utiliser l'ordinateur du club</li>
+          <li>Pour pouvoir voir le rendu avant de mettre a joour le site, utiliser <code class="fichier">VSCODE</code></li>
+          <li>Cliquer sur le boutton GO Live en bas à droite de VSCODE, cela ouvrira une page google contenant le site, cela vous permetra de tester chez vous avant de mettre en ligne</li>
+        </ul>
+      </div>
+    </div>
     <section class="section"><nav>
       <h2>Table des matières</h2>
       <div class="nav-grid">
         <ul>
-          <li><a href="#prérequis">I. Prérequi pour coder</a></li>
-          <li><a href="#taches-annuelles">II. Tâches Annuelles</a></li>
-          <li><a href="#taches-hebdo">III. Tâches Hebdomadaires</a></li>
-          <li><a href="#ajouter-annee">IV. Ajouter une Nouvelle Année</a></li>
-          <li><a href="#bonnes-pratiques">V. Bonnes Pratiques</a></li>
-          <li><a href="#depannage">VI. Dépannage Rapide</a></li>
+          <li><a href="#taches-annuelles">I. Tâches Annuelles</a></li>
+          <li><a href="#taches-hebdo">II. Tâches Hebdomadaires</a></li>
+          <li><a href="#ajouter-annee">III. Ajouter une Nouvelle Année</a></li>
+          <li><a href="#bonnes-pratiques">IV. Bonnes Pratiques</a></li>
+          <li><a href="#depannage">V. Dépannage Rapide</a></li>
+          <li><a href="#mettre-en-ligne">VI. Mettre en ligne</a></li>
+          <li><a href="#footer">Support Technique</a></li>
         </ul>
         <img src="../images/Logo_du_club.jpeg" alt="logo du club" data-lightbox="true">
       </div>
     </nav></section>
 
     <main>
-      <section id="prérequis" class="section">
-        <h2>I. Prérequis pour Coder</h2>
-        <h3>1. Installation de VSCODE</h3>
-        <ul>
-          <li>Outil : <code class="fichier">Un moteur de recherche</code></li>
-          <li>Etapes :</li>
-          <ol>
-            <li>Rechercher VSCODE sur votre moteur de recherche, Cliquer sur le premier site puis sur le boutton download</li>
-            <li>Choisiser la version adapter à votre ordinateur</li>
-            <li>Suiver les Étapes de téléchargement, puis une fois fini, sur la barre de navigation de VSCODE se situant à droite, cliqué sur extensiont (petit cube)</li>
-            <li>Rechercher les extensionts suivantes et téléchargés les <code>LiveServeur</code><code>GitLens</code></li>
-          </ol>
-        </ul>
-        <h3>2. Récupération du code Source</h3>
-        <ul>
-          <li>Outils : <code class="fichier">GitHub</code></li>
-          <li>Etapes</li>
-          <ol>
-            <li>Rechercher GitHub et cliquer sur le premier lien</li>
-            <li>Si ce n'est pas déja fait, creer un compte</li>
-            <li>Rechercher dans la barre de navigation GitHub "Echecs-Club-Ajaccien"</li>
-            <li>Parmis les résultats, cliquer sur Dépot, vous devrier trouver notre site</li>
-            <li>Cliquer sur le boutton "Code" puis "Télécharger le ZIP", une fois télécharger décompresser le fichier</li>
-          </ol>
-        </ul>
-        <h3>3. Afficher le code</h3>
-        <ul>
-          <li>Ouvrer VSCODE et cliquer sur "Open Folder" et Choisiser le dossier décompresser</li>
-        </ul>
-      </section>
       <section id="taches-annuelles" class="section">
-        <h2>II. Tâches Annuelles</h2>
+        <h2>I. Tâches Annuelles</h2>
         <h3>1. Remplacement des liens</h3>
         <ul>
           <li>Fichiers : <code class="fichier">index.html</code><code class="fichier">evenement.json</code><code class="fichier">actualites.json</code></li>
@@ -136,7 +116,7 @@
       </section>
 
       <section id="taches-hebdo" class="section">
-        <h2>III. Tâches Hebdomadaires</h2>
+        <h2>II. Tâches Hebdomadaires</h2>
 
         <h3>1. Ajouter une actualité</h3>
         <code class="fichier">actualites.JSON</code>
@@ -199,7 +179,7 @@
       </section>
 
       <section id="ajouter-annee" class="section">
-        <h2>IV. Ajouter une Nouvelle Année</h2>
+        <h2>III. Ajouter une Nouvelle Année</h2>
 
         <h3>Pour les archives photos :</h3>
         <ul>
@@ -229,7 +209,7 @@
       </section>
 
       <section id="bonnes-pratiques" class="section">
-        <h2>V. Bonnes Pratiques</h2>
+        <h2>IV. Bonnes Pratiques</h2>
         <ul>
           <li><strong>Validation des liens :</strong></li>
           <ul>
@@ -258,7 +238,7 @@
       </section>
 
       <section id="depannage" class="section">
-        <h2>VI. Dépannage Rapide</h2>
+        <h2>V. Dépannage Rapide</h2>
         <table>
           <tr>
             <th>Problème</th>
@@ -282,16 +262,53 @@
           </tr>
         </table>
       </section>
+
+      <section id="mettre-en-ligne" class="section">
+        <h2>VI. Mettre en ligne le site</h2>
+        <ul>
+          <li>Outils : <code class="fichier">VSCODE</code><code class="fichier">Git & GitHub</code></li>
+          <li>Étapes :</li>
+          <ol>
+            <li>Sur VSCODE tester localement les ajouts/modification grace à LiveServeur (GoLive)</li>
+            <li>Si tout est bons, cliquer sur la barre gauche de VSCODE, sur l'icone avec les liens : <code>Source Control</code></li>
+            <li>Ajouter un message expliquant les modifications faites puis sur le bouttons commit, appuyer sur la petite fleche et choisisser : <code>Commit and Push</code></li>
+            <li>Si tout est bien Configurer, au bout de quelques minutes, le site est censé etre mis à jour, tester en retapant l' URl du site, si ça ne marche pas, contacter moi ci-dessous en m'expliquant le probleme</li>
+          </ol>
+        </ul>
+      </section>
     </main>
 
-    <footer>
-      <p>
-        <strong>Support Technique :</strong>
-        <a href="mailto:andria.appietto2011@gmail.com"
-          >andria.appietto2011@gmail.com</a
-        >
-      </p>
-      <p>Joindre le fichier modifié et une capture d'écran</p>
-    </footer>
+  <footer class="section" style="margin-top: 4rem;" id="footer">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+      <div>
+        <h3 style="margin-top: 0; color: #ffcc00;">Support Technique</h3>
+        <p>
+          Pour toute question technique concernant le site web, contactez :
+        </p>
+        <div style="display: flex; align-items: center; gap: 0.5rem; margin: 1rem 0;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="#2c3e50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M22 6L12 13L2 6" stroke="#2c3e50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <a href="mailto:andria.appietto2011@gmail.com" style="color: #0080ff; text-decoration: none;">
+            andria.appietto2011@gmail.com
+          </a>
+        </div>
+      </div>
+    
+      <div>
+        <h3 style="margin-top: 0; color: #ffcc00;">Aide rapide</h3>
+        <ul style="padding-left: 1.5rem;">
+          <li style="margin-bottom: 0.5rem;">Joindre les fichiers modifiés</li>
+          <li style="margin-bottom: 0.5rem;">Inclure une capture d'écran</li>
+          <li>Décrire précisément le problème</li>
+        </ul>
+      </div>
+    </div>
+  
+    <div style="margin-top: 2rem; text-align: center; font-size: 0.9em; color: #666;">
+      <p>© 2025 Échecs Club Ajaccien - Tous droits réservés</p>
+    </div>
+  </footer>
   </body>
 </html>
