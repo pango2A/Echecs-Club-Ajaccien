@@ -517,12 +517,55 @@ footer {
   padding-right: 0.5rem;  
 }
 
+@media (max-width: 768px) {
+  .actualite-card {
+    height: auto;
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+      "image"
+      "content";
+    margin-bottom: 2rem;
+  }
+
+  .actualite-image {
+    height: 250px;
+    width: 100%;
+  }
+
+  .actualite-content {
+    padding: 1.5rem;
+    max-height: 300px;
+    overflow: hidden;
+  }
+
+  .actualite-content p {
+    overflow-y: auto; 
+    min-height: 90px;
+    margin-bottom: 1.5rem;
+    max-height: 150px; 
+  }
+}
+
+@media (max-width: 480px) {
+  .actualite-image {
+    height: 280px;
+  }
+
+  .actualite-content {
+    padding: 1.8rem;
+  }
+}
+
 @media (min-width: 992px) {
   .actualite-card {
     grid-template-columns: 1.5fr 1fr;
     grid-template-areas: "image content";
     height: auto;
     max-height: 400px;
+  }
+
+  .actualite-content h3{
+    font-size: 1rem;
   }
 
   .actualite-content p {
