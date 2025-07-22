@@ -704,10 +704,6 @@ footer {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .gallery img:nth-child(n+5) {
-    display: none;
-  }
-
   .section {
     padding: 2rem 1rem;
   }
