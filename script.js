@@ -675,6 +675,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <img src="${sanitizeImageUrl(escapeHtml(img))}" 
                  alt="${escapeHtml(event.title)}" 
                  class="gallery-img"
+                 loading="lazy"
                  data-lightbox="true">
           `
             )
