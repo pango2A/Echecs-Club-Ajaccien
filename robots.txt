@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://pango2a.github.io/Echecs-Club-Ajaccien/sitemap.xml
