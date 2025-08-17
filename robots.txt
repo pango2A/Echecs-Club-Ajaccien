@@ -1,3 +1,10 @@
+# Autorise tous les moteurs de recherche
 User-agent: *
 Allow: /
+
+# Bloque seulement les fichiers inutiles
+Disallow: /README.md
+Disallow: /CNAME
+
+# Lien vers le sitemap
 Sitemap: https://pango2a.github.io/Echecs-Club-Ajaccien/sitemap.xml
