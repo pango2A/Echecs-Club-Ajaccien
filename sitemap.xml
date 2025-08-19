@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Page d'accueil -->
   <url>
-    <loc>https://pango2a.github.io/Echecs-Club-Ajaccien/</loc>
+    <loc>https://echecs-club-ajaccien.com/</loc>
     <lastmod>2025-08-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -10,14 +10,14 @@
 
   <!-- Pages secondaires -->
   <url>
-    <loc>https://pango2a.github.io/Echecs-Club-Ajaccien/archives-actualites.html</loc>
+    <loc>https://echecs-club-ajaccien.com/archives-actualites.html</loc>
     <lastmod>2025-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://pango2a.github.io/Echecs-Club-Ajaccien/archives-photos.html</loc>
+    <loc>https://echecs-club-ajaccien.com/archives-photos.html</loc>
     <lastmod>2025-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -25,7 +25,7 @@
 
   <!-- Page Guide -->
   <url>
-    <loc>https://pango2a.github.io/Echecs-Club-Ajaccien/Guide/index.html</loc>
+    <loc>https://echecs-club-ajaccien.com/Guide/</loc>
     <lastmod>2025-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
