@@ -135,7 +135,6 @@ header {
   color: rgb(255, 255, 255);
   text-align: center;
   position: relative;
-  /* Ajout d'un pseudo-élément pour l'overlay */
   overflow: hidden;
 }
 
