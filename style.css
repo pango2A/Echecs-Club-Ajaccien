@@ -127,7 +127,7 @@ header {
 }
 
 .hero {
-  background: url('./images/ajaccio-bg.jpg') center/cover no-repeat;
+  background: url('/images/ajaccio-bg.jpg') center/cover no-repeat;
   background-attachment: fixed;
   padding: 6rem 2rem;
   color: rgb(255, 255, 255);
