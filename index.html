@@ -1,25 +1,50 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-RM95Q141D7"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
     gtag('config', 'G-RM95Q141D7');
   </script>
   <link rel="canonical" href="https://echecs-club-ajaccien.com/">
+  <link rel="stylesheet" href="style.css" />
   <meta http-equiv="X-Frame-Options" content="DENY">
-  <meta name="keywords" content="Echecs, échecs, sport, concentration, réflexion, jeu, patience, école, scolaire, Club, Ajaccien, Ajaccio, Corse, ECA, Scacchi, aiaccini" />
+  <meta name="keywords"
+    content="Echecs, échecs, sport, concentration, réflexion, jeu, patience, école, scolaire, Club, Ajaccien, Ajaccio, Corse, ECA, Scacchi, aiaccini" />
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="Referrer-Policy" content="no-referrer">
   <meta charset="UTF-8" />
-  <meta name="description" content="Rejoignez le Club d’Échecs d’Ajaccio (ECA) : cours pour enfants et adultes, tournois, événements, et entraînements à Ajaccio. Tous niveaux bienvenus.">
+  <meta name="description"
+    content="Rejoignez le Club d’Échecs d’Ajaccio (ECA) : cours pour enfants et adultes, tournois, événements, et entraînements à Ajaccio. Tous niveaux bienvenus.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Échecs Club Ajaccien</title>
-  <link rel="stylesheet" href="style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsOrganization",
+    "name": "Échecs Club Ajaccien",
+    "url": "https://echecs-club-ajaccien.com",
+    "logo": "https://echecs-club-ajaccien.com/images/Logo_du_club.jpeg",
+    "description": "Club d'échecs à Ajaccio proposant des cours, tournois et événements pour tous les niveaux.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Lieu Dit la Fontaine du Vittulu, route du Vittulu",
+      "addressLocality": "Ajaccio",
+      "postalCode": "20090",
+      "addressCountry": "FR"
+    },
+    "telephone": "+33767529046",
+    "email": "ecajaccio@gmail.com",
+    "sport": "Chess"
+  }
+  </script>
+
   <!-- Favicon pour navigateurs -->
   <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
@@ -33,16 +58,40 @@
   <!-- Android / Chrome -->
   <link rel="icon" type="image/png" sizes="192x192" href="images/android-chrome-192x192.png">
   <link rel="icon" type="image/png" sizes="512x512" href="images/android-chrome-512x512.png">
+  <link rel="manifest" href="site.webmanifest">
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"  integrity="sha512-..." crossorigin="anonymous">
+  <meta name="theme-color" content="#1e1e2f">
+  <meta name="msapplication-TileColor" content="#1e1e2f">
+  <meta name="msapplication-TileImage" content="images/mstile-144x144.png">
+  <meta name="msapplication-config" content="browserconfig.xml">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://echecs-club-ajaccien.com/">
+  <meta property="og:title" content="Échecs Club Ajaccien - Club d'échecs à Ajaccio">
+  <meta property="og:description"
+    content="Rejoignez le Club d'Échecs d'Ajaccio (ECA) : cours pour enfants et adultes, tournois, événements, et entraînements à Ajaccio.">
+  <meta property="og:image" content="https://echecs-club-ajaccien.com/images/Logo_du_club.jpeg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://echecs-club-ajaccien.com/">
+  <meta property="twitter:title" content="Échecs Club Ajaccien - Club d'échecs à Ajaccio">
+  <meta property="twitter:description"
+    content="Rejoignez le Club d'Échecs d'Ajaccio (ECA) : cours pour enfants et adultes, tournois, événements, et entraînements à Ajaccio.">
+  <meta property="twitter:image" content="https://echecs-club-ajaccien.com/images/Logo_du_club.jpeg">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    integrity="sha512-..." crossorigin="anonymous">
 </head>
+
 <body>
   <header>
     <div class="navbar">
       <div class="logo">
         <img src="./images/Logo_du_club.jpeg" alt="Logo ECA" class="logo-img">
         <a href="#">
-        <span class="logo-text">Echecs Club Ajaccien</span>
+          <span class="logo-text">Echecs Club Ajaccien</span>
         </a>
       </div>
       <div class="menu-hamburger" id="menu-btn">
@@ -53,7 +102,7 @@
       <ul class="nav-links" id="nav-links">
         <li><a href="#evenements">Événements</a></li>
         <li><a href="#actualites">Actualités</a></li>
-        <li><a href="#inscription">Inscription</a></li> 
+        <li><a href="#inscription">Inscription</a></li>
         <li><a href="#contact">Contact</a></li>
         <li><a href="#horaires">Horaires</a></li>
         <li><a href="#probleme-semaine">Problèmes</a></li>
@@ -65,9 +114,15 @@
   </header>
 
   <section id="home" class="hero">
-    <h1><u>Bienvenue à l'Échecs Club Ajaccien</u></h1>
-    <p><u>Partageons notre passion pour les échecs en Corse</u></p>
-    <a href="#contact" class="cta-button">Rejoignez-nous</a>
+    <div class="hero-image-container">
+      <img src="./images/ajaccio-bg.jpg" alt="Échecs Club Ajaccien" class="hero-img" loading="eager">
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <h1><u>Bienvenue à l'Échecs Club Ajaccien</u></h1>
+      <p><u>Partageons notre passion pour les échecs en Corse et à Ajaccio</u></p>
+      <a href="#contact" class="cta-button">Rejoignez-nous</a>
+    </div>
   </section>
 
   <section id="about" class="section">
@@ -94,10 +149,10 @@
     <div class="about-content-wrapper">
       <div class="about-text">
         <p class="about-description">
-        L'Échecs Club Ajaccien (ECA) promeut les échecs à Ajaccio et en Corse depuis 1991.  
-        Nous organisons des tournois, des cours et des animations pour tous les âges.  
-        Notre club accueille débutants, amateurs et joueurs confirmés.  
-        Rejoignez une communauté passionnée et conviviale autour du jeu d'échecs.
+          L'Échecs Club Ajaccien (ECA) promeut les échecs à Ajaccio et en Corse depuis 1991.
+          Nous organisons des tournois, des cours et des animations pour tous les âges.
+          Notre club accueille débutants, amateurs et joueurs confirmés.
+          Rejoignez une communauté passionnée et conviviale autour du jeu d'échecs.
         </p>
       </div>
       <div class="about-logo-container">
@@ -112,10 +167,10 @@
       <p>Découvrez les prochains rendez-vous où stratégie et convivialité se mêlent</p>
     </div>
     <div class="carousel-container">
-      <button class="carousel-btn prev-btn" aria-label="Précédent"><i class="fas fa-chevron-left"></i></button>   
+      <button class="carousel-btn prev-btn" aria-label="Précédent"><i class="fas fa-chevron-left"></i></button>
       <div class="carousel"></div>
       <button class="carousel-btn next-btn" aria-label="Suivant"><i class="fas fa-chevron-right"></i></button>
-    </div>  
+    </div>
     <div class="carousel-dots"></div>
     <div class="countdown-container">
       <div class="countdown-header">
@@ -144,18 +199,18 @@
       <div class="countdown-event" id="next-event-title"></div>
     </div>
   </section>
-  
+
   <section id="actualites" class="section">
     <div class="header">
       <h2>Actualités</h2>
       <p>Les derniers coups joués par notre club et ses membres</p>
     </div>
     <div class="actualite-container">
-      
+
     </div>
     <div style="text-align: center; margin-top: 3rem;">
       <a href="archives-actualites.html" class="archive-link" style="display: inline-block;">
-      Voir toutes les actualités <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+        Voir toutes les actualités <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
       </a>
     </div>
   </section>
@@ -171,10 +226,8 @@
         <h2>Devenez membre</h2>
         <p>Accédez à tous les avantages du club toute l'année</p>
         <div style="text-align: center;">
-          <a href="https://www.helloasso.com/associations/echecs-club-ajaccien/adhesions/adhesion-2025-2026" 
-             target="_blank" 
-             class="inscription-btn" 
-             rel="noopener noreferrer">
+          <a href="https://www.helloasso.com/associations/echecs-club-ajaccien/adhesions/adhesion-2025-2026"
+            target="_blank" class="inscription-btn" rel="noopener noreferrer">
             S'inscrire maintenant
           </a>
         </div>
@@ -233,12 +286,14 @@
         <i class="fas fa-chess-knight fa-2x"></i>
       </div>
       <p class="boutique-text">Découvrez notre sélection d'accessoires aux couleurs du club</p>
-      <a href="https://www.helloasso.com/associations/echecs-club-ajaccien/paiements/t-shirt-eca" class="boutique-link" rel="noopener noreferrer" target="_blank">Visiter la boutique</a>
+      <a href="https://www.helloasso.com/associations/echecs-club-ajaccien/paiements/t-shirt-eca" class="boutique-link"
+        rel="noopener noreferrer" target="_blank">Visiter la boutique</a>
       <div class="boutique-images">
         <img src="./images/Boutique/Tshirt.jpg" alt="T-shirt du club" class="boutique-decoration" data-lightbox="true">
         <img src="./images/Boutique/Veste.jpg" alt="Veste du club" class="boutique-decoration" data-lightbox="true">
         <img src="./images/Boutique/Gourde.jpg" alt="Gourde du club" class="boutique-decoration" data-lightbox="true">
-        <img src="./images/Boutique/Casquette.jpg" alt="Casquette du club" class="boutique-decoration" data-lightbox="true">
+        <img src="./images/Boutique/Casquette.jpg" alt="Casquette du club" class="boutique-decoration"
+          data-lightbox="true">
       </div>
     </div>
   </section>
@@ -252,17 +307,20 @@
     <div class="contact-grid">
       <div class="contact-infos-card">
         <h3>Coordonnées du club</h3>
-        
+
         <div class="contact-info-item">
           <div class="contact-info-icon">
             <i class="fas fa-map-marker-alt"></i>
           </div>
           <div class="contact-info-content">
             <h4>Adresse</h4>
-            <p><a href="https://www.google.com/maps/place/%C3%89checs+Club+Ajaccien/@41.928365,8.724375,16z/data=!4m6!3m5!1s0x12da6985ff8c702d:0x22bb8195314699d9!8m2!3d41.9283651!4d8.7243749!16s%2Fg%2F1tg3dtf1?hl=fr&entry=ttu&g_ep=EgoyMDI1MDcxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">Lieu Dit la Fontaine du Vittulu<br>route du Vittulu<br>20090 AJACCIO</a></p>
+            <p><a
+                href="https://www.google.com/maps/place/%C3%89checs+Club+Ajaccien/@41.928365,8.724375,16z/data=!4m6!3m5!1s0x12da6985ff8c702d:0x22bb8195314699d9!8m2!3d41.9283651!4d8.7243749!16s%2Fg%2F1tg3dtf1?hl=fr&entry=ttu&g_ep=EgoyMDI1MDcxMy4wIKXMDSoASAFQAw%3D%3D"
+                target="_blank" rel="noopener noreferrer">Lieu Dit la Fontaine du Vittulu<br>route du Vittulu<br>20090
+                AJACCIO</a></p>
           </div>
         </div>
-        
+
         <div class="contact-info-item">
           <div class="contact-info-icon">
             <i class="fas fa-phone-alt"></i>
@@ -272,7 +330,7 @@
             <p><a href="tel:+33767529046">07 67 52 90 46</a></p>
           </div>
         </div>
-        
+
         <div class="contact-info-item">
           <div class="contact-info-icon">
             <i class="fas fa-envelope"></i>
@@ -282,15 +340,12 @@
             <p><a href="mailto:ecajaccio@gmail.com">ecajaccio@gmail.com</a></p>
           </div>
         </div>
-        
+
         <div class="map">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2968.3481807752464!2d8.721799976185556!3d41.92836906226512!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12da6985ff8c702d%3A0x22bb8195314699d9!2s%C3%89checs%20Club%20Ajaccien!5e0!3m2!1sfr!2sfr!4v1751565547643!5m2!1sfr!2sfr" 
-                  width="100%" 
-                  height="100%" 
-                  style="border:0;" 
-                  allowfullscreen="" 
-                  loading="lazy"
-                  referrerpolicy="no-referrer-when-downgrade">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2968.3481807752464!2d8.721799976185556!3d41.92836906226512!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12da6985ff8c702d%3A0x22bb8195314699d9!2s%C3%89checs%20Club%20Ajaccien!5e0!3m2!1sfr!2sfr!4v1751565547643!5m2!1sfr!2sfr"
+            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
           </iframe>
         </div>
       </div>
@@ -300,32 +355,20 @@
       <div class="social-media-container">
         <h3 class="social-media-title">Suivez notre actualité</h3>
         <div class="social-media-links">
-          <a href="https://www.facebook.com/people/I-Scacchi-Aiaccini-%C3%89checs-Club-Ajaccien/100064347833591/" 
-             target="_blank" 
-             class="social-media-link" 
-             rel="noopener noreferrer"
-             aria-label="Facebook">
+          <a href="https://www.facebook.com/people/I-Scacchi-Aiaccini-%C3%89checs-Club-Ajaccien/100064347833591/"
+            target="_blank" class="social-media-link" rel="noopener noreferrer" aria-label="Facebook">
             <i class="fab fa-facebook"></i>
           </a>
-          <a href="https://www.instagram.com/i_scacchi_aiaccini/#" 
-             target="_blank" 
-             class="social-media-link" 
-             rel="noopener noreferrer"
-             aria-label="Instagram">
+          <a href="https://www.instagram.com/i_scacchi_aiaccini/#" target="_blank" class="social-media-link"
+            rel="noopener noreferrer" aria-label="Instagram">
             <i class="fab fa-instagram"></i>
           </a>
-          <a href="https://www.youtube.com/channel/UC_8pVEkZwRdBriemfRA-vLw" 
-             target="_blank" 
-             class="social-media-link" 
-             rel="noopener noreferrer"
-             aria-label="YouTube">
+          <a href="https://www.youtube.com/channel/UC_8pVEkZwRdBriemfRA-vLw" target="_blank" class="social-media-link"
+            rel="noopener noreferrer" aria-label="YouTube">
             <i class="fab fa-youtube"></i>
           </a>
-          <a href="https://www.linkedin.com/company/echecs-club-ajaccien/" 
-             target="_blank" 
-             class="social-media-link" 
-             rel="noopener noreferrer"
-             aria-label="LinkedIn">
+          <a href="https://www.linkedin.com/company/echecs-club-ajaccien/" target="_blank" class="social-media-link"
+            rel="noopener noreferrer" aria-label="LinkedIn">
             <i class="fab fa-linkedin"></i>
           </a>
         </div>
@@ -387,16 +430,16 @@
       <p>Quelques clichés de notre vie échiquéenne</p>
     </div>
     <div class="gallery">
-      <img src="./images/Gallerie/Photo_Jeune.jpg" alt="Photo de nos Jeunes" data-lightbox="true"/>
-      <img src="./images/Gallerie/Qualif_Corse.jpg" alt="Qualification Championnat de Corse" data-lightbox="true"/>
-      <img src="./images/Gallerie/Echecs_Pat.jpg" alt="Championnat Scolaire" data-lightbox="true"/>
-      <img src="./images/Gallerie/Noel.jpg" alt="Tournoi_Noel" data-lightbox="true"/>
+      <img src="./images/Gallerie/Photo_Jeune.jpg" alt="Photo de nos Jeunes" data-lightbox="true" />
+      <img src="./images/Gallerie/Qualif_Corse.jpg" alt="Qualification Championnat de Corse" data-lightbox="true" />
+      <img src="./images/Gallerie/Echecs_Pat.jpg" alt="Championnat Scolaire" data-lightbox="true" />
+      <img src="./images/Gallerie/Noel.jpg" alt="Tournoi_Noel" data-lightbox="true" />
     </div>
-  <div style="text-align: center; margin-top: 3rem;">
-    <a href="archives-photos.html" class="archive-link" style="display: inline-block;">
-    Voir toutes les photos <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
-    </a>
-  </div>
+    <div style="text-align: center; margin-top: 3rem;">
+      <a href="archives-photos.html" class="archive-link" style="display: inline-block;">
+        Voir toutes les photos <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+      </a>
+    </div>
   </section>
 
   <section id="archives" class="section">
@@ -431,32 +474,32 @@
     </div>
     <div class="team">
       <div class="member">
-        <img src="./images/Team/Marie-paul.jpg" alt="Président" data-lightbox="true"/>
+        <img src="./images/Team/Marie-paul.jpg" alt="Président" data-lightbox="true" />
         <h3>Marie-Paule TOMASI</h3>
         <p>Présidente</p>
       </div>
       <div class="member">
-        <img src="./images/Team/Lauren.jpg" alt="Entraîneur" data-lightbox="true"/>
+        <img src="./images/Team/Lauren.jpg" alt="Entraîneur" data-lightbox="true" />
         <h3>Lauren GIUDICELLI</h3>
         <p>Trésorière</p>
       </div>
       <div class="member">
-        <img src="./images/Team/Xavier.jpg" alt="Animateur" data-lightbox="true"/>
+        <img src="./images/Team/Xavier.jpg" alt="Animateur" data-lightbox="true" />
         <h3>Xavier CARROLAGGI</h3>
         <p>Secrétaire</p>
       </div>
       <div class="member">
-        <img src="./images/Team/Thomas.jpg" alt="Animateur" data-lightbox="true"/>
+        <img src="./images/Team/Thomas.jpg" alt="Animateur" data-lightbox="true" />
         <h3>Thomas CHOKBENGBOUN</h3>
         <p>Animateur</p>
       </div>
       <div class="member">
-        <img src="./images/Team/Guillaume.jpg" alt="Formateur" data-lightbox="true"/>
+        <img src="./images/Team/Guillaume.jpg" alt="Formateur" data-lightbox="true" />
         <h3>Guillaume PAOLI</h3>
         <p>Formateur</p>
       </div>
       <div class="member">
-        <img src="./images/Team/Patrick.jpg" alt="Formateur" data-lightbox="true"/>
+        <img src="./images/Team/Patrick.jpg" alt="Formateur" data-lightbox="true" />
         <h3>Patrick SOETEWEY</h3>
         <p>Formateur</p>
       </div>
@@ -471,13 +514,16 @@
     <h2 class="sponsor-subtitle">Ligue & Fédération</h2>
     <div class="ligue-federation-logos">
       <div class="ligue-item">
-        <a href="https://www.corse-echecs.com/" target="_blank" rel="noopener noreferrer"><img src="./images/Sponsors/Ligue_Corse.png" alt="Logo Ligue Corse"></a>
+        <a href="https://www.corse-echecs.com/" target="_blank" rel="noopener noreferrer"><img
+            src="./images/Sponsors/Ligue_Corse.png" alt="Logo Ligue Corse"></a>
       </div>
       <div class="ligue-item">
-        <a href="https://www.echecs.asso.fr/" target="_blank" rel="noopener noreferrer"><img src="./images/Sponsors/FFE.png" alt="Logo FFE"></a>
+        <a href="https://www.echecs.asso.fr/" target="_blank" rel="noopener noreferrer"><img
+            src="./images/Sponsors/FFE.png" alt="Logo FFE"></a>
       </div>
       <div class="ligue-item">
-        <a href="https://www.fide.com/" target="_blank" rel="noopener noreferrer"><img src="./images/Sponsors/FIDE.png" alt="Logo FIDE"></a>
+        <a href="https://www.fide.com/" target="_blank" rel="noopener noreferrer"><img src="./images/Sponsors/FIDE.png"
+            alt="Logo FIDE"></a>
       </div>
     </div>
     <h2 class="sponsor-title">Nos Sponsors</h2>
@@ -506,7 +552,8 @@
   <section class="chess-quote-section" class="section">
     <div class="chess-quote-container">
       <blockquote>
-        <span class="highlight-letter">L</span>es échecs sont un jeu par leur forme, un art par leur essence et une science par sa difficulté d'acquisition.
+        <span class="highlight-letter">L</span>es échecs sont un jeu par leur forme, un art par leur essence et une
+        science par sa difficulté d'acquisition.
         Ils peuvent vous procurer autant de plaisir qu'un bon livre ou une belle musique,
         mais vous n'aurez une réelle joie que si vous arrivez à bien jouer.
       </blockquote>
@@ -531,4 +578,5 @@
   </div>
   <script src="script.js"></script>
 </body>
+
 </html>

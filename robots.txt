@@ -1,10 +1,5 @@
-# Autorise tous les moteurs de recherche
+# robots.txt
 User-agent: *
 Allow: /
 
-# Bloque seulement les fichiers inutiles
-Disallow: /README.md
-Disallow: /CNAME
-
-# Lien vers le sitemap
 Sitemap: https://echecs-club-ajaccien.com/sitemap.xml

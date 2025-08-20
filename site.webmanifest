@@ -1,0 +1,31 @@
+{
+  "name": "Échecs Club Ajaccien - Club d'échecs à Ajaccio",
+  "short_name": "ECA Ajaccio",
+  "description": "Club d'échecs à Ajaccio proposant des cours, tournois et événements pour tous les niveaux. Rejoignez notre communauté !",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1e1e2f",
+  "theme_color": "#ffcc00",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "images/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "images/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["sports", "education"],
+  "lang": "fr",
+  "scope": "/"
+}

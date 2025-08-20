@@ -1,33 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Page d'accueil -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://echecs-club-ajaccien.com/</loc>
-    <lastmod>2025-08-17</lastmod>
+    <lastmod>2025-08-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://echecs-club-ajaccien.com/" />
   </url>
-
-  <!-- Pages secondaires -->
   <url>
     <loc>https://echecs-club-ajaccien.com/archives-actualites.html</loc>
-    <lastmod>2025-08-17</lastmod>
+    <lastmod>2025-08-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://echecs-club-ajaccien.com/archives-actualites.html" />
   </url>
-
   <url>
     <loc>https://echecs-club-ajaccien.com/archives-photos.html</loc>
-    <lastmod>2025-08-17</lastmod>
+    <lastmod>2025-08-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-  </url>
-
-  <!-- Page Guide -->
-  <url>
-    <loc>https://echecs-club-ajaccien.com/Guide/</loc>
-    <lastmod>2025-08-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://echecs-club-ajaccien.com/archives-photos.html" />
   </url>
 </urlset>

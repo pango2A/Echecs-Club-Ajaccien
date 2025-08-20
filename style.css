@@ -126,18 +126,6 @@ header {
   color: white;
 }
 
-.hero {
-  background: url('/images/ajaccio-bg.jpg') no-repeat center center;
-  background-size: cover;
-  background-attachment: scroll;
-  background-color: #000;
-  padding: 6rem 2rem;
-  color: rgb(255, 255, 255);
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
 .hero::before {
   content: '';
   position: absolute;
@@ -165,6 +153,70 @@ header {
 .hero p {
   font-size: 1.2rem;
   margin-bottom: 2rem;
+}
+
+/* Styles pour la nouvelle structure Hero avec balise img */
+.hero {
+  position: relative;
+  padding: 6rem 2rem;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  overflow: hidden;
+  height: 350px; /* Ajustez selon vos besoins */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-image-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Supprimez l'ancien style .hero::before */
+.hero::before {
+  content: none;
+}
+
+/* Ajustements responsives */
+@media (max-width: 768px) {
+  .hero {
+    padding: 4rem 1rem;
+    height: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    height: 350px;
+  }
 }
 
 .cta-button {
