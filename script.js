@@ -25,6 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
   setupStatsAnimation();
   setupArchivesFilter();
 
+  if (document.querySelector(".actualite-single")) {
+    loadRandomSimilarActualite();
+  }
+
   /* ==================== */
   /* FONCTIONS SÉCURITÉ */
   /* ==================== */
@@ -40,8 +44,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function sanitizeUrl(url) {
     const allowedProtocols = ["https:", "http:", "mailto:", "tel:"];
+
+    // Autoriser les liens internes relatifs
+    if (typeof url === "string" && url.startsWith("/")) {
+      return url;
+    }
+
     try {
-      const parsed = new URL(url);
+      const parsed = new URL(url, window.location.origin);
       return allowedProtocols.includes(parsed.protocol) ? url : "#";
     } catch {
       return "#";
@@ -522,7 +532,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function setupCountdown(events) {
     const countdownContainer = document.querySelector(".countdown-container");
-    if (!countdownContainer || !events || events.length === 0) {
+
+    // Si le conteneur n'existe pas dans le DOM → on arrête direct
+    if (!countdownContainer) {
+      console.warn("⚠️ Élément .countdown-container introuvable.");
+      return;
+    }
+
+    // Si pas d'événements → on cache le conteneur
+    if (!events || events.length === 0) {
       countdownContainer.style.display = "none";
       return;
     }
@@ -544,8 +562,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const nextEvent = futureEvents[0];
     const nextEventDate = new Date(nextEvent.date);
+
     const nextEventTitle = document.getElementById("next-event-title");
-    nextEventTitle.textContent = ` "${escapeHtml(nextEvent.titre)}"`;
+    if (nextEventTitle) {
+      nextEventTitle.textContent = ` "${escapeHtml(nextEvent.titre)}"`;
+    }
 
     function updateCountdown() {
       const now = new Date();
@@ -569,18 +590,18 @@ document.addEventListener("DOMContentLoaded", () => {
       const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-      document.getElementById("countdown-days").textContent = days
-        .toString()
-        .padStart(2, "0");
-      document.getElementById("countdown-hours").textContent = hours
-        .toString()
-        .padStart(2, "0");
-      document.getElementById("countdown-minutes").textContent = minutes
-        .toString()
-        .padStart(2, "0");
-      document.getElementById("countdown-seconds").textContent = seconds
-        .toString()
-        .padStart(2, "0");
+      // On vérifie chaque élément avant de modifier son texte
+      const elDays = document.getElementById("countdown-days");
+      const elHours = document.getElementById("countdown-hours");
+      const elMinutes = document.getElementById("countdown-minutes");
+      const elSeconds = document.getElementById("countdown-seconds");
+
+      if (elDays) elDays.textContent = days.toString().padStart(2, "0");
+      if (elHours) elHours.textContent = hours.toString().padStart(2, "0");
+      if (elMinutes)
+        elMinutes.textContent = minutes.toString().padStart(2, "0");
+      if (elSeconds)
+        elSeconds.textContent = seconds.toString().padStart(2, "0");
     }
 
     updateCountdown();
@@ -617,24 +638,17 @@ document.addEventListener("DOMContentLoaded", () => {
   /* FONCTIONS UTILITAIRES */
   /* ==================== */
 
-  async function fetchData(path = []) {
-    const jsonPaths = [`./${path}`, path, `/${path}`, `./data/${path}`];
-
-    for (const jsonPath of jsonPaths) {
-      try {
-        const response = await fetch(jsonPath);
-        if (response.ok) {
-          const data = await response.json();
-          console.log(`Données chargées depuis ${jsonPath}`);
-          return data;
-        }
-      } catch (e) {
-        console.warn(`Échec sur ${jsonPath}`, e);
-      }
+  async function fetchData(path) {
+    try {
+      const response = await fetch(`/${path}`);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const data = await response.json();
+      console.log(`Données chargées depuis /${path}`);
+      return data;
+    } catch (e) {
+      console.error(`Impossible de charger ${path}`, e);
+      throw e;
     }
-
-    console.warn(`Échec de chargement pour ${path}`);
-    throw new Error(`Impossible de charger ${path}`);
   }
 
   function filterRecentActualites(actualites, days) {
@@ -719,8 +733,6 @@ document.addEventListener("DOMContentLoaded", () => {
             <h3>${escapeHtml(actu.titre)}</h3>
             <p>${escapeHtml(actu.description)}</p>
             <a href="${sanitizeUrl(actu.lien)}" 
-               target="_blank" 
-               rel="noopener noreferrer" 
                class="actualite-link">
               En Savoir Plus 
             </a>
@@ -753,8 +765,6 @@ document.addEventListener("DOMContentLoaded", () => {
           <h3>${escapeHtml(evt.titre)}</h3>
           <p>${escapeHtml(evt.description)}</p>
           <a href="${sanitizeUrl(evt.lien)}" 
-             target="_blank" 
-             rel="noopener noreferrer" 
              class="carousel-link">
             En Savoir Plus
           </a>
@@ -853,5 +863,37 @@ document.addEventListener("DOMContentLoaded", () => {
       return new Date(`${year}-${monthNumber}-${day.padStart(2, "0")}`);
     }
     return new Date();
+  }
+
+  function shuffleArray(array) {
+    return array
+      .map((value) => ({ value, sort: Math.random() }))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({ value }) => value);
+  }
+
+  async function loadRandomSimilarActualite() {
+    try {
+      const actualites = await fetchData("actualites.json");
+
+      // URL de la page courante
+      const currentPath = window.location.pathname;
+
+      // Filtrer pour exclure l’actu courante
+      const autresActus = actualites.filter((a) => a.lien !== currentPath);
+
+      if (autresActus.length === 0) return;
+
+      // Mélanger les actus restantes
+      const shuffled = shuffleArray(autresActus);
+
+      // Sélectionner le nombre voulu (ici 1 actu, tu peux mettre 2 ou 3 si tu veux)
+      const selection = shuffled.slice(0, 1);
+
+      // Afficher la sélection dans la section "Actualité similaire"
+      displayActualites(selection, ".actualite-container");
+    } catch (error) {
+      console.error("Erreur chargement actu similaire:", error);
+    }
   }
 });
