@@ -165,7 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const sortedActualites = actualites.sort(
         (a, b) => new Date(b.date) - new Date(a.date)
       );
-      const recentActualites = filterRecentActualites(sortedActualites, 30);
+      const recentActualites = filterRecentActualites(sortedActualites, 45);
 
       displayActualites(recentActualites, ".actualite-container");
       displayActualites(sortedActualites, "#archives-actualites-container");

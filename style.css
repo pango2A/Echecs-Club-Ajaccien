@@ -2589,8 +2589,3 @@ footer p::before {
   transform: rotate(45deg);
   z-index: 1;
 }
-
-.actualite-container {
-  display: flex;
-  justify-content: center;
-}
