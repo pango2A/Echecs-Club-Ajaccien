@@ -12,5 +12,12 @@
     "description": "Les rondes 1 et 2 du Championnat de Corse par équipes se déroulent le dimanche 23 novembre 2025 à Prunelli di Fium’Orbu (cadence 1h30+30s, homologué FIDE). Plusieurs équipes de l’Échecs Club Ajaccien sont engagées en Territorial 1 et 2.",
     "image": "/images/Event_Temporaire/Championnat_Corse_equipe.jpg",
     "lien": "/evenements/Championnat-corse-par-equipe.html"
+  },
+  {
+    "date": "2025-11-30",
+    "titre": "Coupe de la parité – R1 & R2",
+    "description": "La Phase Ligue de la Coupe de la Parité se tiendra le dimanche 30 novembre 2025 à Corte. Cette compétition mixte par équipes réunira les clubs corses pour 3 rondes homologuées FIDE.",
+    "image": "/images/Event_Temporaire/coupe_parite.jpg",
+    "lien": "/evenements/Coupe_Parite.html"
   }
 ]
