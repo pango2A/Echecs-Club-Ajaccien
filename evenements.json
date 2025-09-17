@@ -1,17 +1,18 @@
 [
   {
-    "date": "2025-09-13",
-    "titre": "ASSOCI IN FESTA",
-    "description": "Le club sera présent à l’ASSOCI IN FESTA, fête du sport et des associations, le samedi 13 septembre de 10h00 à 18h30 Place du Casone. Venez nous rencontrer et découvrir les échecs !",
-    "image": "/images/Event_Temporaire/Fete_Asso.jpg",
-    "lien": "/evenements/Associ-in-Festa-2025.html"
-  },
-  {
     "date": "2025-09-27",
     "titre": "Tournoi ECA-Inseme",
     "description": "Le 5ᵉ Tournoi ECA-INSEME aura lieu le samedi 27 septembre 2025 à Ajaccio, un open de blitz convivial et solidaire dont tous les bénéfices seront reversés à l’association INSEME. Ouvert à tous, il proposera 7 rondes rapides ainsi que des lots attractifs.",
     "image": "/images/Event_Temporaire/inseme_2025.jpg",
     "lien": "/evenements/Inseme-2025.html"
+  },
+  {
+    "date": "2025-10-18",
+    "dateFin": "2025-10-20",
+    "titre": "4e Open-Automne ",
+    "description": "L’Open d’automne de l’Échecs Club Ajaccien se tiendra du 18 au 20 octobre 2025 à Ajaccio (cadence 1h30+30s, homologué FIDE). Deux tournois sont au programme – un Open et un tournoi jeunes – avec 1 600 € de prix.",
+    "image": "/images/Event_Temporaire/open_automne.jpg",
+    "lien": "/evenements/Open-Automne-2025.html"
   },
   {
     "date": "2025-11-23",

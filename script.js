@@ -185,15 +185,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Trie ensuite les événements par date de début croissante
   function filterFutureEvents(events) {
     const now = new Date();
+
     return events
       .filter((event) => {
         try {
-          const eventDate = new Date(event.date);
-          return eventDate >= now;
+          const startDate = new Date(event.date);
+          const endDate = event.dateFin ? new Date(event.dateFin) : startDate;
+
+          // Un événement est considéré actif jusqu'à la fin de dateFin
+          endDate.setHours(23, 59, 59, 999);
+
+          return endDate >= now;
         } catch (e) {
-          console.error("Erreur traitement date:", e);
+          console.error("Erreur traitement date:", e, event);
           return false;
         }
       })
