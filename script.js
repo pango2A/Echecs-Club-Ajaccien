@@ -539,37 +539,51 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function setupCountdown(events) {
     const countdownContainer = document.querySelector(".countdown-container");
+    if (!countdownContainer) return;
 
-    // Si le conteneur n'existe pas dans le DOM → on arrête direct
-    if (!countdownContainer) {
-      console.warn("⚠️ Élément .countdown-container introuvable.");
-      return;
-    }
-
-    // Si pas d'événements → on cache le conteneur
     if (!events || events.length === 0) {
       countdownContainer.style.display = "none";
       return;
     }
 
     const now = new Date();
-    const futureEvents = events.filter((event) => {
-      try {
-        const eventDate = new Date(event.date);
-        return eventDate > now;
-      } catch {
-        return false;
-      }
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()); // Date sans heures/minutes
+
+    // Trouver le prochain événement
+    const nextEvent = events.find((event) => {
+      const eventDate = new Date(event.date);
+      const eventDay = new Date(
+        eventDate.getFullYear(),
+        eventDate.getMonth(),
+        eventDate.getDate()
+      );
+      return eventDay >= today;
     });
 
-    if (futureEvents.length === 0) {
+    if (!nextEvent) {
       countdownContainer.style.display = "none";
       return;
     }
 
-    const nextEvent = futureEvents[0];
     const nextEventDate = new Date(nextEvent.date);
+    const nextEventDay = new Date(
+      nextEventDate.getFullYear(),
+      nextEventDate.getMonth(),
+      nextEventDate.getDate()
+    );
 
+    // Vérifier si c'est aujourd'hui
+    const isToday = today.getTime() === nextEventDay.getTime();
+
+    if (isToday) {
+      countdownContainer.innerHTML = `
+      <h3 class="countdown-title">"${escapeHtml(nextEvent.titre)}"</h3>
+      <p class="countdown-message">Venez nous rejoindre !</p>
+    `;
+      return; // On arrête tout, pas besoin de countdown
+    }
+
+    // Sinon, afficher le countdown normal
     const nextEventTitle = document.getElementById("next-event-title");
     if (nextEventTitle) {
       nextEventTitle.textContent = ` "${escapeHtml(nextEvent.titre)}"`;
@@ -582,10 +596,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (diff <= 0) {
         clearInterval(countdownInterval);
         countdownContainer.innerHTML = `
-        <h3 class="countdown-title">L'événement "${escapeHtml(
-          nextEvent.titre
-        )}" a commencé !</h3>
-        <p>Rejoignez-nous dès maintenant !</p>
+        <h3 class="countdown-title">"${escapeHtml(nextEvent.titre)}"</h3>
+        <p class="countdown-message">Rejoignez-nous dès maintenant !</p>
       `;
         return;
       }
@@ -597,7 +609,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-      // On vérifie chaque élément avant de modifier son texte
       const elDays = document.getElementById("countdown-days");
       const elHours = document.getElementById("countdown-hours");
       const elMinutes = document.getElementById("countdown-minutes");
