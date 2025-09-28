@@ -3,6 +3,21 @@
     "year": "2025",
     "events": [
       {
+        "title": "5eme Tournoi ECA Inseme",
+        "date": "27 Septembre 2025",
+        "description": "Hier s’est tenu notre grand tournoi d’échecs au profit de l’association Inseme, et le succès a été au rendez-vous ! Plus d’une soixantaine de passionnés ont répondu présent.",
+        "images": [
+          "images/Tournoi_2025/Inseme_2025/Inseme_2025_Benvole.jpg",
+          "images/Tournoi_2025/Inseme_2025/Inseme_2025_Prix.jpg",
+          "images/Tournoi_2025/Inseme_2025/Inseme_Ensemble.jpg",
+          "images/Tournoi_2025/Inseme_2025/Partie_01.jpg",
+          "images/Tournoi_2025/Inseme_2025/Stand.jpg",
+          "images/Tournoi_2025/Inseme_2025/Partie_02.jpg",
+          "images/Tournoi_2025/Inseme_2025/Ensemble2.jpg",
+          "images/Tournoi_2025/Inseme_2025/Remise_Prix.jpg"
+        ]
+      },
+      {
         "title": "Open International de Porticcio 2025",
         "date": "28/04 Juillet 2025",
         "description": "Une semaine intense d'échecs sur le littoral corse avec des joueurs internationaux. L'hôtel Club MarinaViva nous a accueillis avec une infrastructure parfaite.",
