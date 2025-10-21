@@ -1,14 +1,21 @@
 [
   {
+    "date": "2025-10-20",
+    "titre": "4° Open Automne",
+    "description": "Le 4ᵉ Open d’Automne d’Ajaccio a une nouvelle fois rassemblé passionnés et compétiteurs autour d’un tournoi relevé et convivial. Porté par une régularité exemplaire, Jean-Michel Bigonnet s’est imposé avec maîtrise, signant une victoire pleine de panache.",
+    "image": "/images/Actu/open_automne_2025.jpg",
+    "lien": "/actualitees/Open-Automne-2025.html"
+  },
+  {
     "date": "2025-10-15",
-    "titre": "Challenge UNSS e-échecs 2025-2026",
+    "titre": "Challenge UNSS 2025-2026",
     "description": "Le collège Laetitia Bonaparte d’Ajaccio signe une belle performance lors de sa deuxième participation au Challenge E-Échecs UNSS, en se classant 18ᵉ sur 106 équipes. Une réussite qui récompense le travail collectif de la Squadra di Scacchi Dama Letizia et confirme la progression constante des jeunes joueurs ajacciens.",
     "image": "/images/Actu/UNSS_Leatitia_2025.jpg",
     "lien": "/actualitees/UNSS_2025.html"
   },
   {
     "date": "2025-10-03",
-    "titre": "Blitz Pizza Venetta Cucine",
+    "titre": "Blitz Venetta Cucine",
     "description": "Cette saison, le club d’échecs organise chaque mois un Blitz Pizza Détente, un moment convivial mêlant compétition et plaisir ! Toutes les dates figurent sur l’affiche — les tournois sont homologués FIDE, grâce au soutien généreux de Venetta Cucine, notre sponsor.",
     "image": "/images/Actu/blitz_pizza.jpg",
     "lien": "/actualitees/Blitz-Pizza-2025.html"

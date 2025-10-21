@@ -3,6 +3,21 @@
     "year": "2025",
     "events": [
       {
+        "title": "4° Open d'Automne",
+        "date": "20 Octobre 2025",
+        "description": "Suspense, stratégie et passion : Jean-Michel Bigonnet s’impose au 4ᵉ Open d’Automne d’Ajaccio !",
+        "images": [
+          "images/Actu/open_Automne_2025.jpg",
+          "images/Tournoi_2025/Open_Automne/Prix_Jeune.jpg",
+          "images/Tournoi_2025/Open_Automne/Patrick&Fiona.jpg",
+          "images/Tournoi_2025/Open_Automne/Partie1.jpg",
+          "images/Tournoi_2025/Open_Automne/Vue_Ensemble.jpg",
+          "images/Tournoi_2025/Open_Automne/Partie2.jpg",
+          "images/Tournoi_2025/Open_Automne/Vue_Ensemble2.jpg",
+          "images/Tournoi_2025/Open_Automne/Prix2.jpg"
+        ]
+      },
+      {
         "title": "5eme Tournoi ECA Inseme",
         "date": "27 Septembre 2025",
         "description": "Hier s’est tenu notre grand tournoi d’échecs au profit de l’association Inseme, et le succès a été au rendez-vous ! Plus d’une soixantaine de passionnés ont répondu présent.",
