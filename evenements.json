@@ -1,16 +1,53 @@
 [
   {
-    "date": "2025-11-23",
-    "titre": "Championnat de Corse par équipes – R1 & R2",
-    "description": "Les rondes 1 et 2 du Championnat de Corse par équipes se déroulent le dimanche 23 novembre 2025 à Prunelli di Fium’Orbu (cadence 1h30+30s, homologué FIDE). Plusieurs équipes de l’Échecs Club Ajaccien sont engagées en Territorial 1 et 2.",
-    "image": "/images/Event_Temporaire/Championnat_Corse_equipe.jpg",
-    "lien": "/evenements/Championnat-corse-par-equipe.html"
+    "date": "2025-12-14",
+    "titre": "Tournoi de Noël",
+    "description": "Le rendez-vous le plus chaleureux de l’année revient : le Tournoi de Noël de l’Échecs Club Ajaccien ouvre ses portes aux passionnés pour une après-midi de jeu et de convivialité.",
+    "image": "/images/Event_Temporaire/Tournoi_Noel.jpg",
+    "lien": "/evenements/Tournoi-Noel.html"
   },
   {
-    "date": "2025-11-30",
-    "titre": "Coupe de la parité – R1 & R2",
-    "description": "La Phase Ligue de la Coupe de la Parité se tiendra le dimanche 30 novembre 2025 à Corte. Cette compétition mixte par équipes réunira les clubs corses pour 3 rondes homologuées FIDE.",
+    "date": "2025-12-27",
+    "dateFin":"2025-12-30",
+    "titre": "Open de Noël Bastia",
+    "description": "L’Open de Noël de Bastia revient pour quatre jours d’échecs intenses : sept rondes décisives, une ambiance unique et deux places qualificatives pour le championnat de Corse.",
+    "image": "/images/Event_Temporaire/Open_Noel_Bastia.jpg",
+    "lien": "/evenements/Open_Noel_Bastia.html"
+  },
+  {
+    "date": "2026-01-11",
+    "titre": "Coupe de la parité – R1 R2",
+    "description": "La Phase Ligue de la Coupe de la Parité se tiendra le dimanche 11 Janvier 2026 à Corte. Cette compétition mixte par équipes réunira les clubs corses pour 3 rondes homologuées FIDE.",
     "image": "/images/Event_Temporaire/coupe_parite.jpg",
     "lien": "/evenements/Coupe_Parite.html"
+  },
+  {
+    "date": "2026-02-01",
+    "titre": "Qualificatif Ajaccio",
+    "description": "Le 1er février 2026, les jeunes talents ajacciens auront rendez-vous au cœur de l’Échecs Club Ajaccien pour une journée décisive, rythmée par les parties rapides et les qualifications pour le championnat de Corse.",
+    "image": "/images/Event_Temporaire/Campionnat_Ajaccio_Jeune.jpg",
+    "lien": "/evenements/Championnat-Ajaccio-Jeune.html"
+  },
+  {
+    "date": "2026-03-07",
+    "dateFin":"2026-03-08",
+    "titre": "Championnat Corse Jeune",
+    "description": "Les meilleurs espoirs échiquéens de l’île ont rendez-vous à Corte le 7 et 8 mars 2026 : deux jours intenses où se joueront les finales du championnat de Corse jeunes, qualificatives pour le Championnat de France.",
+    "image": "/images/Event_Temporaire/Championnat-Corse-Jeunes.jpg",
+    "lien": "/evenements/Championnat-Corse-Jeune.html"
+  },
+  {
+    "date": "2026-03-22",
+    "titre": "Championnat Corse Équipes",
+    "description": "La 2ᵉ journée du Championnat de Corse par équipes se joue à Corte le 22 mars 2026 : deux rondes décisives pour 25 équipes prêtes à en découdre sur 64 cases.",
+    "image": "/images/Event_Temporaire/Championnat_Corse_Equipe.jpg",
+    "lien": "/evenements/Championnat-Corse-Équipes.html"
+  },
+  {
+    "date": "2026-05-10",
+    "titre": "Championnat Corse Blitz",
+    "description": "Le dimanche 10 mai 2026, Corte devient le centre de l’échiquier corse : le Championnat de Corse de Blitz réunira les meilleurs joueurs et jeunes talents pour une journée intense de compétition et de convivialité.",
+    "image": "/images/Event_Temporaire/Championnat-Corse-Blitz.jpg",
+    "lien": "/evenements/Championnat-Corse-Blitz.html"
   }
 ]
