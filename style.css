@@ -2328,7 +2328,7 @@ footer p::before {
 .countdown-title {
   font-size: 1.2rem;
   margin-bottom: 0.8rem;
-  color: #ffcc00;
+  color: #deb200;
 }
 
 .countdown-timer {
@@ -2387,7 +2387,7 @@ footer p::before {
 
 .countdown-chess-icon {
   font-size: 1.4rem;
-  color: #ffcc00;
+  color: #deb201;
   opacity: 0.8;
   transform: rotate(-15deg);
   transition: transform 0.3s ease;
