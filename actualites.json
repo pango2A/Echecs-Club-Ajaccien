@@ -1,5 +1,12 @@
 [
   {
+    "date": "2026-01-11",
+    "titre": "Coupe Parité",
+    "description": "La Coupe de la Parité a offert une belle journée de compétition et de partage en Corse, mettant en lumière l’engagement des clubs insulaires et la qualification méritée de l’Échecs Club Ajaccien 1 pour la suite de l’épreuve.",
+    "image": "/images/Actu/Coupe_Parite_2026.jpg",
+    "lien": "/actualitees/Coupe-Parite-2026.html"
+  },
+  {
     "date": "2026-01-04",
     "titre": "Changement d'adresse",
     "description": "Après la pause des vacances de Noël 2026, l’Échecs Club Ajaccien retrouve ses joueurs pour une nouvelle rentrée marquée par un changement important. Le club vous accueille désormais au 3, rue du Docteur Versini à Ajaccio.",
@@ -35,7 +42,7 @@
     "lien": "/actualitees/UNSS_2025.html"
   },
   {
-    "date": "2025-11-07",
+    "date": "2026-01-09",
     "titre": "Blitz Venetta Cucine",
     "description": "Cette saison, le club d’échecs organise chaque mois un Blitz Pizza Détente, un moment convivial mêlant compétition et plaisir ! Toutes les dates figurent sur l’affiche — les tournois sont homologués FIDE, grâce au soutien généreux de Venetta Cucine, notre sponsor.",
     "image": "/images/Actu/blitz_pizza.jpg",
