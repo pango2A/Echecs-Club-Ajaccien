@@ -1,26 +1,10 @@
 [
   {
-    "date": "2026-01-24",
-    "dateFin":"2026-01-25",
-    "titre": "Open de Calvi",
-    "description": "Les 24 et 25 janvier 2026, Calvi accueille la 3ᵉ édition de l’Open d’Hiverdu Balagna Chess Club, un tournoi FIDE mêlant compétition et convivialité.",
-    "image": "/images/Event_Temporaire/Open_Calvi_2026.jpg",
-    "lien": "/evenements/Open-Calvi-2026.html"
-  },
-  {
     "date": "2026-02-07",
     "titre": "Tournoi d'Aflokkat",
     "description": "Pour célébrer le partenariat entre l'Échecs Club Ajaccien et l'école d'ingénieur Aflokkat, un tournoi sera organisé dans leurs locaux le 7 février 2026. Une occasion unique de mêler stratégie et innovation !",
     "image": "/images/Event_Temporaire/Tournoi_Aflokkat.jpg",
     "lien": "/evenements/Tournoi-Aflokkat.html"
-  },
-  {
-    "date": "2026-01-31",
-    "dateFin":"2026-02-01",
-    "titre": "Qualificatif Ajaccio",
-    "description": "Le 31 Janvier 2026 et 1° Février 2026, les jeunes talents ajacciens auront rendez-vous au cœur de l’Échecs Club Ajaccien pour une journée décisive, rythmée par les parties rapides et les qualifications pour le championnat de Corse.",
-    "image": "/images/Event_Temporaire/Championnat_Ajaccio_Jeune.jpg",
-    "lien": "/evenements/Championnat-Ajaccio-Jeune.html"
   },
   {
     "date": "2026-03-07",

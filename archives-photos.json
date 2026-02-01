@@ -1,5 +1,23 @@
 [
   {
+    "year": "2026",
+    "events": [
+      {
+        "title": "Championnat d'Ajaccio Jeunes 2026",
+        "date": "31 Janvier, 1 Février 2026",
+        "description": "L'année 2026 commence fort avec le Championnat d'Ajaccio Jeunes, félicitations à tout les qualifiés pour le Championnat de Corse qui se déroulera à Corte.",
+        "images": [
+          "images/Tournoi_2026/Championnat_Ajaccio/Tables_U10.jpg",
+          "images/Tournoi_2026/Championnat_Ajaccio/U12.jpg",
+          "images/Tournoi_2026/Championnat_Ajaccio/U14.jpg",
+          "images/Tournoi_2026/Championnat_Ajaccio/U16.jpg",          
+          "images/Tournoi_2026/Championnat_Ajaccio/Remise_Prix.jpg",
+          "images/Tournoi_2026/Championnat_Ajaccio/Vue_Ensemble.jpg"
+        ]
+      }
+    ]
+  },
+  {
     "year": "2025",
     "events": [
       {
