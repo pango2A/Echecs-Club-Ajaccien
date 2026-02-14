@@ -1,5 +1,13 @@
 [
   {
+    "date": "2026-02-16",
+    "dateFin":"2026-03-27",
+    "titre": "Stage de Février",
+    "description": "Du 16 février au 27 mars 2026, l'Échecs Club Ajaccien propose un stage intensif pour les jeunes joueurs. Au programme : entraînements quotidiens, ateliers tactiques et préparation aux compétitions à venir. Une opportunité idéale pour progresser dans une ambiance conviviale et stimulante.",
+    "image": "/images/Event_Temporaire/Vancance_Fevrier.jpg",
+    "lien": "/evenements/Stage_Fevrier_2026.html"
+  },
+  {
     "date": "2026-03-07",
     "dateFin":"2026-03-08",
     "titre": "Championnat Corse Jeune",
