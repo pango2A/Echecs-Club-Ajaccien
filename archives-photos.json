@@ -4,7 +4,7 @@
     "events": [
       {
         "title": "Championnat d'Ajaccio Jeunes 2026",
-        "date": "31 Janvier, 1 Février 2026",
+        "date": "1 Février 2026",
         "description": "L'année 2026 commence fort avec le Championnat d'Ajaccio Jeunes, félicitations à tout les qualifiés pour le Championnat de Corse qui se déroulera à Corte.",
         "images": [
           "images/Tournoi_2026/Championnat_Ajaccio/Tables_U10.jpg",
@@ -13,6 +13,19 @@
           "images/Tournoi_2026/Championnat_Ajaccio/U16.jpg",          
           "images/Tournoi_2026/Championnat_Ajaccio/Remise_Prix.jpg",
           "images/Tournoi_2026/Championnat_Ajaccio/Vue_Ensemble.jpg"
+        ]
+      },
+      {
+        "title": "Tournoi Mira-ECA",
+        "date": "7 Février 2026",
+        "description": "Pour honorer le partenariat entre l'école Mira et l'ECA, un tournoi amical a été organisé entre les élèves de l'école et les membres du club.",
+        "images": [
+          "images/Tournoi_2026/Mira/Vue_Ensemble.jpg",
+          "images/Tournoi_2026/Mira/Vue_Ensemble2.jpg",
+          "images/Tournoi_2026/Mira/Vue_Ensemble3.jpg",
+          "images/Tournoi_2026/Mira/Prix.jpg",          
+          "images/Tournoi_2026/Mira/U8.jpg",
+          "images/Tournoi_2026/Mira/Lauren.jpg"
         ]
       }
     ]
