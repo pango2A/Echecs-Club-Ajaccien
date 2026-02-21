@@ -3,8 +3,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   const CONFIG = {
     stats: {
-      licencies: 125,
-      jeunes: 86,
+      licencies: 142,
+      jeunes: 95,
       animateurs: 6,
     },
   };
