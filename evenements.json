@@ -1,24 +1,30 @@
 [
   {
-    "date": "2026-03-07",
-    "dateFin":"2026-03-08",
-    "titre": "Championnat Corse Jeune",
-    "description": "Les meilleurs espoirs échiquéens de l’île ont rendez-vous à Corte le 7 et 8 mars 2026 : deux jours intenses où se joueront les finales du championnat de Corse jeunes, qualificatives pour le Championnat de France.",
-    "image": "/images/Event_Temporaire/Championnat-Corse-Jeunes.jpg",
-    "lien": "/evenements/Championnat-Corse-Jeune.html"
+    "date": "2026-03-29",
+    "titre": "Championnat Corse Équipes Jeunes",
+    "description": "Le tournoi de rapide que tout les jeunes joueurs de Corse attendent avec impatience arrive bientôt : le championnat de Corse par équipes jeunes se déroulera à Corte le dimanche 29 Mars 2026 !",
+    "image": "/images/Event_Temporaire/Championnat_Corse_equipes_jeunes.jpg",
+    "lien": "/evenements/Championnat-Corse-Equipes-Jeunes.html"
   },
   {
-    "date": "2026-03-22",
+    "date": "2026-04-05",
     "titre": "Championnat Corse Équipes",
-    "description": "La 2ᵉ journée du Championnat de Corse par équipes se joue à Corte le 22 mars 2026 : deux rondes décisives pour 25 équipes prêtes à en découdre sur 64 cases.",
+    "description": "La 2ᵉ journée du Championnat de Corse par équipes se joue à Corte le 05 Avril 2026 : deux rondes décisives pour 25 équipes prêtes à en découdre sur 64 cases.",
     "image": "/images/Event_Temporaire/championnat_corse_equipes.jpg",
     "lien": "/evenements/Championnat-Corse-equipes.html"
   },
   {
-    "date": "2026-05-10",
-    "titre": "Championnat Corse Blitz",
-    "description": "Le dimanche 10 mai 2026, Corte devient le centre de l’échiquier corse : le Championnat de Corse de Blitz réunira les meilleurs joueurs et jeunes talents pour une journée intense de compétition et de convivialité.",
-    "image": "/images/Event_Temporaire/Championnat-Corse-Blitz.jpg",
-    "lien": "/evenements/Championnat-Corse-Blitz.html"
+    "date": "2026-03-26",
+    "titre": "Tournoi Interne",
+    "description": "Notre tournoi interne continu avec la ronde 3 qui se déroulera le jeudi 26 Mars. Tout les joueurs inscrits sont priés de venir !",
+    "image": "/images/Actu/Tournoi_Interne.jpg",
+    "lien": "/actualitees/Tournoi_Interne.html"
+  },
+  {
+    "date": "2026-04-03",
+    "titre": "Blitz Pizza",
+    "description": "Venez nombreux pour notre rendez-vous mensuel du Blitz Pizza, le vendredi 03 Avril 2026 ! Un moment de convivialité et de compétition à ne pas manquer !",
+    "image": "/images/Actu/blitz_pizza.jpg",
+    "lien": "/actualitees/Blitz-Pizza-2025.html"
   }
 ]
