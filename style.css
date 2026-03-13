@@ -771,6 +771,7 @@ footer {
 
   .hero {
     padding: 4rem 1rem;
+    height: 200px;
   }
 
   .hero h1 {
