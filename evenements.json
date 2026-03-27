@@ -1,5 +1,13 @@
 [
   {
+    "date": "2026-04-11",
+    "dateFin": "2026-04-12",
+    "titre": "Tournoi de Rapide",
+    "description": "Le week-end du 11 et 12 Avril 2026, le club organise simultanément deux tournois homologués FIDE : le trophée des rois et le trophée des cavaliers. L'occasion pour nos joueurs de se tester en jouant des parties plus lentes !",
+    "image": "/images/Event_Temporaire/Tournoi_Rapide_2026.jpg",
+    "lien": "/evenements/Tournoi_Rapide_2026.html"
+  },
+  {
     "date": "2026-03-29",
     "titre": "Championnat Corse Équipes Jeunes",
     "description": "Le tournoi de rapide que tout les jeunes joueurs de Corse attendent avec impatience arrive bientôt : le championnat de Corse par équipes jeunes se déroulera à Corte le dimanche 29 Mars 2026 !",
@@ -14,9 +22,9 @@
     "lien": "/evenements/Championnat-Corse-equipes.html"
   },
   {
-    "date": "2026-03-26",
+    "date": "2026-04-09",
     "titre": "Tournoi Interne",
-    "description": "Notre tournoi interne continu avec la ronde 3 qui se déroulera le jeudi 26 Mars. Tout les joueurs inscrits sont priés de venir !",
+    "description": "Notre tournoi interne continu avec la ronde 4 qui se déroulera le jeudi 9 Avril. Tout les joueurs inscrits sont priés de venir !",
     "image": "/images/Actu/Tournoi_Interne.jpg",
     "lien": "/actualitees/Tournoi_Interne.html"
   },
