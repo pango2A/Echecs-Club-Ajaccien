@@ -1,5 +1,12 @@
 [
   {
+    "date": "2026-05-08",
+    "titre": "Quitz",
+    "description": "Notre bénévole et formatteur, Patrick Soetewey, vous offre un mélange entre blitz et quiz echiquéen, ne loupez pas cette occasion de tester vos connaissances et votre rapidité !",
+    "image": "/images/Event_Temporaire/Quitz-2026.jpg",
+    "lien": "/evenements/Quitz-2026.html"
+  },
+  {
     "date": "2026-04-11",
     "dateFin": "2026-04-12",
     "titre": "Tournoi de Rapide",
@@ -8,17 +15,10 @@
     "lien": "/evenements/Tournoi_Rapide_2026.html"
   },
   {
-    "date": "2026-03-29",
-    "titre": "Championnat Corse Équipes Jeunes",
-    "description": "Le tournoi de rapide que tout les jeunes joueurs de Corse attendent avec impatience arrive bientôt : le championnat de Corse par équipes jeunes se déroulera à Corte le dimanche 29 Mars 2026 !",
-    "image": "/images/Event_Temporaire/Championnat_Corse_equipes_jeunes.jpg",
-    "lien": "/evenements/Championnat-Corse-Equipes-Jeunes.html"
-  },
-  {
-    "date": "2026-04-05",
+    "date": "2026-05-03",
     "titre": "Championnat Corse Équipes",
-    "description": "La 2ᵉ journée du Championnat de Corse par équipes se joue à Corte le 05 Avril 2026 : deux rondes décisives pour 25 équipes prêtes à en découdre sur 64 cases.",
-    "image": "/images/Event_Temporaire/championnat_corse_equipes.jpg",
+    "description": "La 3ᵉ journée du Championnat de Corse par équipes se joue à Corte le 03 Mai 2026 : deux rondes décisives pour 25 équipes prêtes à en découdre sur 64 cases.",
+    "image": "/images/Actu/championnat_corse_equipes.jpg",
     "lien": "/evenements/Championnat-Corse-equipes.html"
   },
   {
@@ -29,9 +29,9 @@
     "lien": "/actualitees/Tournoi_Interne.html"
   },
   {
-    "date": "2026-04-03",
+    "date": "2026-05-15",
     "titre": "Blitz Pizza",
-    "description": "Venez nombreux pour notre rendez-vous mensuel du Blitz Pizza, le vendredi 03 Avril 2026 ! Un moment de convivialité et de compétition à ne pas manquer !",
+    "description": "Venez nombreux pour notre rendez-vous mensuel du Blitz Pizza, le vendredi 15 Mai 2026 ! Un moment de convivialité et de compétition à ne pas manquer !",
     "image": "/images/Actu/blitz_pizza.jpg",
     "lien": "/actualitees/Blitz-Pizza-2025.html"
   }
