@@ -1,29 +1,30 @@
 [
   {
-    "date": "2026-05-08",
-    "titre": "Quitz",
-    "description": "Notre bénévole et formateur, Patrick Soetewey, vous offre un mélange entre blitz et quiz échiquéen. Ne loupez pas cette occasion de tester vos connaissances et votre rapidité !",
-    "image": "/images/Event_Temporaire/Quitz-2026.jpg",
-    "lien": "/evenements/Quitz-2026.html"
+    "date": "2026-06-27",
+    "date-fin": "2026-07-03",
+    "titre": "Open de Purtichju",
+    "description": "Le Corsican Circuit 2026 s’ouvrira une nouvelle fois à Purtichju avec le très attendu Open International Marina Viva, devenu au fil des éditions un rendez-vous incontournable du calendrier échiquéen estival. Dans un cadre exceptionnel en bord de mer, joueurs titrés, grands maîtres et passionnés venus du monde entier se retrouveront pour une semaine de compétition intense et conviviale.",
+    "image": "/images/Event_Temporaire/Purtichju_2026.jpg",
+    "lien": "/evenements/Open-Purtichju-2026.html"
   },
   {
-    "date": "2026-05-03",
-    "titre": "Championnat Corse Équipes",
-    "description": "La 3ᵉ journée du Championnat de Corse par équipes se joue à Corte le 03 Mai 2026 : deux rondes décisives pour 25 équipes prêtes à en découdre sur 64 cases.",
-    "image": "/images/Actu/championnat_corse_equipes.jpg",
-    "lien": "/evenements/Championnat-Corse-equipes.html"
+    "date": "2026-05-28",
+    "titre": "Tournoi Scolaire",
+    "description": "Le Palais des Congrès d’Ajaccio accueillera, le jeudi 28 mai 2026, une grande journée dédiée aux échecs scolaires réunissant plusieurs centaines d’élèves venus représenter leurs établissements dans une compétition par équipes. Organisé par la Ligue Corse des Échecs en partenariat avec les acteurs institutionnels locaux, cet événement mettra à l’honneur les valeurs éducatives, sportives et citoyennes du jeu d’échecs.",
+    "image": "/images/Event_Temporaire/Tournoi_Scolaire.jpg",
+    "lien": "/evenements/Tournoi_Scolaire.html"
   },
   {
-    "date": "2026-04-09",
+    "date": "2026-06-04",
     "titre": "Tournoi Interne",
-    "description": "Notre tournoi interne continu avec la ronde 4 qui se déroulera le jeudi 9 Avril. Tout les joueurs inscrits sont priés de venir !",
+    "description": "Notre tournoi interne continu avec la ronde 6 qui se déroulera le jeudi 4 Juin 2026. Tout les joueurs inscrits sont priés de venir !",
     "image": "/images/Actu/Tournoi_Interne.jpg",
     "lien": "/actualitees/Tournoi_Interne.html"
   },
   {
-    "date": "2026-05-15",
+    "date": "2026-06-05",
     "titre": "Blitz Pizza",
-    "description": "Venez nombreux pour notre rendez-vous mensuel du Blitz Pizza, le vendredi 15 Mai 2026 ! Un moment de convivialité et de compétition à ne pas manquer !",
+    "description": "Venez nombreux pour notre rendez-vous mensuel du Blitz Pizza, le vendredi 5 Juin 2026 ! Un moment de convivialité et de compétition à ne pas manquer !",
     "image": "/images/Actu/blitz_pizza.jpg",
     "lien": "/actualitees/Blitz-Pizza-2025.html"
   }
