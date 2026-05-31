@@ -1,18 +1,18 @@
 [
   {
+    "date": "2026-08-01",
+    "titre": "Open de Ciamannacce",
+    "description": "Le samedi 1 août 2026, Ciamannacce vibrera au rythme des échecs avec un grand tournoi de blitz ouvert à tous, organisé dans une ambiance conviviale et festive. Entre compétition, animations et soirée grillade, cette journée réunira joueurs passionnés, familles et amateurs autour du jeu d’échecs.",
+    "image": "/images/Event_Temporaire/ciamannacce.jpg",
+    "lien": "/evenements/Open-Ciamannacce-2026.html"
+  },
+  {
     "date": "2026-06-27",
     "date-fin": "2026-07-03",
     "titre": "Open de Purtichju",
     "description": "Le Corsican Circuit 2026 s’ouvrira une nouvelle fois à Purtichju avec le très attendu Open International Marina Viva, devenu au fil des éditions un rendez-vous incontournable du calendrier échiquéen estival. Dans un cadre exceptionnel en bord de mer, joueurs titrés, grands maîtres et passionnés venus du monde entier se retrouveront pour une semaine de compétition intense et conviviale.",
     "image": "/images/Event_Temporaire/Purtichju_2026.jpg",
     "lien": "/evenements/Open-Purtichju-2026.html"
-  },
-  {
-    "date": "2026-05-28",
-    "titre": "Tournoi Scolaire",
-    "description": "Le Palais des Congrès d’Ajaccio accueillera, le jeudi 28 mai 2026, une grande journée dédiée aux échecs scolaires réunissant plusieurs centaines d’élèves venus représenter leurs établissements dans une compétition par équipes. Organisé par la Ligue Corse des Échecs en partenariat avec les acteurs institutionnels locaux, cet événement mettra à l’honneur les valeurs éducatives, sportives et citoyennes du jeu d’échecs.",
-    "image": "/images/Event_Temporaire/Tournoi_Scolaire.jpg",
-    "lien": "/evenements/Tournoi_Scolaire.html"
   },
   {
     "date": "2026-06-04",

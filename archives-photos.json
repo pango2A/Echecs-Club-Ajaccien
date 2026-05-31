@@ -3,6 +3,19 @@
     "year": "2026",
     "events": [
       {
+        "title": "Tournoi Scolaire 2026",
+        "date": "28 Mai 2026",
+        "description": "Le championnat scolaire d’échecs d’Ajaccio a une nouvelle fois rassemblé plusieurs centaines d’élèves au Palais des Congrès pour une journée exceptionnelle placée sous le signe du partage, de la réflexion et de la convivialité.",
+        "images": [
+          "images/Tournoi_2026/Tournoi_Scolaire_2026/Ensemble.jpg",
+          "images/Tournoi_2026/Tournoi_Scolaire_2026/Parti1.jpg",
+          "images/Tournoi_2026/Tournoi_Scolaire_2026/Parti2.jpg",
+          "images/Tournoi_2026/Tournoi_Scolaire_2026/Inseme.jpg",          
+          "images/Tournoi_2026/Tournoi_Scolaire_2026/Prix-CM1.jpg",
+          "images/actu/Tournoi-Scolaire-2026.jpg"
+        ]
+      },
+      {
         "title": "Championnat d'Ajaccio Jeunes 2026",
         "date": "1 Février 2026",
         "description": "L'année 2026 commence fort avec le Championnat d'Ajaccio Jeunes, félicitations à tout les qualifiés pour le Championnat de Corse qui se déroulera à Corte.",
