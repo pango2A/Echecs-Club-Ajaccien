@@ -28,12 +28,5 @@
     "description": "Notre tournoi interne se termine avec la ronde 7 qui se déroulera le jeudi 18 Juin 2026. Tout les joueurs inscrits sont priés de venir !",
     "image": "/images/Actu/Tournoi_Interne.jpg",
     "lien": "/actualitees/Tournoi_Interne.html"
-  },
-  {
-    "date": "2026-06-05",
-    "titre": "Blitz Pizza",
-    "description": "Venez nombreux pour notre rendez-vous mensuel du Blitz Pizza, le vendredi 5 Juin 2026 ! Un moment de convivialité et de compétition à ne pas manquer !",
-    "image": "/images/Actu/blitz_pizza.jpg",
-    "lien": "/actualitees/Blitz-Pizza-2025.html"
   }
 ]
