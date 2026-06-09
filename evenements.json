@@ -1,5 +1,12 @@
 [
   {
+    "date": "2026-06-23",
+    "titre": "Assemblé Générale",
+    "description": "Découvrez la convocation à l'Assemblée Générale de l'Échecs Club Ajaccien, un moment clé pour les membres du club. Cette réunion annuelle est l'occasion de faire le point sur les activités passées, de discuter des projets futurs et de renforcer les liens au sein de notre communauté échiquéenne. Ne manquez pas cette opportunité de participer activement à la vie du club et de contribuer à son développement.",
+    "image": "/images/Logo_du_club.jpeg",
+    "lien": "/evenements/Assemblee-Generale-2026.html"
+  },
+  {
     "date": "2026-06-12",
     "date-fin": "2026-06-13",
     "titre": "Tournoi Fin d'année",
