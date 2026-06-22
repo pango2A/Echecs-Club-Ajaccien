@@ -1,5 +1,13 @@
 [
   {
+    "date": "2026-07-06",
+    "date-fin": "2026-07-17",
+    "titre": "Stage d'été",
+    "description": "L’Échecs Club Ajaccien organise ses stages d’été 2026 du 6 au 17 juillet à Ajaccio. Deux semaines de découverte, d’apprentissage et de perfectionnement sont proposées aux joueurs de tous niveaux, dans une ambiance conviviale et pédagogique.",
+    "image": "/images/Event_Temporaire/Stages.jpg",
+    "lien": "/evenements/Stages-2026.html"
+  },
+  {
     "date": "2026-06-23",
     "titre": "Assemblée Générale",
     "description": "Découvrez la convocation à l'Assemblée Générale de l'Échecs Club Ajaccien, un moment clé pour les membres du club. Cette réunion annuelle est l'occasion de faire le point sur les activités passées, de discuter des projets futurs et de renforcer les liens au sein de notre communauté échiquéenne. Ne manquez pas cette opportunité de participer activement à la vie du club et de contribuer à son développement.",
@@ -20,12 +28,5 @@
     "description": "Le Corsican Circuit 2026 s’ouvrira une nouvelle fois à Purtichju avec le très attendu Open International Marina Viva, devenu au fil des éditions un rendez-vous incontournable du calendrier échiquéen estival. Dans un cadre exceptionnel en bord de mer, joueurs titrés, grands maîtres et passionnés venus du monde entier se retrouveront pour une semaine de compétition intense et conviviale.",
     "image": "/images/Event_Temporaire/Purtichju_2026.jpg",
     "lien": "/evenements/Open-Purtichju-2026.html"
-  },
-  {
-    "date": "2026-06-18",
-    "titre": "Tournoi Interne",
-    "description": "Notre tournoi interne se termine avec la ronde 7 qui se déroulera le jeudi 18 Juin 2026. Tout les joueurs inscrits sont priés de venir !",
-    "image": "/images/Actu/Tournoi_Interne.jpg",
-    "lien": "/actualitees/Tournoi_Interne.html"
   }
 ]
