@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lichess Club Challenge — ECA</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, -apple-system, sans-serif; font-size: 16px; line-height: 1.6; background: #f5f5f0; color: #1a1a1a; padding: 2rem 1rem; }
+    .container { max-width: 640px; margin: 0 auto; }
+    h1 { font-size: 20px; font-weight: 500; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px; }
+    .card { background: #fff; border: 0.5px solid rgba(0,0,0,0.12); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.25rem; }
+    .section-title { font-size: 15px; font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+    .section { margin-bottom: 1.1rem; }
+    label { display: block; font-size: 13px; color: #666; margin-bottom: 5px; }
+    input[type="date"], input[type="time"], select, textarea { width: 100%; padding: 8px 10px; font-size: 14px; border: 0.5px solid rgba(0,0,0,0.2); border-radius: 8px; background: #fff; color: #1a1a1a; outline: none; }
+    textarea { resize: vertical; min-height: 65px; }
+    .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 8px 16px; font-size: 14px; border: 0.5px solid rgba(0,0,0,0.2); border-radius: 8px; background: transparent; color: #1a1a1a; cursor: pointer; transition: background 0.15s; }
+    button:hover { background: #f0f0eb; }
+    button:active { transform: scale(0.98); }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    button.full { width: 100%; padding: 10px; }
+    .error { font-size: 13px; color: #c0392b; margin-top: 8px; }
+    .text-success { color: #0f6e56; }
+    .text-danger { color: #c0392b; }
+    .text-muted { color: #666; }
+    .result-card { background: #f9f9f6; border: 0.5px solid rgba(0,0,0,0.12); border-radius: 12px; padding: 1.5rem; text-align: center; }
+    #qr-container { display: flex; justify-content: center; margin: 1rem auto; }
+    #challenge-url { font-size: 12px; color: #666; word-break: break-all; margin: 0.5rem 0; }
+    .timer-bar-bg { background: rgba(0,0,0,0.1); border-radius: 4px; height: 6px; margin: 0.75rem 0; overflow: hidden; }
+    .timer-bar { height: 6px; border-radius: 4px; background: #1D9E75; transition: width 1s linear, background 1s; }
+    .timer-row { display: flex; justify-content: space-between; font-size: 12px; color: #666; }
+    .action-btns { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 1rem; }
+    .expire-section { margin-top: 1rem; border-top: 0.5px solid rgba(0,0,0,0.1); padding-top: 1rem; }
+    .pm-status { font-size: 13px; margin-top: 8px; }
+    .debug { font-size: 11px; color: #999; margin-top: 6px; word-break: break-all; }
+    @media (max-width: 480px) { .row2 { grid-template-columns: 1fr; } }
+    @media (prefers-color-scheme: dark) {
+      body { background: #1a1a18; color: #e8e8e0; }
+      .card { background: #242420; border-color: rgba(255,255,255,0.1); }
+      .result-card { background: #1e1e1c; border-color: rgba(255,255,255,0.1); }
+      input, select, textarea, button { background: #2a2a26; color: #e8e8e0; border-color: rgba(255,255,255,0.15); }
+      button:hover { background: #333330; }
+      .timer-bar-bg { background: rgba(255,255,255,0.1); }
+      .text-muted, label, .timer-row { color: #999; }
+      #challenge-url { color: #999; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1><i class="ti ti-chess-knight"></i> Défi club — ECA</h1>
+
+  <div id="step1">
+    <div class="card">
+      <div class="section-title"><i class="ti ti-chess"></i> Paramètres de la partie</div>
+      <div class="row2 section">
+        <div>
+          <label>Cadence (minutes)</label>
+          <select id="clock-limit">
+            <option value="60">1 min — bullet</option>
+            <option value="120">2 min — bullet</option>
+            <option value="180">3 min — blitz</option>
+            <option value="300" selected>5 min — blitz</option>
+            <option value="600">10 min — rapide</option>
+            <option value="900">15 min — rapide</option>
+            <option value="1800">30 min — classique</option>
+          </select>
+        </div>
+        <div>
+          <label>Incrément (secondes)</label>
+          <select id="clock-increment">
+            <option value="0">0 sec</option>
+            <option value="2" selected>2 sec</option>
+            <option value="3">3 sec</option>
+            <option value="5">5 sec</option>
+            <option value="10">10 sec</option>
+          </select>
+        </div>
+      </div>
+      <div class="row2 section">
+        <div>
+          <label>Variante</label>
+          <select id="variant">
+            <option value="standard" selected>Standard</option>
+            <option value="chess960">Chess 960</option>
+            <option value="crazyhouse">Crazyhouse</option>
+            <option value="antichess">Antichess</option>
+            <option value="atomic">Atomic</option>
+            <option value="horde">Horde</option>
+            <option value="kingOfTheHill">King of the Hill</option>
+            <option value="threeCheck">Three-check</option>
+          </select>
+        </div>
+        <div>
+          <label>Couleur</label>
+          <select id="color">
+            <option value="random" selected>Aléatoire</option>
+            <option value="white">Blanc</option>
+            <option value="black">Noir</option>
+          </select>
+        </div>
+      </div>
+      <div class="row2">
+        <div>
+          <label><i class="ti ti-calendar"></i> Date du RDV IRL</label>
+          <input type="date" id="rdv-date" />
+        </div>
+        <div>
+          <label><i class="ti ti-clock"></i> Heure</label>
+          <input type="time" id="rdv-time" value="19:00" />
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title"><i class="ti ti-message"></i> Message PM aux membres</div>
+      <textarea id="message" placeholder="Ex : Partie amicale ce soir au club, venez nombreux !"></textarea>
+    </div>
+
+    <button class="full" id="create-btn" onclick="createChallenge()">
+      <i class="ti ti-chess-knight"></i> Créer le défi et envoyer le PM
+    </button>
+    <div id="error-msg" class="error"></div>
+  </div>
+
+  <div id="step2" style="display:none;">
+    <div class="result-card">
+      <div style="font-size:15px; font-weight:500; margin-bottom:0.25rem;"><i class="ti ti-circle-check"></i> Défi créé !</div>
+      <div id="rdv-display" class="text-muted" style="font-size:13px; margin:4px 0;"></div>
+      <div id="msg-display" class="text-muted" style="font-size:13px; font-style:italic; margin:4px 0;"></div>
+      <div id="pm-status" class="pm-status"></div>
+      <div id="qr-container"></div>
+      <div id="challenge-url"></div>
+      <div style="margin:0.5rem 0;">
+        <div class="timer-row"><span>Temps restant</span><span id="timer-text">12h00m00s</span></div>
+        <div class="timer-bar-bg"><div class="timer-bar" id="timer-bar" style="width:100%"></div></div>
+      </div>
+      <div class="action-btns">
+        <button onclick="copyLink()"><i class="ti ti-copy"></i> Copier le lien</button>
+        <button onclick="openChallenge()"><i class="ti ti-external-link"></i> Ouvrir sur Lichess</button>
+      </div>
+      <div class="expire-section">
+        <button class="full" id="expire-btn" onclick="sendExpireMessage(false)">
+          <i class="ti ti-bell-off"></i> Envoyer message d'expiration maintenant
+        </button>
+        <div id="expire-status" class="pm-status"></div>
+      </div>
+      <div style="margin-top:0.75rem;">
+        <button class="full" onclick="reset()"><i class="ti ti-plus"></i> Nouveau défi</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+  const LICHESS_TOKEN = 'lip_8JpdjbLtQo3kiksBMfCQ';
+  const TEAM_ID = 'defis-eca';
+  const EXPIRE_DURATION = 12 * 60 * 60 * 1000;
+
+  let challengeUrl = '';
+  let expiresAt = null;
+  let timerInterval = null;
+  let autoExpireTimeout = null;
+
+  async function createChallenge() {
+    const errorEl = document.getElementById('error-msg');
+    errorEl.textContent = '';
+
+    const btn = document.getElementById('create-btn');
+    btn.disabled = true;
+    btn.textContent = 'Création en cours...';
+
+    expiresAt = Date.now() + EXPIRE_DURATION;
+
+    const params = new URLSearchParams({
+      'clock.limit': document.getElementById('clock-limit').value,
+      'clock.increment': document.getElementById('clock-increment').value,
+      variant: document.getElementById('variant').value,
+      color: document.getElementById('color').value,
+      rated: 'false',
+      expiresAt: expiresAt.toString()
+    });
+
+    try {
+      const res = await fetch('https://lichess.org/api/challenge/open', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer ' + LICHESS_TOKEN,
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: params.toString()
+      });
+
+      const data = await res.json();
+      console.log('Réponse API défi:', JSON.stringify(data));
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Erreur ' + res.status);
+      }
+
+      // L'API retourne data.challenge.id — on construit l'URL manuellement
+      const challengeId = (data.challenge && data.challenge.id) || data.id;
+      if (!challengeId) throw new Error('ID de défi introuvable dans la réponse API.');
+      challengeUrl = 'https://lichess.org/' + challengeId;
+
+      const date = document.getElementById('rdv-date').value;
+      const time = document.getElementById('rdv-time').value;
+      const msg = document.getElementById('message').value.trim();
+      const variantEl = document.getElementById('variant');
+      const cadenceEl = document.getElementById('clock-limit');
+      const variant = variantEl.options[variantEl.selectedIndex].text;
+      const cadence = cadenceEl.options[cadenceEl.selectedIndex].text;
+      const incr = document.getElementById('clock-increment').value;
+
+      let rdvText = '';
+      if (date) {
+        const d = new Date(date + 'T' + time);
+        rdvText = 'RDV IRL : ' + d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }) + ' à ' + time;
+        document.getElementById('rdv-display').textContent = rdvText;
+      }
+      if (msg) document.getElementById('msg-display').textContent = '« ' + msg + ' »';
+
+      const pmText = buildPMText(challengeUrl, rdvText, msg, cadence, incr, variant);
+      await sendPM(pmText);
+
+      const qrEl = document.getElementById('qr-container');
+      qrEl.innerHTML = '';
+      new QRCode(qrEl, { text: challengeUrl, width: 180, height: 180, correctLevel: QRCode.CorrectLevel.M });
+      document.getElementById('challenge-url').textContent = challengeUrl;
+
+      document.getElementById('step1').style.display = 'none';
+      document.getElementById('step2').style.display = 'block';
+
+      startTimer();
+      autoExpireTimeout = setTimeout(() => sendExpireMessage(true), EXPIRE_DURATION);
+
+    } catch (e) {
+      errorEl.textContent = e.message;
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="ti ti-chess-knight"></i> Créer le défi et envoyer le PM';
+    }
+  }
+
+  function buildPMText(url, rdv, msg, cadence, incr, variant) {
+    let text = '♟ Défi ouvert au club !\n';
+    if (msg) text += msg + '\n';
+    text += '\nPartie : ' + variant + ' — ' + cadence + (incr > 0 ? ' + ' + incr + 'sec' : '') + '\n';
+    if (rdv) text += rdv + '\n';
+    text += '\nAccepte le défi ici : ' + url + '\n(Lien valable 12h)';
+    return text;
+  }
+
+  async function sendPM(text) {
+    const pmEl = document.getElementById('pm-status');
+    pmEl.className = 'pm-status text-muted';
+    pmEl.textContent = 'Envoi du PM en cours...';
+
+    // Endpoint correct pour envoyer un message à tous les membres d'une équipe
+    const res = await fetch('https://lichess.org/team/' + TEAM_ID + '/pm-all', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + LICHESS_TOKEN,
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: new URLSearchParams({ message: text }).toString()
+    });
+
+    console.log('Statut PM:', res.status);
+
+    if (res.ok) {
+      pmEl.className = 'pm-status text-success';
+      pmEl.textContent = '✓ PM envoyé à tous les membres de l\'équipe.';
+    } else {
+      const body = await res.text();
+      console.log('Réponse PM:', body);
+      pmEl.className = 'pm-status text-danger';
+      pmEl.textContent = '⚠ PM non envoyé (erreur ' + res.status + ') — vérifie la console pour les détails.';
+    }
+  }
+
+  async function sendExpireMessage(auto) {
+    const statusEl = document.getElementById('expire-status');
+    const btn = document.getElementById('expire-btn');
+    if (btn) { btn.disabled = true; btn.textContent = 'Envoi...'; }
+    statusEl.textContent = '';
+
+    const text = '⏰ Le défi ouvert du club a expiré' + (auto ? ' (12h écoulées)' : '') + '.\nAucun adversaire ne peut plus l\'accepter.\n' + challengeUrl;
+
+    const res = await fetch('https://lichess.org/team/' + TEAM_ID + '/pm-all', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + LICHESS_TOKEN,
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: new URLSearchParams({ message: text }).toString()
+    });
+
+    if (res.ok) {
+      statusEl.className = 'pm-status text-success';
+      statusEl.textContent = '✓ Message d\'expiration envoyé.';
+      if (btn) btn.textContent = 'Message envoyé';
+      clearInterval(timerInterval);
+      document.getElementById('timer-bar').style.background = '#c0392b';
+      document.getElementById('timer-text').textContent = 'Expiré';
+    } else {
+      statusEl.className = 'pm-status text-danger';
+      statusEl.textContent = '⚠ Échec de l\'envoi (erreur ' + res.status + ').';
+      if (btn) { btn.disabled = false; btn.innerHTML = '<i class="ti ti-bell-off"></i> Réessayer'; }
+    }
+  }
+
+  function startTimer() {
+    const bar = document.getElementById('timer-bar');
+    const text = document.getElementById('timer-text');
+    timerInterval = setInterval(() => {
+      const remaining = expiresAt - Date.now();
+      if (remaining <= 0) {
+        clearInterval(timerInterval);
+        bar.style.width = '0%';
+        bar.style.background = '#c0392b';
+        text.textContent = 'Expiré';
+        return;
+      }
+      const pct = (remaining / EXPIRE_DURATION) * 100;
+      bar.style.width = pct.toFixed(1) + '%';
+      bar.style.background = pct > 50 ? '#1D9E75' : pct > 20 ? '#EF9F27' : '#c0392b';
+      const h = Math.floor(remaining / 3600000);
+      const m = Math.floor((remaining % 3600000) / 60000);
+      const s = Math.floor((remaining % 60000) / 1000);
+      text.textContent = h + 'h' + String(m).padStart(2, '0') + 'm' + String(s).padStart(2, '0') + 's';
+    }, 1000);
+  }
+
+  function copyLink() {
+    navigator.clipboard.writeText(challengeUrl).then(() => {
+      const btn = event.target.closest('button');
+      const orig = btn.innerHTML;
+      btn.textContent = 'Copié !';
+      setTimeout(() => { btn.innerHTML = orig; }, 2000);
+    });
+  }
+
+  function openChallenge() { window.open(challengeUrl, '_blank'); }
+
+  function reset() {
+    clearInterval(timerInterval);
+    if (autoExpireTimeout) clearTimeout(autoExpireTimeout);
+    challengeUrl = '';
+    expiresAt = null;
+    document.getElementById('step1').style.display = 'block';
+    document.getElementById('step2').style.display = 'none';
+    document.getElementById('error-msg').textContent = '';
+    document.getElementById('qr-container').innerHTML = '';
+    document.getElementById('pm-status').textContent = '';
+    document.getElementById('expire-status').textContent = '';
+    document.getElementById('rdv-display').textContent = '';
+    document.getElementById('msg-display').textContent = '';
+  }
+</script>
+</body>
+</html>
