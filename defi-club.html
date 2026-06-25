@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Défi Club — Échecs Club Ajaccien</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous" />
+  <style>
+    :root {
+      --navy:   #1e1e2f;
+      --gold:   #e6b800;
+      --green:  #1D9E75;
+      --red:    #c0392b;
+      --orange: #EF9F27;
+      --wa:     #25D366;
+      --bg:     #f5f7fa;
+      --surface:#ffffff;
+      --border: rgba(0,0,0,0.12);
+      --text:   #333;
+      --muted:  #666;
+      --radius: 12px;
+    }
+
+    .defi-page { max-width: 680px; margin: 2rem auto; padding: 0 1rem 3rem; }
+    .defi-page h1 { font-size: 22px; font-weight: 600; color: var(--navy); display: flex; align-items: center; gap: 10px; margin-bottom: 1.5rem; }
+
+    /* Tabs */
+    .tabs { display: flex; gap: 4px; background: var(--bg); border-radius: 10px; padding: 4px; margin-bottom: 1.5rem; border: 0.5px solid var(--border); }
+    .tab { flex: 1; padding: 9px; font-size: 13px; font-family: inherit; font-weight: 500; border: none; border-radius: 7px; background: transparent; color: var(--muted); cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .tab:hover { color: var(--navy); }
+    .tab.active { background: var(--surface); color: var(--navy); box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* Cards */
+    .d-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1.4rem; margin-bottom: 1.25rem; }
+    .d-section-title { font-size: 13px; font-weight: 600; color: var(--navy); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+    .d-section-title i { color: var(--gold); }
+    .d-section { margin-bottom: 1rem; }
+    .d-label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 5px; font-weight: 500; }
+    .d-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .d-input, .d-select, .d-textarea { width: 100%; padding: 9px 11px; font-size: 14px; font-family: inherit; border: 0.5px solid rgba(0,0,0,0.2); border-radius: 8px; background: var(--bg); color: var(--text); outline: none; transition: border-color 0.15s; }
+    .d-input:focus, .d-select:focus, .d-textarea:focus { border-color: var(--navy); background: #fff; }
+    .d-textarea { resize: vertical; min-height: 65px; }
+    .d-hint { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+    /* Checkbox membre */
+    .membre-check { display: flex; align-items: center; gap: 8px; margin-top: 0.75rem; font-size: 13px; color: var(--text); cursor: pointer; }
+    .membre-check input { width: 16px; height: 16px; cursor: pointer; accent-color: var(--navy); }
+
+    /* Buttons */
+    .d-btn { display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 9px 18px; font-size: 14px; font-family: inherit; border: 0.5px solid rgba(0,0,0,0.2); border-radius: 8px; background: transparent; color: var(--text); cursor: pointer; transition: background 0.15s, transform 0.1s; }
+    .d-btn:hover { background: #f0f0eb; }
+    .d-btn:active { transform: scale(0.98); }
+    .d-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .d-btn.full { width: 100%; padding: 11px; }
+    .d-btn.primary { background: var(--navy); color: #fff; border-color: var(--navy); }
+    .d-btn.primary:hover { background: #2d2d45; }
+    .d-btn.success { background: var(--green); color: #fff; border-color: var(--green); }
+    .d-btn.success:hover { background: #178f66; }
+    .d-btn.whatsapp { background: var(--wa); color: #fff; border-color: var(--wa); }
+    .d-btn.whatsapp:hover { background: #1ebe5d; }
+    .d-btn.danger { background: var(--red); color: #fff; border-color: var(--red); }
+
+    /* Status */
+    .worker-status { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); margin-bottom: 1.25rem; padding: 8px 12px; background: var(--bg); border-radius: 8px; border: 0.5px solid var(--border); }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); flex-shrink: 0; }
+    .status-dot.ok  { background: var(--green); }
+    .status-dot.err { background: var(--red); }
+
+    /* Événements en cours */
+    .event-card { border: 0.5px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 10px; background: var(--surface); }
+    .event-card.defi-card  { border-left: 3px solid var(--gold); }
+    .event-card.tournoi-card { border-left: 3px solid #7c3aed; }
+    .event-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+    .event-title { font-size: 14px; font-weight: 600; color: var(--navy); }
+    .event-sub   { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .event-badge { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
+    .badge-defi    { background: #fff8e1; color: #92610a; }
+    .badge-tournoi { background: #f3e8ff; color: #6d28d9; }
+    .inscrits-list { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+    .inscrit-chip { background: var(--bg); border: 0.5px solid var(--border); border-radius: 20px; padding: 3px 10px; font-size: 12px; color: var(--navy); }
+    .event-actions { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+    .empty-state { text-align: center; padding: 2rem; color: var(--muted); font-size: 14px; }
+    .empty-state i { font-size: 32px; margin-bottom: 0.5rem; display: block; opacity: 0.3; }
+
+    /* Modal rejoindre */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 100; align-items: center; justify-content: center; padding: 1rem; }
+    .modal-overlay.open { display: flex; }
+    .modal { background: var(--surface); border-radius: var(--radius); padding: 1.5rem; max-width: 420px; width: 100%; }
+    .modal h3 { font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 1rem; }
+    .modal-btns { display: flex; gap: 8px; margin-top: 1rem; }
+
+    /* Résultat */
+    .result-banner { background: linear-gradient(135deg, #0f6e56, #1D9E75); color: #fff; border-radius: 10px; padding: 14px 18px; margin-bottom: 1rem; display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; }
+
+    .d-error   { font-size: 13px; color: var(--red);    margin-top: 8px; }
+    .d-success { font-size: 13px; color: var(--green);  margin-top: 6px; }
+    .d-muted   { font-size: 13px; color: var(--muted); }
+    .d-spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; }
+    .d-spinner.dark { border-color: rgba(0,0,0,0.15); border-top-color: var(--navy); }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Token field */
+    .token-field { position: relative; }
+    .token-field input { padding-right: 40px; }
+    .token-toggle { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--muted); font-size: 14px; }
+
+    @media (max-width: 480px) { .d-row2 { grid-template-columns: 1fr; } .tabs { flex-direction: column; } }
+  </style>
+</head>
+<body>
+
+<div class="defi-page">
+  <h1><i class="fas fa-chess-knight" style="color:#e6b800"></i> Défi Club — ECA</h1>
+
+  <div class="worker-status">
+    <div class="status-dot" id="status-dot"></div>
+    <span id="status-text">Vérification du service…</span>
+  </div>
+
+  <!-- ══ TABS ══ -->
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('en-cours')"><i class="fas fa-fire"></i> En cours</button>
+    <button class="tab" onclick="showTab('defi')"><i class="fas fa-chess-knight"></i> Défi 1v1</button>
+    <button class="tab" onclick="showTab('tournoi')"><i class="fas fa-trophy"></i> Tournoi</button>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       TAB : EN COURS
+  ══════════════════════════════════════ -->
+  <div id="tab-en-cours" class="tab-panel active">
+    <div id="evenements-list">
+      <div class="empty-state"><i class="fas fa-chess"></i>Chargement…</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       TAB : DÉFI 1V1
+  ══════════════════════════════════════ -->
+  <div id="tab-defi" class="tab-panel">
+    <div id="defi-form">
+      <div class="d-card">
+        <div class="d-section-title"><i class="fas fa-user"></i> Qui cherche un adversaire ?</div>
+        <div class="d-section">
+          <label class="d-label">Ton pseudo Lichess</label>
+          <div style="display:flex; gap:8px;">
+            <input type="text" id="defi-pseudo" class="d-input" placeholder="ex : Epicfail20" autocomplete="off" />
+            <button class="d-btn" onclick="verifierPseudoDefi()" id="verify-defi-btn" style="white-space:nowrap;">
+              <i class="fas fa-check"></i> Vérifier
+            </button>
+          </div>
+          <div id="defi-pseudo-status" class="d-hint" style="margin-top:6px;"></div>
+        </div>
+        <label class="membre-check">
+          <input type="checkbox" id="defi-membre-check" />
+          Je confirme être membre de l'équipe <strong>defis-eca</strong> sur Lichess
+        </label>
+      </div>
+
+      <div class="d-card">
+        <div class="d-section-title"><i class="fas fa-chess"></i> Paramètres de la partie</div>
+        <div class="d-row2 d-section">
+          <div>
+            <label class="d-label">Cadence</label>
+            <select id="defi-cadence" class="d-select">
+              <option value="1+0">1 min — bullet</option>
+              <option value="2+0">2 min — bullet</option>
+              <option value="3+0">3 min — blitz</option>
+              <option value="5+2" selected>5+2 — blitz</option>
+              <option value="10+0">10 min — rapide</option>
+              <option value="15+10">15+10 — rapide</option>
+              <option value="30+0">30 min — classique</option>
+            </select>
+          </div>
+          <div>
+            <label class="d-label">Variante</label>
+            <select id="defi-variant" class="d-select">
+              <option value="Standard" selected>Standard</option>
+              <option value="Chess 960">Chess 960</option>
+              <option value="Crazyhouse">Crazyhouse</option>
+              <option value="Antichess">Antichess</option>
+              <option value="Atomic">Atomic</option>
+              <option value="Horde">Horde</option>
+              <option value="King of the Hill">King of the Hill</option>
+              <option value="Three-check">Three-check</option>
+            </select>
+          </div>
+        </div>
+        <div class="d-row2 d-section">
+          <div>
+            <label class="d-label">Elo minimum <span style="font-weight:400">(optionnel)</span></label>
+            <input type="number" id="defi-elo-min" class="d-input" placeholder="ex : 1000" min="600" max="3000" step="50" />
+          </div>
+          <div>
+            <label class="d-label">Elo maximum <span style="font-weight:400">(optionnel)</span></label>
+            <input type="number" id="defi-elo-max" class="d-input" placeholder="ex : 1800" min="600" max="3000" step="50" />
+          </div>
+        </div>
+        <div class="d-row2">
+          <div>
+            <label class="d-label"><i class="fas fa-calendar-alt"></i> Date RDV</label>
+            <input type="date" id="defi-date" class="d-input" />
+          </div>
+          <div>
+            <label class="d-label"><i class="fas fa-clock"></i> Heure</label>
+            <input type="time" id="defi-time" class="d-input" value="19:00" />
+          </div>
+        </div>
+      </div>
+
+      <div class="d-card">
+        <div class="d-section-title"><i class="fas fa-comment"></i> Message (optionnel)</div>
+        <textarea id="defi-message" class="d-textarea" placeholder="Ex : Je serai au club à partir de 19h, partie amicale !"></textarea>
+      </div>
+
+      <button class="d-btn primary full" id="defi-submit-btn" onclick="lancerDefi()">
+        <i class="fas fa-chess-knight"></i> Lancer le défi et notifier le club
+      </button>
+      <div id="defi-error" class="d-error"></div>
+    </div>
+
+    <!-- Confirmation -->
+    <div id="defi-confirm" style="display:none;">
+      <div class="result-banner">
+        <i class="fas fa-check-circle"></i> Défi lancé ! Le club a été notifié.
+      </div>
+      <div class="d-card" style="text-align:center;">
+        <div id="defi-confirm-info" class="d-muted" style="margin-bottom:1rem;"></div>
+        <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
+          <button class="d-btn whatsapp" onclick="shareDefiWhatsApp()"><i class="fab fa-whatsapp"></i> Partager sur WhatsApp</button>
+          <button class="d-btn" onclick="resetDefi()"><i class="fas fa-plus"></i> Nouveau défi</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       TAB : TOURNOI
+  ══════════════════════════════════════ -->
+  <div id="tab-tournoi" class="tab-panel">
+    <div id="tournoi-form">
+      <div class="d-card">
+        <div class="d-section-title"><i class="fas fa-key"></i> Identification leader</div>
+        <div class="d-section">
+          <label class="d-label">Ton token Lichess <span style="font-weight:400">(leaders uniquement)</span></label>
+          <div class="token-field">
+            <input type="password" id="tournoi-token" class="d-input" placeholder="lip_..." autocomplete="off" />
+            <button class="token-toggle" onclick="toggleToken('tournoi-token')"><i class="fas fa-eye"></i></button>
+          </div>
+          <div class="d-hint"><i class="fas fa-info-circle"></i> Génère un token sur lichess.org/account/security avec le scope <strong>team:lead</strong>. Il n'est jamais stocké.</div>
+        </div>
+        <button class="d-btn primary" id="verify-leader-btn" onclick="verifierLeader()">
+          <i class="fas fa-shield-alt"></i> Vérifier mon accès
+        </button>
+        <div id="leader-status" style="font-size:13px; margin-top:8px;"></div>
+      </div>
+
+      <div id="tournoi-fields" style="display:none;">
+        <div class="d-card">
+          <div class="d-section-title"><i class="fas fa-trophy"></i> Informations du tournoi</div>
+          <div class="d-section">
+            <label class="d-label">Nom du tournoi</label>
+            <input type="text" id="tournoi-nom" class="d-input" placeholder="ex : Tournoi mensuel ECA — Juillet" />
+          </div>
+          <div class="d-row2 d-section">
+            <div>
+              <label class="d-label">Cadence</label>
+              <select id="tournoi-cadence" class="d-select">
+                <option value="1+0">1 min — bullet</option>
+                <option value="2+0">2 min — bullet</option>
+                <option value="3+0">3 min — blitz</option>
+                <option value="5+2" selected>5+2 — blitz</option>
+                <option value="10+0">10 min — rapide</option>
+                <option value="15+10">15+10 — rapide</option>
+                <option value="30+0">30 min — classique</option>
+              </select>
+            </div>
+            <div>
+              <label class="d-label">Variante</label>
+              <select id="tournoi-variant" class="d-select">
+                <option value="Standard" selected>Standard</option>
+                <option value="Chess 960">Chess 960</option>
+                <option value="Crazyhouse">Crazyhouse</option>
+                <option value="Antichess">Antichess</option>
+                <option value="Atomic">Atomic</option>
+                <option value="Horde">Horde</option>
+              </select>
+            </div>
+          </div>
+          <div class="d-row2 d-section">
+            <div>
+              <label class="d-label"><i class="fas fa-calendar-alt"></i> Date</label>
+              <input type="date" id="tournoi-date" class="d-input" />
+            </div>
+            <div>
+              <label class="d-label"><i class="fas fa-clock"></i> Heure</label>
+              <input type="time" id="tournoi-time" class="d-input" value="19:00" />
+            </div>
+          </div>
+          <div>
+            <label class="d-label">Description (optionnelle)</label>
+            <textarea id="tournoi-desc" class="d-textarea" placeholder="Infos pratiques, format, règles…"></textarea>
+          </div>
+        </div>
+
+        <button class="d-btn primary full" id="tournoi-submit-btn" onclick="creerTournoi()">
+          <i class="fas fa-trophy"></i> Créer le tournoi et notifier le club
+        </button>
+        <div id="tournoi-error" class="d-error"></div>
+      </div>
+
+      <!-- Confirmation tournoi -->
+      <div id="tournoi-confirm" style="display:none;">
+        <div class="result-banner">
+          <i class="fas fa-trophy"></i> Tournoi créé ! Le club a été notifié.
+        </div>
+        <div class="d-card" style="text-align:center;">
+          <div id="tournoi-confirm-info" class="d-muted" style="margin-bottom:1rem;"></div>
+          <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
+            <button class="d-btn whatsapp" onclick="shareTournoiWhatsApp()"><i class="fab fa-whatsapp"></i> Partager sur WhatsApp</button>
+            <button class="d-btn" onclick="resetTournoi()"><i class="fas fa-plus"></i> Nouveau tournoi</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MODAL : REJOINDRE UN DÉFI ══ -->
+<div class="modal-overlay" id="modal-rejoindre">
+  <div class="modal">
+    <h3 id="modal-title">Se déclarer disponible</h3>
+    <div class="d-section">
+      <label class="d-label">Ton pseudo Lichess</label>
+      <div style="display:flex; gap:8px;">
+        <input type="text" id="modal-pseudo" class="d-input" placeholder="ex : Epicfail20" />
+        <button class="d-btn" onclick="verifierPseudoModal()"><i class="fas fa-check"></i></button>
+      </div>
+      <div id="modal-pseudo-status" class="d-hint" style="margin-top:6px;"></div>
+    </div>
+    <label class="membre-check">
+      <input type="checkbox" id="modal-membre-check" />
+      Je confirme être membre de l'équipe <strong>defis-eca</strong>
+    </label>
+    <div id="modal-error" class="d-error"></div>
+    <div class="modal-btns">
+      <button class="d-btn success full" onclick="confirmerRejoindre()"><i class="fas fa-handshake"></i> Confirmer</button>
+      <button class="d-btn" onclick="fermerModal()">Annuler</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MODAL : S'INSCRIRE TOURNOI ══ -->
+<div class="modal-overlay" id="modal-inscrire">
+  <div class="modal">
+    <h3 id="modal-tournoi-title">S'inscrire au tournoi</h3>
+    <div class="d-section">
+      <label class="d-label">Ton pseudo Lichess</label>
+      <div style="display:flex; gap:8px;">
+        <input type="text" id="modal-tournoi-pseudo" class="d-input" placeholder="ex : Epicfail20" />
+        <button class="d-btn" onclick="verifierPseudoTournoi()"><i class="fas fa-check"></i></button>
+      </div>
+      <div id="modal-tournoi-pseudo-status" class="d-hint" style="margin-top:6px;"></div>
+    </div>
+    <label class="membre-check">
+      <input type="checkbox" id="modal-tournoi-membre-check" />
+      Je confirme être membre de l'équipe <strong>defis-eca</strong>
+    </label>
+    <div id="modal-tournoi-error" class="d-error"></div>
+    <div class="modal-btns">
+      <button class="d-btn success full" onclick="confirmerInscription()"><i class="fas fa-user-plus"></i> S'inscrire</button>
+      <button class="d-btn" onclick="fermerModalTournoi()">Annuler</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const WORKER_URL = 'https://eca-defi-worker.scapa2a.workers.dev';
+
+// État global
+var defiPseudoVerifie  = false;
+var modalPseudoVerifie = false;
+var tournoiPseudoVerifie = false;
+var currentDefiId      = null;
+var currentTournoiId   = null;
+var leaderToken        = null;
+var leaderUsername     = null;
+var lastCreatedDefi    = null;
+var lastCreatedTournoi = null;
+
+// ── Init ─────────────────────────────────────────────────────────
+window.addEventListener('load', function() {
+  checkWorker();
+  loadEvenements();
+  // Rafraîchit les événements toutes les 30 secondes
+  setInterval(loadEvenements, 30000);
+});
+
+async function checkWorker() {
+  var dot  = document.getElementById('status-dot');
+  var text = document.getElementById('status-text');
+  try {
+    var res = await fetch(WORKER_URL + '/evenements');
+    if (res.ok) { dot.classList.add('ok'); text.textContent = 'Service en ligne'; }
+    else throw new Error();
+  } catch(e) {
+    dot.classList.add('err');
+    text.textContent = 'Service indisponible — contacte l\'administrateur';
+  }
+}
+
+// ── Tabs ─────────────────────────────────────────────────────────
+function showTab(name) {
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.closest('.tab').classList.add('active');
+  if (name === 'en-cours') loadEvenements();
+}
+
+// ── Événements en cours ──────────────────────────────────────────
+async function loadEvenements() {
+  var container = document.getElementById('evenements-list');
+  try {
+    var res  = await fetch(WORKER_URL + '/evenements');
+    var data = await res.json();
+    var html = '';
+
+    if (data.defis && data.defis.length > 0) {
+      data.defis.forEach(function(d) {
+        var remaining = d.expiresAt - Date.now();
+        var h = Math.floor(remaining / 3600000);
+        var m = Math.floor((remaining % 3600000) / 60000);
+        var eloTxt = d.eloRange ? ' · Elo ' + d.eloRange : '';
+        var dispHtml = '';
+        if (d.disponibles && d.disponibles.length > 0) {
+          dispHtml = '<div style="font-size:12px; color:var(--muted); margin-bottom:4px;">Disponibles :</div><div class="inscrits-list">';
+          d.disponibles.forEach(function(p) { dispHtml += '<span class="inscrit-chip"><i class="fas fa-user" style="font-size:10px"></i> ' + p + '</span>'; });
+          dispHtml += '</div>';
+        }
+        html += '<div class="event-card defi-card">' +
+          '<div class="event-header">' +
+            '<div><div class="event-title">♟ Défi de ' + d.pseudo + '</div>' +
+            '<div class="event-sub">' + d.cadence + ' · ' + d.variant + eloTxt + (d.rdv ? ' · ' + d.rdv : '') + '</div></div>' +
+            '<span class="event-badge badge-defi">Expire dans ' + h + 'h' + String(m).padStart(2,'0') + '</span>' +
+          '</div>' +
+          (d.message ? '<div style="font-size:13px; color:var(--muted); font-style:italic; margin-bottom:8px;">« ' + d.message + ' »</div>' : '') +
+          dispHtml +
+          '<div class="event-actions">' +
+            '<button class="d-btn success" onclick="ouvrirModalRejoindre(\'' + d.id + '\',\'' + d.pseudo + '\')"><i class="fas fa-handshake"></i> Je suis disponible</button>' +
+            '<button class="d-btn whatsapp" onclick="shareDefiWhatsAppDirect(\'' + d.pseudo + '\',\'' + d.cadence + '\',\'' + (d.eloRange||'') + '\',\'' + (d.rdv||'') + '\')"><i class="fab fa-whatsapp"></i></button>' +
+          '</div>' +
+        '</div>';
+      });
+    }
+
+    if (data.tournois && data.tournois.length > 0) {
+      data.tournois.forEach(function(t) {
+        var inscHtml = '';
+        if (t.inscrits && t.inscrits.length > 0) {
+          inscHtml = '<div style="font-size:12px; color:var(--muted); margin-bottom:4px;">' + t.inscrits.length + ' inscrit(s) :</div><div class="inscrits-list">';
+          t.inscrits.forEach(function(p) { inscHtml += '<span class="inscrit-chip"><i class="fas fa-user" style="font-size:10px"></i> ' + p + '</span>'; });
+          inscHtml += '</div>';
+        } else {
+          inscHtml = '<div style="font-size:12px; color:var(--muted); margin-bottom:8px;">Aucun inscrit pour l\'instant.</div>';
+        }
+        html += '<div class="event-card tournoi-card">' +
+          '<div class="event-header">' +
+            '<div><div class="event-title">🏆 ' + t.nom + '</div>' +
+            '<div class="event-sub">' + t.cadence + ' · ' + t.variant + (t.rdv ? ' · ' + t.rdv : '') + '</div></div>' +
+            '<span class="event-badge badge-tournoi">Tournoi</span>' +
+          '</div>' +
+          (t.description ? '<div style="font-size:13px; color:var(--muted); margin-bottom:8px;">' + t.description + '</div>' : '') +
+          inscHtml +
+          '<div class="event-actions">' +
+            '<button class="d-btn success" onclick="ouvrirModalInscrire(\'' + t.id + '\',\'' + t.nom + '\')"><i class="fas fa-user-plus"></i> Je m\'inscris</button>' +
+            '<button class="d-btn whatsapp" onclick="shareTournoiWhatsAppDirect(\'' + t.nom + '\',\'' + t.cadence + '\',\'' + (t.rdv||'') + '\')"><i class="fab fa-whatsapp"></i></button>' +
+          '</div>' +
+        '</div>';
+      });
+    }
+
+    if (!html) {
+      html = '<div class="empty-state"><i class="fas fa-chess"></i>Aucun événement en cours.<br><span style="font-size:12px;">Lance un défi ou crée un tournoi depuis les onglets ci-dessus.</span></div>';
+    }
+
+    container.innerHTML = html;
+  } catch(e) {
+    container.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-circle"></i>Impossible de charger les événements.</div>';
+  }
+}
+
+// ── Vérification pseudo ──────────────────────────────────────────
+async function verifierPseudo(pseudo, statusEl, flagSetter) {
+  if (!pseudo) { statusEl.textContent = ''; flagSetter(false); return; }
+  statusEl.style.color = 'var(--muted)';
+  statusEl.textContent = 'Vérification…';
+  try {
+    var res  = await fetch(WORKER_URL + '/verifier-pseudo', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ pseudo: pseudo })
+    });
+    var data = await res.json();
+    if (data.exists) {
+      statusEl.style.color = 'var(--green)';
+      statusEl.textContent = '✓ Pseudo vérifié : ' + data.username;
+      flagSetter(true);
+    } else {
+      statusEl.style.color = 'var(--red)';
+      statusEl.textContent = '✗ Pseudo introuvable sur Lichess.';
+      flagSetter(false);
+    }
+  } catch(e) {
+    statusEl.style.color = 'var(--orange)';
+    statusEl.textContent = '⚠ Impossible de vérifier.';
+    flagSetter(false);
+  }
+}
+
+function verifierPseudoDefi() {
+  verifierPseudo(
+    document.getElementById('defi-pseudo').value.trim(),
+    document.getElementById('defi-pseudo-status'),
+    function(v) { defiPseudoVerifie = v; }
+  );
+}
+
+function verifierPseudoModal() {
+  verifierPseudo(
+    document.getElementById('modal-pseudo').value.trim(),
+    document.getElementById('modal-pseudo-status'),
+    function(v) { modalPseudoVerifie = v; }
+  );
+}
+
+function verifierPseudoTournoi() {
+  verifierPseudo(
+    document.getElementById('modal-tournoi-pseudo').value.trim(),
+    document.getElementById('modal-tournoi-pseudo-status'),
+    function(v) { tournoiPseudoVerifie = v; }
+  );
+}
+
+// ── Leader ───────────────────────────────────────────────────────
+async function verifierLeader() {
+  var token    = document.getElementById('tournoi-token').value.trim();
+  var statusEl = document.getElementById('leader-status');
+  var btn      = document.getElementById('verify-leader-btn');
+  if (!token) { statusEl.textContent = '⚠ Saisis ton token.'; statusEl.style.color = 'var(--orange)'; return; }
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="d-spinner"></span> Vérification…';
+  statusEl.textContent = '';
+
+  try {
+    var res  = await fetch(WORKER_URL + '/verifier-leader', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token: token })
+    });
+    var data = await res.json();
+
+    if (data.isLeader) {
+      leaderToken    = token;
+      leaderUsername = data.username;
+      statusEl.style.color = 'var(--green)';
+      statusEl.textContent = '✓ Accès confirmé — bonjour ' + data.username + ' !';
+      document.getElementById('tournoi-fields').style.display = 'block';
+    } else {
+      statusEl.style.color = 'var(--red)';
+      statusEl.textContent = '✗ ' + (data.error || 'Tu n\'es pas leader de l\'équipe defis-eca.');
+    }
+  } catch(e) {
+    statusEl.style.color = 'var(--red)';
+    statusEl.textContent = '✗ Erreur : ' + e.message;
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-shield-alt"></i> Vérifier mon accès';
+  }
+}
+
+function toggleToken(id) {
+  var input = document.getElementById(id);
+  input.type = input.type === 'password' ? 'text' : 'password';
+}
+
+// ── Lancer défi 1v1 ─────────────────────────────────────────────
+async function lancerDefi() {
+  var errorEl = document.getElementById('defi-error');
+  errorEl.textContent = '';
+
+  var pseudo  = document.getElementById('defi-pseudo').value.trim();
+  var checked = document.getElementById('defi-membre-check').checked;
+  var eloMin  = document.getElementById('defi-elo-min').value;
+  var eloMax  = document.getElementById('defi-elo-max').value;
+
+  if (!pseudo)   { errorEl.textContent = '⚠ Saisis ton pseudo Lichess.'; return; }
+  if (!defiPseudoVerifie) { errorEl.textContent = '⚠ Vérifie ton pseudo d\'abord.'; return; }
+  if (!checked)  { errorEl.textContent = '⚠ Confirme que tu es membre de l\'équipe.'; return; }
+  if ((eloMin && !eloMax) || (!eloMin && eloMax)) { errorEl.textContent = '⚠ Remplis les deux champs Elo ou laisse-les vides.'; return; }
+  if (eloMin && eloMax && parseInt(eloMin) >= parseInt(eloMax)) { errorEl.textContent = '⚠ Elo minimum doit être inférieur au maximum.'; return; }
+
+  var btn = document.getElementById('defi-submit-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="d-spinner"></span> Envoi en cours…';
+
+  var cadence = document.getElementById('defi-cadence').value;
+  var variant = document.getElementById('defi-variant').value;
+  var date    = document.getElementById('defi-date').value;
+  var time    = document.getElementById('defi-time').value;
+  var message = document.getElementById('defi-message').value.trim();
+
+  var rdv = '';
+  if (date) {
+    var d = new Date(date + 'T' + time);
+    rdv = 'RDV IRL : ' + d.toLocaleDateString('fr-FR', { weekday:'long', day:'numeric', month:'long' }) + ' à ' + time;
+  }
+
+  try {
+    var res = await fetch(WORKER_URL + '/defi-1v1', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        pseudo: pseudo, cadence: cadence, variant: variant,
+        eloRange: (eloMin && eloMax) ? eloMin + '–' + eloMax : null,
+        rdv: rdv, message: message
+      })
+    });
+    var data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Erreur ' + res.status);
+
+    lastCreatedDefi = { pseudo, cadence, variant, eloRange: (eloMin && eloMax) ? eloMin+'–'+eloMax : null, rdv, message };
+
+    var info = pseudo + ' cherche un adversaire en ' + cadence + ' ' + variant;
+    if (eloMin && eloMax) info += ' (Elo ' + eloMin + '–' + eloMax + ')';
+    if (rdv) info += '\n' + rdv;
+    document.getElementById('defi-confirm-info').textContent = info;
+
+    document.getElementById('defi-form').style.display    = 'none';
+    document.getElementById('defi-confirm').style.display = 'block';
+    loadEvenements();
+
+  } catch(e) {
+    errorEl.textContent = '⚠ ' + e.message;
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-chess-knight"></i> Lancer le défi et notifier le club';
+  }
+}
+
+function resetDefi() {
+  defiPseudoVerifie = false;
+  document.getElementById('defi-form').style.display    = 'block';
+  document.getElementById('defi-confirm').style.display = 'none';
+  document.getElementById('defi-pseudo').value = '';
+  document.getElementById('defi-pseudo-status').textContent = '';
+  document.getElementById('defi-membre-check').checked = false;
+  document.getElementById('defi-elo-min').value = '';
+  document.getElementById('defi-elo-max').value = '';
+  document.getElementById('defi-message').value = '';
+  document.getElementById('defi-error').textContent = '';
+}
+
+// ── Créer tournoi ────────────────────────────────────────────────
+async function creerTournoi() {
+  var errorEl = document.getElementById('tournoi-error');
+  errorEl.textContent = '';
+
+  var nom  = document.getElementById('tournoi-nom').value.trim();
+  var date = document.getElementById('tournoi-date').value;
+  var time = document.getElementById('tournoi-time').value;
+
+  if (!nom)  { errorEl.textContent = '⚠ Donne un nom au tournoi.'; return; }
+  if (!date) { errorEl.textContent = '⚠ Indique la date du tournoi.'; return; }
+
+  var btn = document.getElementById('tournoi-submit-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="d-spinner"></span> Création…';
+
+  var cadence = document.getElementById('tournoi-cadence').value;
+  var variant = document.getElementById('tournoi-variant').value;
+  var desc    = document.getElementById('tournoi-desc').value.trim();
+
+  var rdv = '';
+  if (date) {
+    var d = new Date(date + 'T' + time);
+    rdv = d.toLocaleDateString('fr-FR', { weekday:'long', day:'numeric', month:'long' }) + ' à ' + time;
+  }
+
+  try {
+    var res = await fetch(WORKER_URL + '/creer-tournoi', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token: leaderToken, nom, cadence, variant, rdv, description: desc })
+    });
+    var data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Erreur ' + res.status);
+
+    lastCreatedTournoi = { nom, cadence, variant, rdv, description: desc };
+
+    var info = nom + '\n' + cadence + ' · ' + variant + (rdv ? '\n' + rdv : '');
+    document.getElementById('tournoi-confirm-info').textContent = info;
+    document.getElementById('tournoi-form').style.display    = 'none';
+    document.getElementById('tournoi-confirm').style.display = 'block';
+    loadEvenements();
+
+  } catch(e) {
+    errorEl.textContent = '⚠ ' + e.message;
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-trophy"></i> Créer le tournoi et notifier le club';
+  }
+}
+
+function resetTournoi() {
+  document.getElementById('tournoi-form').style.display    = 'block';
+  document.getElementById('tournoi-confirm').style.display = 'none';
+  document.getElementById('tournoi-nom').value  = '';
+  document.getElementById('tournoi-desc').value = '';
+  document.getElementById('tournoi-error').textContent = '';
+}
+
+// ── Modals rejoindre ─────────────────────────────────────────────
+function ouvrirModalRejoindre(defiId, pseudo) {
+  currentDefiId = defiId;
+  document.getElementById('modal-title').textContent = 'Se déclarer disponible contre ' + pseudo;
+  document.getElementById('modal-pseudo').value = '';
+  document.getElementById('modal-pseudo-status').textContent = '';
+  document.getElementById('modal-membre-check').checked = false;
+  document.getElementById('modal-error').textContent = '';
+  modalPseudoVerifie = false;
+  document.getElementById('modal-rejoindre').classList.add('open');
+}
+
+function fermerModal() { document.getElementById('modal-rejoindre').classList.remove('open'); }
+
+async function confirmerRejoindre() {
+  var pseudo  = document.getElementById('modal-pseudo').value.trim();
+  var checked = document.getElementById('modal-membre-check').checked;
+  var errorEl = document.getElementById('modal-error');
+  errorEl.textContent = '';
+
+  if (!pseudo)  { errorEl.textContent = '⚠ Saisis ton pseudo.'; return; }
+  if (!modalPseudoVerifie) { errorEl.textContent = '⚠ Vérifie ton pseudo d\'abord.'; return; }
+  if (!checked) { errorEl.textContent = '⚠ Confirme que tu es membre de l\'équipe.'; return; }
+
+  try {
+    var res = await fetch(WORKER_URL + '/rejoindre-defi', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ defiId: currentDefiId, pseudo: pseudo })
+    });
+    var data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Erreur');
+
+    fermerModal();
+    loadEvenements();
+    showTab('en-cours');
+  } catch(e) {
+    errorEl.textContent = '⚠ ' + e.message;
+  }
+}
+
+// ── Modals inscrire tournoi ──────────────────────────────────────
+function ouvrirModalInscrire(tournoiId, nom) {
+  currentTournoiId = tournoiId;
+  document.getElementById('modal-tournoi-title').textContent = 'S\'inscrire : ' + nom;
+  document.getElementById('modal-tournoi-pseudo').value = '';
+  document.getElementById('modal-tournoi-pseudo-status').textContent = '';
+  document.getElementById('modal-tournoi-membre-check').checked = false;
+  document.getElementById('modal-tournoi-error').textContent = '';
+  tournoiPseudoVerifie = false;
+  document.getElementById('modal-inscrire').classList.add('open');
+}
+
+function fermerModalTournoi() { document.getElementById('modal-inscrire').classList.remove('open'); }
+
+async function confirmerInscription() {
+  var pseudo  = document.getElementById('modal-tournoi-pseudo').value.trim();
+  var checked = document.getElementById('modal-tournoi-membre-check').checked;
+  var errorEl = document.getElementById('modal-tournoi-error');
+  errorEl.textContent = '';
+
+  if (!pseudo)  { errorEl.textContent = '⚠ Saisis ton pseudo.'; return; }
+  if (!tournoiPseudoVerifie) { errorEl.textContent = '⚠ Vérifie ton pseudo d\'abord.'; return; }
+  if (!checked) { errorEl.textContent = '⚠ Confirme que tu es membre de l\'équipe.'; return; }
+
+  try {
+    var res = await fetch(WORKER_URL + '/inscrire-tournoi', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ tournoiId: currentTournoiId, pseudo: pseudo })
+    });
+    var data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Erreur');
+
+    fermerModalTournoi();
+    loadEvenements();
+  } catch(e) {
+    errorEl.textContent = '⚠ ' + e.message;
+  }
+}
+
+// ── WhatsApp ─────────────────────────────────────────────────────
+function shareDefiWhatsApp() {
+  if (!lastCreatedDefi) return;
+  var d = lastCreatedDefi;
+  shareDefiWhatsAppDirect(d.pseudo, d.cadence, d.eloRange||'', d.rdv||'');
+}
+
+function shareDefiWhatsAppDirect(pseudo, cadence, eloRange, rdv) {
+  var text = '♟ *Défi IRL — Échecs Club Ajaccien*\n';
+  text += pseudo + ' cherche un adversaire !\n';
+  text += 'Cadence : ' + cadence + '\n';
+  if (eloRange) text += 'Niveau : ' + eloRange + ' Elo\n';
+  if (rdv)      text += rdv + '\n';
+  text += '\nInscris-toi sur echecs-club-ajaccien.com/defi-club.html';
+  window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+}
+
+function shareTournoiWhatsApp() {
+  if (!lastCreatedTournoi) return;
+  var t = lastCreatedTournoi;
+  shareTournoiWhatsAppDirect(t.nom, t.cadence, t.rdv||'');
+}
+
+function shareTournoiWhatsAppDirect(nom, cadence, rdv) {
+  var text = '🏆 *Tournoi IRL — Échecs Club Ajaccien*\n';
+  text += nom + '\n';
+  text += 'Cadence : ' + cadence + '\n';
+  if (rdv) text += rdv + '\n';
+  text += '\nInscris-toi sur echecs-club-ajaccien.com/defi-club.html';
+  window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+}
+
+// Ferme les modals en cliquant en dehors
+document.getElementById('modal-rejoindre').addEventListener('click', function(e) {
+  if (e.target === this) fermerModal();
+});
+document.getElementById('modal-inscrire').addEventListener('click', function(e) {
+  if (e.target === this) fermerModalTournoi();
+});
+</script>
+</body>
+</html>
