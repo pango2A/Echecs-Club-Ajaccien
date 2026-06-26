@@ -160,7 +160,7 @@
         <div class="d-row2 d-section">
           <div>
             <label class="d-label">Cadence</label>
-            <select id="defi-cadence" class="d-select">
+            <select id="defi-cadence" class="d-select" onchange="toggleCadencePerso()">
               <option value="1+0">1 min — bullet</option>
               <option value="2+0">2 min — bullet</option>
               <option value="3+0">3 min — blitz</option>
@@ -168,7 +168,22 @@
               <option value="10+0">10 min — rapide</option>
               <option value="15+10">15+10 — rapide</option>
               <option value="30+0">30 min — classique</option>
+              <option value="60+30">1h+30s — longue</option>
+              <option value="90+30">1h30+30s — longue</option>
+              <option value="custom">Personnalisée…</option>
             </select>
+            <div id="cadence-perso" style="display:none; margin-top:8px;">
+              <div class="d-row2">
+                <div>
+                  <label class="d-label">Durée (minutes)</label>
+                  <input type="number" id="cadence-min" class="d-input" placeholder="ex : 90" min="1" max="360" />
+                </div>
+                <div>
+                  <label class="d-label">Incrément (secondes)</label>
+                  <input type="number" id="cadence-inc" class="d-input" placeholder="ex : 30" min="0" max="60" value="0" />
+                </div>
+              </div>
+            </div>
           </div>
           <div>
             <label class="d-label">Variante</label>
@@ -607,7 +622,8 @@ async function lancerDefi() {
   btn.disabled = true;
   btn.innerHTML = '<span class="d-spinner"></span> Envoi en cours…';
 
-  var cadence = document.getElementById('defi-cadence').value;
+  var cadence = getCadenceValue();
+  if (!cadence) { errorEl.textContent = '⚠ Saisis la durée de la cadence personnalisée.'; return; }
   var variant = document.getElementById('defi-variant').value;
   var date    = document.getElementById('defi-date').value;
   var time    = document.getElementById('defi-time').value;
@@ -646,6 +662,25 @@ async function lancerDefi() {
   }
 }
 
+function toggleCadencePerso() {
+  var val = document.getElementById('defi-cadence').value;
+  document.getElementById('cadence-perso').style.display = val === 'custom' ? 'block' : 'none';
+}
+
+function getCadenceValue() {
+  var val = document.getElementById('defi-cadence').value;
+  if (val !== 'custom') return val;
+  var min = document.getElementById('cadence-min').value;
+  var inc = document.getElementById('cadence-inc').value || '0';
+  if (!min || parseInt(min) < 1) return null;
+  // Format lisible : 90min -> "1h30" etc.
+  var h = Math.floor(parseInt(min) / 60);
+  var m = parseInt(min) % 60;
+  var label = h > 0 ? h + 'h' + (m > 0 ? m + 'min' : '') : m + 'min';
+  if (parseInt(inc) > 0) label += '+' + inc + 's';
+  return label;
+}
+
 function resetDefi() {
   defiPseudoVerifie = false;
   document.getElementById('defi-form').style.display    = 'block';
@@ -657,6 +692,10 @@ function resetDefi() {
   document.getElementById('defi-elo-max').value = '';
   document.getElementById('defi-message').value = '';
   document.getElementById('defi-error').textContent = '';
+  document.getElementById('defi-cadence').value = '5+2';
+  document.getElementById('cadence-perso').style.display = 'none';
+  document.getElementById('cadence-min').value = '';
+  document.getElementById('cadence-inc').value = '0';
 }
 
 // ── Créer tournoi ─────────────────────────────────────────────────
