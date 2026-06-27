@@ -276,7 +276,7 @@
           <div class="d-row2 d-section">
             <div>
               <label class="d-label">Cadence</label>
-              <select id="tournoi-cadence" class="d-select">
+              <select id="tournoi-cadence" class="d-select" onchange="toggleCadencePersoTournoi()">
                 <option value="1+0">1 min — bullet</option>
                 <option value="2+0">2 min — bullet</option>
                 <option value="3+0">3 min — blitz</option>
@@ -284,7 +284,22 @@
                 <option value="10+0">10 min — rapide</option>
                 <option value="15+10">15+10 — rapide</option>
                 <option value="30+0">30 min — classique</option>
+                <option value="60+30">1h+30s — longue</option>
+                <option value="90+30">1h30+30s — longue</option>
+                <option value="custom-t">Personnalisée…</option>
               </select>
+              <div id="cadence-perso-tournoi" style="display:none; margin-top:8px;">
+                <div class="d-row2">
+                  <div>
+                    <label class="d-label">Durée (minutes)</label>
+                    <input type="number" id="cadence-min-tournoi" class="d-input" placeholder="ex : 90" min="1" max="360" />
+                  </div>
+                  <div>
+                    <label class="d-label">Incrément (secondes)</label>
+                    <input type="number" id="cadence-inc-tournoi" class="d-input" placeholder="ex : 30" min="0" max="60" value="0" />
+                  </div>
+                </div>
+              </div>
             </div>
             <div>
               <label class="d-label">Variante</label>
@@ -712,7 +727,8 @@ async function creerTournoi() {
   btn.disabled = true;
   btn.innerHTML = '<span class="d-spinner"></span> Création…';
 
-  var cadence = document.getElementById('tournoi-cadence').value;
+  var cadence = getCadenceTournoiValue();
+  if (!cadence) { errorEl.textContent = '⚠ Saisis la durée de la cadence personnalisée.'; return; }
   var variant = document.getElementById('tournoi-variant').value;
   var desc    = document.getElementById('tournoi-desc').value.trim();
   var rdv = '';
@@ -747,12 +763,34 @@ async function creerTournoi() {
   }
 }
 
+function toggleCadencePersoTournoi() {
+  var val = document.getElementById('tournoi-cadence').value;
+  document.getElementById('cadence-perso-tournoi').style.display = val === 'custom-t' ? 'block' : 'none';
+}
+
+function getCadenceTournoiValue() {
+  var val = document.getElementById('tournoi-cadence').value;
+  if (val !== 'custom-t') return val;
+  var min = document.getElementById('cadence-min-tournoi').value;
+  var inc = document.getElementById('cadence-inc-tournoi').value || '0';
+  if (!min || parseInt(min) < 1) return null;
+  var h = Math.floor(parseInt(min) / 60);
+  var m = parseInt(min) % 60;
+  var label = h > 0 ? h + 'h' + (m > 0 ? m + 'min' : '') : m + 'min';
+  if (parseInt(inc) > 0) label += '+' + inc + 's';
+  return label;
+}
+
 function resetTournoi() {
   document.getElementById('tournoi-form').style.display    = 'block';
   document.getElementById('tournoi-confirm').style.display = 'none';
   document.getElementById('tournoi-nom').value  = '';
   document.getElementById('tournoi-desc').value = '';
   document.getElementById('tournoi-error').textContent = '';
+  document.getElementById('tournoi-cadence').value = '5+2';
+  document.getElementById('cadence-perso-tournoi').style.display = 'none';
+  document.getElementById('cadence-min-tournoi').value = '';
+  document.getElementById('cadence-inc-tournoi').value = '0';
 }
 
 // ── Modals rejoindre ──────────────────────────────────────────────
