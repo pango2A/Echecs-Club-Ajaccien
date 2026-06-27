@@ -371,7 +371,7 @@
               <input type="password" id="tournoi-ligne-token" class="d-input" placeholder="lip_..." autocomplete="off" />
               <button class="token-toggle" onclick="toggleToken('tournoi-ligne-token')"><i class="fas fa-eye"></i></button>
             </div>
-            <div class="d-hint">Scopes requis : <strong>team:lead</strong> + <strong>tournament:write</strong>.</div>
+            <div class="d-hint"><i class="fas fa-info-circle"></i> Génère un token sur lichess.org/account/security avec les scopes <strong>team:lead</strong>, <strong>tournament:write</strong> et <strong>msg:write</strong>. Il n'est jamais stocké.</div>
           </div>
           <button class="d-btn primary" id="verify-leader-ligne-btn" onclick="verifierLeaderLigne()">
             <i class="fas fa-shield-alt"></i> Vérifier mon accès
@@ -1092,7 +1092,7 @@ async function verifierLeaderLigne() {
     statusEl.textContent = 'Erreur : ' + e.message;
   } finally {
     btn.disabled = false;
-    btn.innerHTML = '<i class="fas fa-shield-alt"></i> Verifier mon acces';
+    btn.innerHTML = '<i class="fas fa-shield-alt"></i> Vérifier mon accès';
   }
 }
 
