@@ -6,134 +6,149 @@
   <title>Défi Club — Échecs Club Ajaccien</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Nunito+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --navy:   #1e1e2f;
-      --gold:   #e6b800;
-      --green:  #1D9E75;
-      --red:    #c0392b;
-      --orange: #EF9F27;
-      --wa:     #25D366;
-      --bg:     #f5f7fa;
-      --surface:#ffffff;
-      --border: rgba(0,0,0,0.12);
-      --text:   #333;
-      --muted:  #666;
-      --radius: 12px;
+      --roux:     #9B4A2E;
+      --roux-l:   #B55D3C;
+      --roux-d:   #7D3A22;
+      --cream:    #FDF3EC;
+      --cream-d:  #F0E0D0;
+      --gold:     #C4824A;
+      --gold-l:   #D4955E;
+      --wa:       #25D366;
+      --red:      #C0392B;
+      --surface:  #FFF8F4;
+      --border:   rgba(155,74,46,0.16);
+      --text:     #3A1A0C;
+      --muted:    #8A5E4A;
+      --radius:   10px;
+      --serif:    'Lora', Georgia, serif;
+      --sans:     'Nunito Sans', system-ui, sans-serif;
     }
 
-    .defi-page { max-width: 680px; margin: 2rem auto; padding: 0 1rem 3rem; }
-    .defi-page h1 { font-size: 22px; font-weight: 600; color: var(--navy); display: flex; align-items: center; gap: 10px; margin-bottom: 1.5rem; }
+    .defi-page { max-width: 1166px; margin: 0 auto; padding: 2rem 2rem 3rem; font-family: var(--sans); font-size: 18.5px; line-height: 1.5; background: var(--surface); min-height: 100vh; }
+    .defi-page h1 { font-family: var(--serif); font-size: 33px; font-weight: 600; color: var(--roux); display: flex; align-items: center; gap: 13px; margin-bottom: 0.4rem; letter-spacing: -0.01em; }
+    .defi-page .subtitle { font-size: 15.8px; color: var(--muted); margin-bottom: 1.6rem; font-style: italic; font-family: var(--serif); line-height: 1.3; }
+
+    .checker-rule { height: 10px; display: flex; margin-bottom: 1.6rem; border-radius: 3px; overflow: hidden; }
+    .checker-rule span { flex: 1; }
+    .checker-rule span:nth-child(odd) { background: var(--roux); }
+    .checker-rule span:nth-child(even) { background: var(--cream-d); }
 
     /* Tabs */
-    .tabs { display: flex; gap: 4px; background: var(--bg); border-radius: 10px; padding: 4px; margin-bottom: 1.5rem; border: 0.5px solid var(--border); }
-    .tab { flex: 1; padding: 9px; font-size: 13px; font-family: inherit; font-weight: 500; border: none; border-radius: 7px; background: transparent; color: var(--muted); cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
-    .tab:hover { color: var(--navy); }
-    .tab.active { background: var(--surface); color: var(--navy); box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+    .tabs { display: flex; gap: 5px; background: var(--cream-d); border-radius: 12px; padding: 5px; margin-bottom: 1.6rem; border: 0.5px solid var(--border); }
+    .tab { flex: 1; padding: 11px; font-size: 18.9px; font-family: var(--sans); font-weight: 500; border: none; border-radius: 9px; background: transparent; color: var(--muted); cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .tab:hover { color: var(--roux); }
+    .tab.active { background: var(--surface); color: var(--roux); box-shadow: 0 1px 4px rgba(155,74,46,0.15); }
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
 
     /* Cards */
-    .d-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1.4rem; margin-bottom: 1.25rem; }
-    .d-section-title { font-size: 13px; font-weight: 600; color: var(--navy); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+    .d-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-bottom: 1.6rem; }
+    .d-section-title { font-family: var(--serif); font-size: 18.9px; font-weight: 600; color: var(--roux); letter-spacing: 0.01em; margin-bottom: 1.3rem; display: flex; align-items: center; gap: 10px; }
     .d-section-title i { color: var(--gold); }
-    .d-section { margin-bottom: 1rem; }
-    .d-label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 5px; font-weight: 500; }
-    .d-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .d-input, .d-select, .d-textarea { width: 100%; padding: 9px 11px; font-size: 14px; font-family: inherit; border: 0.5px solid rgba(0,0,0,0.2); border-radius: 8px; background: var(--bg); color: var(--text); outline: none; transition: border-color 0.15s; }
-    .d-input:focus, .d-select:focus, .d-textarea:focus { border-color: var(--navy); background: #fff; }
-    .d-textarea { resize: vertical; min-height: 65px; }
-    .d-hint { font-size: 11px; color: var(--muted); margin-top: 4px; }
+    .d-section { margin-bottom: 1.3rem; }
+    .d-label { display: block; font-size: 15.8px; color: var(--muted); margin-bottom: 6px; font-weight: 500; }
+    .d-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    .d-input, .d-select, .d-textarea { width: 100%; padding: 11px 14px; font-size: 18.9px; font-family: var(--sans); border: 0.5px solid rgba(155,74,46,0.20); border-radius: 9px; background: var(--cream); color: var(--text); outline: none; transition: border-color 0.15s; }
+    .d-input:focus, .d-select:focus, .d-textarea:focus { border-color: var(--roux); background: #fff; }
+    .d-textarea { resize: vertical; min-height: 85px; }
+    .d-hint { font-size: 14.5px; color: var(--muted); margin-top: 5px; }
 
     /* Checkbox membre */
-    .membre-check { display: flex; align-items: center; gap: 8px; margin-top: 0.75rem; font-size: 13px; color: var(--text); cursor: pointer; }
-    .membre-check input { width: 16px; height: 16px; cursor: pointer; accent-color: var(--navy); }
+    .membre-check { display: flex; align-items: center; gap: 10px; margin-top: 0.95rem; font-size: 18.9px; color: var(--text); cursor: pointer; }
+    .membre-check input { width: 18px; height: 18px; cursor: pointer; accent-color: var(--roux); }
 
     /* Buttons */
-    .d-btn { display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 9px 18px; font-size: 14px; font-family: inherit; border: 0.5px solid rgba(0,0,0,0.2); border-radius: 8px; background: transparent; color: var(--text); cursor: pointer; transition: background 0.15s, transform 0.1s; }
-    .d-btn:hover { background: #f0f0eb; }
+    .d-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 11px 22px; font-size: 18.9px; font-family: var(--sans); border: 0.5px solid rgba(155,74,46,0.20); border-radius: 9px; background: transparent; color: var(--text); cursor: pointer; transition: background 0.15s, transform 0.1s; }
+    .d-btn:hover { background: var(--cream-d); }
     .d-btn:active { transform: scale(0.98); }
     .d-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-    .d-btn.full { width: 100%; padding: 11px; }
-    .d-btn.primary { background: var(--navy); color: #fff; border-color: var(--navy); }
-    .d-btn.primary:hover { background: #2d2d45; }
-    .d-btn.success { background: var(--green); color: #fff; border-color: var(--green); }
-    .d-btn.success:hover { background: #178f66; }
+    .d-btn.full { width: 100%; padding: 15.4px; }
+    .d-btn.primary { background: var(--roux); color: #fff; border-color: var(--roux); }
+    .d-btn.primary:hover { background: var(--roux-l); }
+    .d-btn.success { background: var(--gold); color: #fff; border-color: var(--gold); }
+    .d-btn.success:hover { background: var(--gold-l); }
     .d-btn.whatsapp { background: var(--wa); color: #fff; border-color: var(--wa); }
     .d-btn.whatsapp:hover { background: #1ebe5d; }
     .d-btn.danger { background: var(--red); color: #fff; border-color: var(--red); }
 
     /* Status */
-    .worker-status { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); margin-bottom: 1.25rem; padding: 8px 12px; background: var(--bg); border-radius: 8px; border: 0.5px solid var(--border); }
-    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); flex-shrink: 0; }
-    .status-dot.ok  { background: var(--green); }
+    .worker-status { display: flex; align-items: center; gap: 10px; font-size: 15.8px; color: var(--muted); margin-bottom: 1.6rem; padding: 10px 15px; background: var(--cream-d); border-radius: 9px; border: 0.5px solid var(--border); }
+    .status-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--muted); flex-shrink: 0; }
+    .status-dot.ok  { background: #5A8A5A; }
     .status-dot.err { background: var(--red); }
 
     /* Événements en cours */
-    .event-card { border: 0.5px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 10px; background: var(--surface); }
-    .event-card.defi-card  { border-left: 3px solid var(--gold); }
-    .event-card.tournoi-card { border-left: 3px solid #7c3aed; }
-    .event-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
-    .event-title { font-size: 14px; font-weight: 600; color: var(--navy); }
-    .event-sub   { font-size: 12px; color: var(--muted); margin-top: 2px; }
-    .event-badge { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
-    .badge-defi    { background: #fff8e1; color: #92610a; }
-    .badge-tournoi { background: #f3e8ff; color: #6d28d9; }
-    .inscrits-list { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
-    .inscrit-chip { background: var(--bg); border: 0.5px solid var(--border); border-radius: 20px; padding: 3px 10px; font-size: 12px; color: var(--navy); }
-    .event-actions { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
-    .empty-state { text-align: center; padding: 2rem; color: var(--muted); font-size: 14px; }
-    .empty-state i { font-size: 32px; margin-bottom: 0.5rem; display: block; opacity: 0.3; }
+    .event-card { border: 0.5px solid var(--border); border-radius: 12px; padding: 18px; margin-bottom: 13px; background: var(--surface); }
+    .event-card.defi-card  { border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; }
+    .event-card.tournoi-card { border-left: 4px solid var(--roux); border-radius: 0 12px 12px 0; }
+    .event-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 13px; margin-bottom: 10px; }
+    .event-title { font-family: var(--serif); font-size: 18.5px; font-weight: 600; color: var(--roux); }
+    .event-sub   { font-size: 15.8px; color: var(--muted); margin-top: 3px; }
+    .event-badge { font-size: 14.5px; font-weight: 600; padding: 3px 10px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
+    .badge-defi    { background: #F8E8DC; color: #7A3E22; }
+    .badge-tournoi { background: #E1E9E4; color: var(--roux); }
+    .inscrits-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+    .inscrit-chip { background: var(--cream); border: 0.5px solid var(--border); border-radius: 20px; padding: 3px 11px; font-size: 15.8px; color: var(--roux); }
+    .event-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 13px; }
+    .empty-state { text-align: center; padding: 2.6rem; color: var(--muted); font-size: 18.5px; }
+    .empty-state i { font-size: 42px; margin-bottom: 0.65rem; display: block; opacity: 0.3; }
 
     /* Modal rejoindre */
-    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 100; align-items: center; justify-content: center; padding: 1rem; }
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(90,40,20,0.45); z-index: 100; align-items: center; justify-content: center; padding: 1.3rem; }
     .modal-overlay.open { display: flex; }
-    .modal { background: var(--surface); border-radius: var(--radius); padding: 1.5rem; max-width: 420px; width: 100%; }
-    .modal h3 { font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 1rem; }
-    .modal-btns { display: flex; gap: 8px; margin-top: 1rem; }
+    .modal { background: var(--surface); border-radius: var(--radius); padding: 1.95rem; max-width: 546px; width: 100%; }
+    .modal h3 { font-family: var(--serif); font-size: 19.8px; font-weight: 600; color: var(--roux); margin-bottom: 1.3rem; }
+    .modal-btns { display: flex; gap: 10px; margin-top: 1.3rem; }
 
     /* Résultat */
-    .result-banner { background: linear-gradient(135deg, #0f6e56, #1D9E75); color: #fff; border-radius: 10px; padding: 14px 18px; margin-bottom: 1rem; display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; }
+    .result-banner { background: var(--roux); color: #fff; border-radius: 12px; padding: 17.6px 22px; margin-bottom: 1.3rem; display: flex; align-items: center; gap: 13px; font-size: 17px; font-weight: 600; font-family: var(--serif); }
 
-    .d-error   { font-size: 13px; color: var(--red);    margin-top: 8px; }
-    .d-success { font-size: 13px; color: var(--green);  margin-top: 6px; }
-    .d-muted   { font-size: 13px; color: var(--muted); }
-    .d-spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; }
-    .d-spinner.dark { border-color: rgba(0,0,0,0.15); border-top-color: var(--navy); }
+    .d-error   { font-size: 18.9px; color: var(--red);    margin-top: 10px; }
+    .d-success { font-size: 18.9px; color: var(--roux); margin-top: 8px; }
+    .d-muted   { font-size: 18.9px; color: var(--muted); }
+    .d-spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; }
+    .d-spinner.dark { border-color: rgba(155,74,46,0.15); border-top-color: var(--roux); }
     @keyframes spin { to { transform: rotate(360deg); } }
 
     /* Token field */
     .token-field { position: relative; }
-    .token-field input { padding-right: 40px; }
-    .token-toggle { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--muted); font-size: 14px; }
+    .token-field input { padding-right: 52px; }
+    .token-toggle { position: absolute; right: 13px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--muted); font-size: 16px; }
 
     /* Calendrier */
-    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
-    .cal-dow { font-size: 11px; font-weight: 600; color: var(--muted); text-align: center; padding: 4px 0; text-transform: uppercase; }
-    .cal-day { position: relative; aspect-ratio: 1; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: background 0.15s, transform 0.1s; font-size: 13px; color: var(--text); }
-    .cal-day:hover { background: #ececf5; transform: scale(1.04); }
+    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+    .cal-dow { font-size: 14.5px; font-weight: 600; color: var(--muted); text-align: center; padding: 5px 0; }
+    .cal-day { position: relative; aspect-ratio: 1; border-radius: 9px; border: 1px solid var(--border); background: var(--cream); display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: background 0.15s, transform 0.1s; font-size: 18.6px; color: var(--text); }
+    .cal-day:hover { background: var(--cream-d); transform: scale(1.04); }
     .cal-day.empty { background: transparent; border: none; cursor: default; }
     .cal-day.empty:hover { transform: none; background: transparent; }
-    .cal-day.has-defi { background: #fff8e1; border-color: var(--gold); }
-    .cal-day.has-tournoi { background: #f3e8ff; border-color: #7c3aed; cursor: pointer; }
-    .cal-day.has-tournoi:hover { background: #ead6ff; }
-    .cal-day.is-today { box-shadow: 0 0 0 2px var(--navy) inset; font-weight: 700; }
-    .cal-day-num { font-size: 13px; }
-    .cal-day-badge { position: absolute; top: 3px; right: 3px; font-size: 9px; font-weight: 700; background: var(--gold); color: #fff; border-radius: 20px; min-width: 14px; height: 14px; display: flex; align-items: center; justify-content: center; padding: 0 3px; }
-    .cal-day.has-tournoi .cal-day-badge { background: #7c3aed; }
-    .cal-legend-dot { display: inline-block; width: 9px; height: 9px; border-radius: 3px; margin-right: 4px; vertical-align: middle; }
-    .cal-popover { position: fixed; z-index: 200; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); padding: 12px; max-width: 280px; font-size: 13px; pointer-events: none; }
-    .cal-popover-title { font-weight: 600; color: var(--navy); margin-bottom: 6px; font-size: 12px; }
-    .cal-popover-item { padding: 4px 0; border-top: 1px solid var(--border); color: var(--text); }
+    .cal-day.has-defi { background: #FBF0E8; border-color: var(--gold); }
+    .cal-day.has-tournoi { background: #E1E9E4; border-color: var(--roux); cursor: pointer; }
+    .cal-day.has-tournoi:hover { background: #ECD8CE; }
+    .cal-day.is-today { box-shadow: 0 0 0 2px var(--gold) inset; font-weight: 700; }
+    .cal-day-num { font-size: 18.9px; }
+    .cal-day-badge { position: absolute; top: 4px; right: 4px; font-size: 11.9px; font-weight: 700; background: var(--gold); color: #fff; border-radius: 20px; min-width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; padding: 0 4px; }
+    .cal-day.has-tournoi .cal-day-badge { background: var(--roux); }
+    .cal-legend-dot { display: inline-block; width: 12px; height: 12px; border-radius: 4px; margin-right: 5px; vertical-align: middle; }
+    .cal-popover { position: fixed; z-index: 200; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(155,74,46,0.16); padding: 15px; max-width: 340px; font-size: 18.9px; pointer-events: none; }
+    .cal-popover-title { font-family: var(--serif); font-weight: 600; color: var(--roux); margin-bottom: 8px; font-size: 18.9px; }
+    .cal-popover-item { padding: 5px 0; border-top: 1px solid var(--border); color: var(--text); }
     .cal-popover-item:first-of-type { border-top: none; }
 
     @media (max-width: 480px) { .d-row2 { grid-template-columns: 1fr; } .tabs { flex-direction: column; } }
   </style>
 </head>
-<body>
+<body style="background: #F2E4D8; margin: 0;">
 
 <div class="defi-page">
-  <h1><i class="fas fa-chess-knight" style="color:#e6b800"></i> Défi Club — ECA</h1>
+  <h1><i class="fas fa-chess-knight" style="color:var(--gold)"></i> Défi Club — ECA</h1>
+  <div class="subtitle">Échecs Club Ajaccien</div>
+  <div class="checker-rule"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
 
   <div class="worker-status">
     <div class="status-dot" id="status-dot"></div>
@@ -160,13 +175,13 @@
     <div class="d-card" style="padding: 1rem 1.4rem;">
       <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem;">
         <button class="d-btn" onclick="calNavMonth(-1)"><i class="fas fa-chevron-left"></i></button>
-        <div id="cal-month-label" style="font-size:15px; font-weight:600; color:var(--navy);"></div>
+        <div id="cal-month-label" style="font-family: var(--serif); font-size:19.8px; font-weight:600; color:var(--roux);"></div>
         <button class="d-btn" onclick="calNavMonth(1)"><i class="fas fa-chevron-right"></i></button>
       </div>
       <div id="cal-grid" class="cal-grid"></div>
       <div style="display:flex; gap:14px; margin-top:12px; font-size:11px; color:var(--muted); flex-wrap:wrap;">
         <span><span class="cal-legend-dot" style="background:var(--gold)"></span> Défi(s)</span>
-        <span><span class="cal-legend-dot" style="background:#7c3aed"></span> Tournoi</span>
+        <span><span class="cal-legend-dot" style="background:var(--roux)"></span> Tournoi</span>
         <span><span class="cal-legend-dot" style="background:var(--bg); border:1px solid var(--border)"></span> Libre</span>
       </div>
     </div>
@@ -699,7 +714,7 @@ async function verifierLeader() {
     if (data.isLeader) {
       leaderToken    = token;
       leaderUsername = data.username;
-      statusEl.style.color = 'var(--green)';
+      statusEl.style.color = 'var(--roux)';
       statusEl.textContent = '✓ Accès confirmé — bonjour ' + data.username + ' !';
       document.getElementById('tournoi-fields').style.display = 'block';
     } else {
@@ -975,7 +990,7 @@ function shareTournoiWhatsAppDirect(nom, cadence, rdv, lichessUrl) {
 
 // ── Annuler un événement ──────────────────────────────────────────
 async function annulerEvenement(id, createur) {
-  var pseudo = prompt("Saisis ton pseudo Lichess pour confirmer l'annulation :");
+  var pseudo = prompt('Saisis ton nom pour confirmer l\'annulation :');
   if (!pseudo) return;
   if (pseudo.toLowerCase() !== createur.toLowerCase()) {
     alert('Seul le créateur (' + createur + ') peut annuler cet événement.');
@@ -1046,7 +1061,7 @@ async function verifierLeaderLigne() {
     var data = await res.json();
     if (data.isLeader) {
       leaderTokenLigne = token;
-      statusEl.style.color = 'var(--green)';
+      statusEl.style.color = 'var(--roux)';
       statusEl.textContent = 'Acces confirme - bonjour ' + data.username + ' !';
       document.getElementById('tournoi-ligne-fields').style.display = 'block';
     } else {
