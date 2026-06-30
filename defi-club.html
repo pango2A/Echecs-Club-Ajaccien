@@ -534,6 +534,7 @@
 
 <script>
 const WORKER_URL = 'https://eca-defi-worker.scapa2a.workers.dev';
+const TEAM_ID    = 'defis-eca';
 
 // État global
 var currentDefiId        = null;
@@ -703,7 +704,7 @@ async function verifierLeader() {
       document.getElementById('tournoi-fields').style.display = 'block';
     } else {
       statusEl.style.color = 'var(--red)';
-      statusEl.textContent = '✗ ' + (data.error || 'Tu n\'es pas leader de l\'équipe defis-eca.');
+      statusEl.textContent = '✗ ' + (data.error || 'Tu n\'es pas leader de l\'équipe ' + TEAM_ID + '.');
     }
   } catch(e) {
     statusEl.style.color = 'var(--red)';
