@@ -181,19 +181,9 @@
       <div class="d-card">
         <div class="d-section-title"><i class="fas fa-user"></i> Qui cherche un adversaire ?</div>
         <div class="d-section">
-          <label class="d-label">Ton pseudo Lichess</label>
-          <div style="display:flex; gap:8px;">
-            <input type="text" id="defi-pseudo" class="d-input" placeholder="ex : Epicfail20" autocomplete="off" />
-            <button class="d-btn" onclick="verifierPseudoDefi()" id="verify-defi-btn" style="white-space:nowrap;">
-              <i class="fas fa-check"></i> Vérifier
-            </button>
-          </div>
-          <div id="defi-pseudo-status" class="d-hint" style="margin-top:6px;"></div>
+          <label class="d-label">Ton nom / prénom</label>
+          <input type="text" id="defi-pseudo" class="d-input" placeholder="ex : Jean Dupont" autocomplete="off" />
         </div>
-        <label class="membre-check">
-          <input type="checkbox" id="defi-membre-check" />
-          Je confirme être membre de l'équipe <strong>defis-eca</strong> sur Lichess
-        </label>
       </div>
 
       <div class="d-card">
@@ -515,17 +505,9 @@
   <div class="modal">
     <h3 id="modal-title">Se déclarer disponible</h3>
     <div class="d-section">
-      <label class="d-label">Ton pseudo Lichess</label>
-      <div style="display:flex; gap:8px;">
-        <input type="text" id="modal-pseudo" class="d-input" placeholder="ex : Epicfail20" />
-        <button class="d-btn" onclick="verifierPseudoModal()"><i class="fas fa-check"></i></button>
-      </div>
-      <div id="modal-pseudo-status" class="d-hint" style="margin-top:6px;"></div>
+      <label class="d-label">Ton nom / prénom</label>
+      <input type="text" id="modal-pseudo" class="d-input" placeholder="ex : Jean Dupont" />
     </div>
-    <label class="membre-check">
-      <input type="checkbox" id="modal-membre-check" />
-      Je confirme être membre de l'équipe <strong>defis-eca</strong>
-    </label>
     <div id="modal-error" class="d-error"></div>
     <div class="modal-btns">
       <button class="d-btn success full" onclick="confirmerRejoindre()"><i class="fas fa-handshake"></i> Confirmer</button>
@@ -539,17 +521,9 @@
   <div class="modal">
     <h3 id="modal-tournoi-title">S'inscrire au tournoi</h3>
     <div class="d-section">
-      <label class="d-label">Ton pseudo Lichess</label>
-      <div style="display:flex; gap:8px;">
-        <input type="text" id="modal-tournoi-pseudo" class="d-input" placeholder="ex : Epicfail20" />
-        <button class="d-btn" onclick="verifierPseudoTournoi()"><i class="fas fa-check"></i></button>
-      </div>
-      <div id="modal-tournoi-pseudo-status" class="d-hint" style="margin-top:6px;"></div>
+      <label class="d-label">Ton nom / prénom</label>
+      <input type="text" id="modal-tournoi-pseudo" class="d-input" placeholder="ex : Jean Dupont" />
     </div>
-    <label class="membre-check">
-      <input type="checkbox" id="modal-tournoi-membre-check" />
-      Je confirme être membre de l'équipe <strong>defis-eca</strong>
-    </label>
     <div id="modal-tournoi-error" class="d-error"></div>
     <div class="modal-btns">
       <button class="d-btn success full" onclick="confirmerInscription()"><i class="fas fa-user-plus"></i> S'inscrire</button>
@@ -562,9 +536,6 @@
 const WORKER_URL = 'https://eca-defi-worker.scapa2a.workers.dev';
 
 // État global
-var defiPseudoVerifie    = false;
-var modalPseudoVerifie   = false;
-var tournoiPseudoVerifie = false;
 var currentDefiId        = null;
 var currentTournoiId     = null;
 var leaderToken          = null;
@@ -709,37 +680,6 @@ function renderEvenements(data, container) {
   container.innerHTML = html;
 }
 
-// ── Vérification pseudo ───────────────────────────────────────────
-async function verifierPseudo(pseudo, statusEl, flagSetter) {
-  if (!pseudo) { statusEl.textContent = ''; flagSetter(false); return; }
-  statusEl.style.color = 'var(--muted)';
-  statusEl.textContent = 'Vérification…';
-  try {
-    var res  = await fetch(WORKER_URL + '/verifier-pseudo', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ pseudo: pseudo })
-    });
-    var data = await res.json();
-    if (data.exists) {
-      statusEl.style.color = 'var(--green)';
-      statusEl.textContent = '✓ Pseudo vérifié : ' + data.username;
-      flagSetter(true);
-    } else {
-      statusEl.style.color = 'var(--red)';
-      statusEl.textContent = '✗ Pseudo introuvable sur Lichess.';
-      flagSetter(false);
-    }
-  } catch(e) {
-    statusEl.style.color = 'var(--orange)';
-    statusEl.textContent = '⚠ Impossible de vérifier.';
-    flagSetter(false);
-  }
-}
-
-function verifierPseudoDefi()   { verifierPseudo(document.getElementById('defi-pseudo').value.trim(), document.getElementById('defi-pseudo-status'), function(v) { defiPseudoVerifie = v; }); }
-function verifierPseudoModal()  { verifierPseudo(document.getElementById('modal-pseudo').value.trim(), document.getElementById('modal-pseudo-status'), function(v) { modalPseudoVerifie = v; }); }
-function verifierPseudoTournoi(){ verifierPseudo(document.getElementById('modal-tournoi-pseudo').value.trim(), document.getElementById('modal-tournoi-pseudo-status'), function(v) { tournoiPseudoVerifie = v; }); }
-
 // ── Leader ────────────────────────────────────────────────────────
 async function verifierLeader() {
   var token    = document.getElementById('tournoi-token').value.trim();
@@ -784,12 +724,9 @@ async function lancerDefi() {
   var errorEl = document.getElementById('defi-error');
   errorEl.textContent = '';
   var pseudo  = document.getElementById('defi-pseudo').value.trim();
-  var checked = document.getElementById('defi-membre-check').checked;
   var eloMin  = document.getElementById('defi-elo-min').value;
   var eloMax  = document.getElementById('defi-elo-max').value;
-  if (!pseudo)             { errorEl.textContent = '⚠ Saisis ton pseudo Lichess.'; return; }
-  if (!defiPseudoVerifie)  { errorEl.textContent = '⚠ Vérifie ton pseudo d\'abord.'; return; }
-  if (!checked)            { errorEl.textContent = '⚠ Confirme que tu es membre de l\'équipe.'; return; }
+  if (!pseudo) { errorEl.textContent = '⚠ Saisis ton nom ou prénom.'; return; }
   if ((eloMin && !eloMax) || (!eloMin && eloMax)) { errorEl.textContent = '⚠ Remplis les deux champs Elo ou laisse-les vides.'; return; }
   if (eloMin && eloMax && parseInt(eloMin) >= parseInt(eloMax)) { errorEl.textContent = '⚠ Elo minimum doit être inférieur au maximum.'; return; }
 
@@ -857,12 +794,9 @@ function getCadenceValue() {
 }
 
 function resetDefi() {
-  defiPseudoVerifie = false;
   document.getElementById('defi-form').style.display    = 'block';
   document.getElementById('defi-confirm').style.display = 'none';
   document.getElementById('defi-pseudo').value = '';
-  document.getElementById('defi-pseudo-status').textContent = '';
-  document.getElementById('defi-membre-check').checked = false;
   document.getElementById('defi-elo-min').value = '';
   document.getElementById('defi-elo-max').value = '';
   document.getElementById('defi-message').value = '';
@@ -959,22 +893,16 @@ function ouvrirModalRejoindre(defiId, pseudo) {
   currentDefiId = defiId;
   document.getElementById('modal-title').textContent = 'Se déclarer disponible contre ' + pseudo;
   document.getElementById('modal-pseudo').value = '';
-  document.getElementById('modal-pseudo-status').textContent = '';
-  document.getElementById('modal-membre-check').checked = false;
   document.getElementById('modal-error').textContent = '';
-  modalPseudoVerifie = false;
   document.getElementById('modal-rejoindre').classList.add('open');
 }
 function fermerModal() { document.getElementById('modal-rejoindre').classList.remove('open'); }
 
 async function confirmerRejoindre() {
   var pseudo  = document.getElementById('modal-pseudo').value.trim();
-  var checked = document.getElementById('modal-membre-check').checked;
   var errorEl = document.getElementById('modal-error');
   errorEl.textContent = '';
-  if (!pseudo)             { errorEl.textContent = '⚠ Saisis ton pseudo.'; return; }
-  if (!modalPseudoVerifie) { errorEl.textContent = '⚠ Vérifie ton pseudo d\'abord.'; return; }
-  if (!checked)            { errorEl.textContent = '⚠ Confirme que tu es membre de l\'équipe.'; return; }
+  if (!pseudo) { errorEl.textContent = '⚠ Saisis ton nom ou prénom.'; return; }
   try {
     var res = await fetch(WORKER_URL + '/rejoindre-defi', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -994,22 +922,16 @@ function ouvrirModalInscrire(tournoiId, nom) {
   currentTournoiId = tournoiId;
   document.getElementById('modal-tournoi-title').textContent = 'S\'inscrire : ' + nom;
   document.getElementById('modal-tournoi-pseudo').value = '';
-  document.getElementById('modal-tournoi-pseudo-status').textContent = '';
-  document.getElementById('modal-tournoi-membre-check').checked = false;
   document.getElementById('modal-tournoi-error').textContent = '';
-  tournoiPseudoVerifie = false;
   document.getElementById('modal-inscrire').classList.add('open');
 }
 function fermerModalTournoi() { document.getElementById('modal-inscrire').classList.remove('open'); }
 
 async function confirmerInscription() {
   var pseudo  = document.getElementById('modal-tournoi-pseudo').value.trim();
-  var checked = document.getElementById('modal-tournoi-membre-check').checked;
   var errorEl = document.getElementById('modal-tournoi-error');
   errorEl.textContent = '';
-  if (!pseudo)               { errorEl.textContent = '⚠ Saisis ton pseudo.'; return; }
-  if (!tournoiPseudoVerifie) { errorEl.textContent = '⚠ Vérifie ton pseudo d\'abord.'; return; }
-  if (!checked)              { errorEl.textContent = '⚠ Confirme que tu es membre de l\'équipe.'; return; }
+  if (!pseudo) { errorEl.textContent = '⚠ Saisis ton nom ou prénom.'; return; }
   try {
     var res = await fetch(WORKER_URL + '/inscrire-tournoi', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
