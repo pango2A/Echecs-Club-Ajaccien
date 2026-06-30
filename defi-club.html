@@ -642,7 +642,12 @@ function renderEvenements(data, container) {
       var dispHtml = '';
       if (d.disponibles && d.disponibles.length > 0) {
         dispHtml = '<div style="font-size:12px; color:var(--muted); margin-bottom:4px;">Disponibles :</div><div class="inscrits-list">';
-        d.disponibles.forEach(function(p) { dispHtml += '<span class="inscrit-chip"><i class="fas fa-user" style="font-size:10px"></i> ' + p + '</span>'; });
+        d.disponibles.forEach(function(p) {
+          dispHtml += '<span class="inscrit-chip">' +
+            '<i class="fas fa-user" style="font-size:10px"></i> ' + p +
+            ' <button onclick="quitterDefi(\'' + d.id + '\',\'' + p + '\')" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:11px;padding:0 0 0 4px;" title="Se retirer">✕</button>' +
+            '</span>';
+        });
         dispHtml += '</div>';
       }
       html += '<div class="event-card defi-card">' +
@@ -675,15 +680,18 @@ function renderEvenements(data, container) {
       html += '<div class="event-card tournoi-card">' +
         '<div class="event-header">' +
           '<div><div class="event-title">🏆 ' + t.nom + '</div>' +
-          '<div class="event-sub">' + t.cadence + ' · ' + t.variant + (t.rdv ? ' · ' + t.rdv : '') + '</div></div>' +
-          '<span class="event-badge badge-tournoi">Tournoi</span>' +
+          '<div class="event-sub">' + t.cadence + ' · ' + t.variant + (t.rdv || t.startAt ? ' · ' + (t.rdv || t.startAt) : '') + '</div>' +
+          '<div style="font-size:12px; color:var(--muted); margin-top:2px;"><i class="fas fa-user" style="font-size:10px"></i> Organisé par ' + (t.organisateur || '') + '</div>' +
+          '</div>' +
+          '<span class="event-badge badge-tournoi">' + (t.type === 'tournoi-ligne' ? (t.mode === 'swiss' ? 'Swiss' : 'Arena') : 'IRL') + '</span>' +
         '</div>' +
         (t.description ? '<div style="font-size:13px; color:var(--muted); margin-bottom:8px;">' + t.description + '</div>' : '') +
         inscHtml +
         '<div class="event-actions">' +
           (t.type === 'tournoi-ligne' ? '<a href="' + t.lichessUrl + '" target="_blank" class="d-btn primary"><i class="fas fa-external-link-alt"></i> Rejoindre</a>' : '<button class="d-btn success" onclick="ouvrirModalInscrire(\'' + t.id + '\',\'' + t.nom + '\')"><i class="fas fa-user-plus"></i> Je m\'inscris</button>') +
           '<button class="d-btn whatsapp" onclick="shareTournoiWhatsAppDirect(\'' + t.nom + '\',\'' + t.cadence + '\',\'' + (t.rdv||t.startAt||'') + '\',\'' + (t.lichessUrl||'') + '\')"><i class="fab fa-whatsapp"></i></button>' +
-          (t.inscrits && t.inscrits.length > 0 ? '<button class="d-btn" onclick="exportInscrits(\'' + t.id + '\',\'' + t.nom + '\')"><i class="fas fa-download"></i> Exporter</button>' : '') +
+          (t.inscrits && t.inscrits.length > 0 ? '<button class="d-btn" onclick="exportInscrits(\'' + t.id + '\',\'' + t.nom + '\',\'txt\')"><i class="fas fa-download"></i> TXT</button>' : '') +
+          (t.inscrits && t.inscrits.length > 0 ? '<button class="d-btn" onclick="exportInscrits(\'' + t.id + '\',\'' + t.nom + '\',\'csv\')"><i class="fas fa-file-csv"></i> CSV</button>' : '') +
         '</div>' +
       '</div>';
     });
@@ -1138,25 +1146,59 @@ function shareTournoiLigneWhatsApp() {
   window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
 }
 
-function exportInscrits(tournoiId, nom) {
+function exportInscrits(tournoiId, nom, format) {
   if (!cachedEvenements) return;
   var tournoi = cachedEvenements.tournois.find(function(t) { return t.id === tournoiId; });
   if (!tournoi || !tournoi.inscrits || tournoi.inscrits.length === 0) return;
-  var lines = ['Liste des inscrits - ' + nom, 'Export du ' + new Date().toLocaleDateString('fr-FR'), ''];
-  tournoi.inscrits.forEach(function(p, i) {
-    lines.push((i + 1) + '. ' + p + ' - https://lichess.org/@/' + p);
-  });
-  lines.push('', 'Total : ' + tournoi.inscrits.length + ' inscrit(s)');
-  var blob = new Blob([lines.join('\n')], { type: 'text/plain;charset=utf-8' });
-  var url  = URL.createObjectURL(blob);
-  var a    = document.createElement('a');
-  a.href = url;
-  a.download = 'inscrits-' + nom.replace(/[^a-z0-9]/gi, '-').toLowerCase() + '.txt';
-  document.body.appendChild(a);
-  a.click();
+
+  var date = new Date().toLocaleDateString('fr-FR');
+  var filename = 'inscrits-' + nom.replace(/[^a-z0-9]/gi, '-').toLowerCase();
+  var blob, url, a;
+
+  if (format === 'csv') {
+    var rows = [['N°', 'Nom', 'Profil Lichess']];
+    tournoi.inscrits.forEach(function(p, i) {
+      rows.push([(i + 1), p, 'https://lichess.org/@/' + p]);
+    });
+    rows.push(['', '', '']);
+    rows.push(['Export', date, '']);
+    rows.push(['Total', tournoi.inscrits.length + ' inscrit(s)', '']);
+    var csv = rows.map(function(r) { return r.map(function(c) { return '"' + String(c).replace(/"/g, '""') + '"'; }).join(','); }).join('\n');
+    blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8' });
+    filename += '.csv';
+  } else {
+    var lines = ['Liste des inscrits - ' + nom, 'Export du ' + date, ''];
+    tournoi.inscrits.forEach(function(p, i) { lines.push((i + 1) + '. ' + p + ' - https://lichess.org/@/' + p); });
+    lines.push('', 'Total : ' + tournoi.inscrits.length + ' inscrit(s)');
+    blob = new Blob([lines.join('\n')], { type: 'text/plain;charset=utf-8' });
+    filename += '.txt';
+  }
+
+  url = URL.createObjectURL(blob);
+  a   = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
+
+async function quitterDefi(defiId, nom) {
+  if (!confirm('Retirer "' + nom + '" de la liste des disponibles ?')) return;
+  try {
+    var res = await fetch(WORKER_URL + '/quitter-defi', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ defiId: defiId, pseudo: nom })
+    });
+    var data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Erreur');
+    currentETag = null; cachedEvenements = null;
+    loadEvenements();
+  } catch(e) {
+    alert('Erreur : ' + e.message);
+  }
+}
+
+
 
 
 // ===== CALENDRIER =====
