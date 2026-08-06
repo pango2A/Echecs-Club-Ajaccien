@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Défi Club — Échecs Club Ajaccien</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Nunito+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --roux:     #9B4A2E;
+      --roux-l:   #B55D3C;
+      --roux-d:   #7D3A22;
+      --cream:    #FDF3EC;
+      --cream-d:  #F0E0D0;
+      --gold:     #C4824A;
+      --gold-l:   #D4955E;
+      --wa:       #25D366;
+      --red:      #C0392B;
+      --surface:  #FFF8F4;
+      --border:   rgba(155,74,46,0.16);
+      --text:     #3A1A0C;
+      --muted:    #8A5E4A;
+      --radius:   10px;
+      --serif:    'Lora', Georgia, serif;
+      --sans:     'Nunito Sans', system-ui, sans-serif;
+    }
+
+    .defi-page { max-width: 1166px; margin: 0 auto; padding: 2rem 2rem 3rem; font-family: var(--sans); font-size: 18.5px; line-height: 1.5; background: var(--surface); min-height: 100vh; }
+    .defi-page h1 { font-family: var(--serif); font-size: 33px; font-weight: 600; color: var(--roux); display: flex; align-items: center; gap: 13px; margin-bottom: 0.4rem; letter-spacing: -0.01em; }
+    .defi-page .subtitle { font-size: 15.8px; color: var(--muted); margin-bottom: 1.6rem; font-style: italic; font-family: var(--serif); line-height: 1.3; }
+
+    .checker-rule { height: 10px; display: flex; margin-bottom: 1.6rem; border-radius: 3px; overflow: hidden; }
+    .checker-rule span { flex: 1; }
+    .checker-rule span:nth-child(odd) { background: var(--roux); }
+    .checker-rule span:nth-child(even) { background: var(--cream-d); }
+
+    /* Tabs */
+    .tabs { display: flex; gap: 5px; background: var(--cream-d); border-radius: 12px; padding: 5px; margin-bottom: 1.6rem; border: 0.5px solid var(--border); }
+    .tab { flex: 1; padding: 11px; font-size: 18.9px; font-family: var(--sans); font-weight: 500; border: none; border-radius: 9px; background: transparent; color: var(--muted); cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .tab:hover { color: var(--roux); }
+    .tab.active { background: var(--surface); color: var(--roux); box-shadow: 0 1px 4px rgba(155,74,46,0.15); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* Cards */
+    .d-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-bottom: 1.6rem; }
+    .d-section-title { font-family: var(--serif); font-size: 18.9px; font-weight: 600; color: var(--roux); letter-spacing: 0.01em; margin-bottom: 1.3rem; display: flex; align-items: center; gap: 10px; }
+    .d-section-title i { color: var(--gold); }
+    .d-section { margin-bottom: 1.3rem; }
+    .d-label { display: block; font-size: 15.8px; color: var(--muted); margin-bottom: 6px; font-weight: 500; }
+    .d-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    .d-input, .d-select, .d-textarea { width: 100%; padding: 11px 14px; font-size: 18.9px; font-family: var(--sans); border: 0.5px solid rgba(155,74,46,0.20); border-radius: 9px; background: var(--cream); color: var(--text); outline: none; transition: border-color 0.15s; }
+    .d-input:focus, .d-select:focus, .d-textarea:focus { border-color: var(--roux); background: #fff; }
+    .d-textarea { resize: vertical; min-height: 85px; }
+    .d-hint { font-size: 14.5px; color: var(--muted); margin-top: 5px; }
+
+    /* Checkbox membre */
+    .membre-check { display: flex; align-items: center; gap: 10px; margin-top: 0.95rem; font-size: 18.9px; color: var(--text); cursor: pointer; }
+    .membre-check input { width: 18px; height: 18px; cursor: pointer; accent-color: var(--roux); }
+
+    /* Buttons */
+    .d-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 11px 22px; font-size: 18.9px; font-family: var(--sans); border: 0.5px solid rgba(155,74,46,0.20); border-radius: 9px; background: transparent; color: var(--text); cursor: pointer; transition: background 0.15s, transform 0.1s; }
+    .d-btn:hover { background: var(--cream-d); }
+    .d-btn:active { transform: scale(0.98); }
+    .d-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .d-btn.full { width: 100%; padding: 15.4px; }
+    .d-btn.primary { background: var(--roux); color: #fff; border-color: var(--roux); }
+    .d-btn.primary:hover { background: var(--roux-l); }
+    .d-btn.success { background: var(--gold); color: #fff; border-color: var(--gold); }
+    .d-btn.success:hover { background: var(--gold-l); }
+    .d-btn.whatsapp { background: var(--wa); color: #fff; border-color: var(--wa); }
+    .d-btn.whatsapp:hover { background: #1ebe5d; }
+    .d-btn.danger { background: var(--red); color: #fff; border-color: var(--red); }
+
+    /* Status */
+    .worker-status { display: flex; align-items: center; gap: 10px; font-size: 15.8px; color: var(--muted); margin-bottom: 1.6rem; padding: 10px 15px; background: var(--cream-d); border-radius: 9px; border: 0.5px solid var(--border); }
+    .status-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--muted); flex-shrink: 0; }
+    .status-dot.ok  { background: #5A8A5A; }
+    .status-dot.err { background: var(--red); }
+
+    /* Événements en cours */
+    .event-card { border: 0.5px solid var(--border); border-radius: 12px; padding: 18px; margin-bottom: 13px; background: var(--surface); }
+    .event-card.defi-card  { border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; }
+    .event-card.tournoi-card { border-left: 4px solid var(--roux); border-radius: 0 12px 12px 0; }
+    .event-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 13px; margin-bottom: 10px; }
+    .event-title { font-family: var(--serif); font-size: 18.5px; font-weight: 600; color: var(--roux); }
+    .event-sub   { font-size: 15.8px; color: var(--muted); margin-top: 3px; }
+    .event-badge { font-size: 14.5px; font-weight: 600; padding: 3px 10px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
+    .badge-defi    { background: #F8E8DC; color: #7A3E22; }
+    .badge-tournoi { background: #E1E9E4; color: var(--roux); }
+    .inscrits-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+    .inscrit-chip { background: var(--cream); border: 0.5px solid var(--border); border-radius: 20px; padding: 3px 11px; font-size: 15.8px; color: var(--roux); }
+    .event-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 13px; }
+    .empty-state { text-align: center; padding: 2.6rem; color: var(--muted); font-size: 18.5px; }
+    .empty-state i { font-size: 42px; margin-bottom: 0.65rem; display: block; opacity: 0.3; }
+
+    /* Modal rejoindre */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(90,40,20,0.45); z-index: 100; align-items: center; justify-content: center; padding: 1.3rem; }
+    .modal-overlay.open { display: flex; }
+    .modal { background: var(--surface); border-radius: var(--radius); padding: 1.95rem; max-width: 546px; width: 100%; }
+    .modal h3 { font-family: var(--serif); font-size: 19.8px; font-weight: 600; color: var(--roux); margin-bottom: 1.3rem; }
+    .modal-btns { display: flex; gap: 10px; margin-top: 1.3rem; }
+
+    /* Résultat */
+    .result-banner { background: var(--roux); color: #fff; border-radius: 12px; padding: 17.6px 22px; margin-bottom: 1.3rem; display: flex; align-items: center; gap: 13px; font-size: 17px; font-weight: 600; font-family: var(--serif); }
+
+    .d-error   { font-size: 18.9px; color: var(--red);    margin-top: 10px; }
+    .d-success { font-size: 18.9px; color: var(--roux); margin-top: 8px; }
+    .d-muted   { font-size: 18.9px; color: var(--muted); }
+    .d-spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; }
+    .d-spinner.dark { border-color: rgba(155,74,46,0.15); border-top-color: var(--roux); }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Token field */
+    .token-field { position: relative; }
+    .token-field input { padding-right: 52px; }
+    .token-toggle { position: absolute; right: 13px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--muted); font-size: 16px; }
+
+    /* Calendrier */
+    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+    .cal-dow { font-size: 14.5px; font-weight: 600; color: var(--muted); text-align: center; padding: 5px 0; }
+    .cal-day { position: relative; aspect-ratio: 1; border-radius: 9px; border: 1px solid var(--border); background: var(--cream); display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: background 0.15s, transform 0.1s; font-size: 18.6px; color: var(--text); }
+    .cal-day:hover { background: var(--cream-d); transform: scale(1.04); }
+    .cal-day.empty { background: transparent; border: none; cursor: default; }
+    .cal-day.empty:hover { transform: none; background: transparent; }
+    .cal-day.has-defi { background: #FBF0E8; border-color: var(--gold); }
+    .cal-day.has-tournoi { background: #E1E9E4; border-color: var(--roux); cursor: pointer; }
+    .cal-day.has-tournoi:hover { background: #ECD8CE; }
+    .cal-day.is-today { box-shadow: 0 0 0 2px var(--gold) inset; font-weight: 700; }
+    .cal-day-num { font-size: 18.9px; }
+    .cal-day-badge { position: absolute; top: 4px; right: 4px; font-size: 11.9px; font-weight: 700; background: var(--gold); color: #fff; border-radius: 20px; min-width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; padding: 0 4px; }
+    .cal-day.has-tournoi .cal-day-badge { background: var(--roux); }
+    .cal-legend-dot { display: inline-block; width: 12px; height: 12px; border-radius: 4px; margin-right: 5px; vertical-align: middle; }
+    .cal-popover { position: fixed; z-index: 200; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(155,74,46,0.16); padding: 15px; max-width: 340px; font-size: 18.9px; pointer-events: none; }
+    .cal-popover-title { font-family: var(--serif); font-weight: 600; color: var(--roux); margin-bottom: 8px; font-size: 18.9px; }
+    .cal-popover-item { padding: 5px 0; border-top: 1px solid var(--border); color: var(--text); }
+    .cal-popover-item:first-of-type { border-top: none; }
+
+    @media (max-width: 480px) { .d-row2 { grid-template-columns: 1fr; } .tabs { flex-direction: column; } }
+  </style>
+</head>
+<body style="background: #F2E4D8; margin: 0;">
+
+<div class="defi-page">
+  <h1><i class="fas fa-chess-knight" style="color:var(--gold)"></i> Défi Club — ECA</h1>
+  <div class="subtitle">Échecs Club Ajaccien</div>
+  <div class="checker-rule"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+  <div class="worker-status">
+    <div class="status-dot" id="status-dot"></div>
+    <span id="status-text">Vérification du service…</span>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('en-cours')"><i class="fas fa-fire"></i> En cours</button>
+    <button class="tab" onclick="showTab('calendrier')"><i class="fas fa-calendar-alt"></i> Calendrier</button>
+    <button class="tab" onclick="showTab('defi')"><i class="fas fa-chess-knight"></i> Défi 1v1</button>
+    <button class="tab" onclick="showTab('tournoi')"><i class="fas fa-trophy"></i> Tournoi</button>
+  </div>
+
+  <!-- TAB : EN COURS -->
+  <div id="tab-en-cours" class="tab-panel active">
+    <div id="evenements-list">
+      <div class="empty-state"><i class="fas fa-chess"></i>Chargement…</div>
+    </div>
+  </div>
+
+  <!-- TAB : CALENDRIER -->
+  <div id="tab-calendrier" class="tab-panel">
+    <div class="d-card" style="padding: 1rem 1.4rem;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem;">
+        <button class="d-btn" onclick="calNavMonth(-1)"><i class="fas fa-chevron-left"></i></button>
+        <div id="cal-month-label" style="font-family: var(--serif); font-size:19.8px; font-weight:600; color:var(--roux);"></div>
+        <button class="d-btn" onclick="calNavMonth(1)"><i class="fas fa-chevron-right"></i></button>
+      </div>
+      <div id="cal-grid" class="cal-grid"></div>
+      <div style="display:flex; gap:14px; margin-top:12px; font-size:11px; color:var(--muted); flex-wrap:wrap;">
+        <span><span class="cal-legend-dot" style="background:var(--gold)"></span> Défi(s)</span>
+        <span><span class="cal-legend-dot" style="background:var(--roux)"></span> Tournoi</span>
+        <span><span class="cal-legend-dot" style="background:var(--bg); border:1px solid var(--border)"></span> Libre</span>
+      </div>
+    </div>
+
+    <!-- Popover détail jour (tooltip / clic maintenu) -->
+    <div id="cal-popover" class="cal-popover" style="display:none;"></div>
+  </div>
+
+  <!-- TAB : DÉFI 1V1 -->
+  <div id="tab-defi" class="tab-panel">
+    <div id="defi-form">
+      <div class="d-card">
+        <div class="d-section-title"><i class="fas fa-user"></i> Qui cherche un adversaire ?</div>
+        <div class="d-section">
+          <label class="d-label">Ton nom / prénom</label>
+          <input type="text" id="defi-pseudo" class="d-input" placeholder="ex : Jean Dupont" autocomplete="off" />
+        </div>
+      </div>
+
+      <div class="d-card">
+        <div class="d-section-title"><i class="fas fa-chess"></i> Paramètres de la partie</div>
+        <div class="d-row2 d-section">
+          <div>
+            <label class="d-label">Cadence</label>
+            <select id="defi-cadence" class="d-select" onchange="toggleCadencePerso()">
+              <option value="1+0">1 min — bullet</option>
+              <option value="2+0">2 min — bullet</option>
+              <option value="3+0">3 min — blitz</option>
+              <option value="5+2" selected>5+2 — blitz</option>
+              <option value="10+0">10 min — rapide</option>
+              <option value="15+10">15+10 — rapide</option>
+              <option value="30+0">30 min — classique</option>
+              <option value="60+30">1h+30s — longue</option>
+              <option value="90+30">1h30+30s — longue</option>
+              <option value="custom">Personnalisée…</option>
+            </select>
+            <div id="cadence-perso" style="display:none; margin-top:8px;">
+              <div class="d-row2">
+                <div>
+                  <label class="d-label">Durée (minutes)</label>
+                  <input type="number" id="cadence-min" class="d-input" placeholder="ex : 90" min="1" max="360" />
+                </div>
+                <div>
+                  <label class="d-label">Incrément (secondes)</label>
+                  <input type="number" id="cadence-inc" class="d-input" placeholder="ex : 30" min="0" max="60" value="0" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <label class="d-label">Variante</label>
+            <select id="defi-variant" class="d-select">
+              <option value="Standard" selected>Standard</option>
+              <option value="Chess 960">Chess 960</option>
+              <option value="Crazyhouse">Crazyhouse</option>
+              <option value="Antichess">Antichess</option>
+              <option value="Atomic">Atomic</option>
+              <option value="Horde">Horde</option>
+              <option value="King of the Hill">King of the Hill</option>
+              <option value="Three-check">Three-check</option>
+            </select>
+          </div>
+        </div>
+        <div class="d-row2 d-section">
+          <div>
+            <label class="d-label">Elo minimum <span style="font-weight:400">(optionnel)</span></label>
+            <input type="number" id="defi-elo-min" class="d-input" placeholder="ex : 1000" min="600" max="3000" step="50" />
+          </div>
+          <div>
+            <label class="d-label">Elo maximum <span style="font-weight:400">(optionnel)</span></label>
+            <input type="number" id="defi-elo-max" class="d-input" placeholder="ex : 1800" min="600" max="3000" step="50" />
+          </div>
+        </div>
+        <div class="d-row2">
+          <div>
+            <label class="d-label"><i class="fas fa-calendar-alt"></i> Date RDV</label>
+            <input type="date" id="defi-date" class="d-input" />
+          </div>
+          <div>
+            <label class="d-label"><i class="fas fa-clock"></i> Heure</label>
+            <input type="time" id="defi-time" class="d-input" value="19:00" />
+          </div>
+        </div>
+      </div>
+
+      <div class="d-card">
+        <div class="d-section-title"><i class="fas fa-comment"></i> Message (optionnel)</div>
+        <textarea id="defi-message" class="d-textarea" placeholder="Ex : Je serai au club à partir de 19h, partie amicale !"></textarea>
+      </div>
+
+      <button class="d-btn primary full" id="defi-submit-btn" onclick="lancerDefi()">
+        <i class="fas fa-chess-knight"></i> Lancer le défi et notifier le club
+      </button>
+      <div id="defi-error" class="d-error"></div>
+    </div>
+
+    <!-- Confirmation -->
+    <div id="defi-confirm" style="display:none;">
+      <div class="result-banner">
+        <i class="fas fa-check-circle"></i> Défi lancé ! Le club a été notifié.
+      </div>
+      <div class="d-card" style="text-align:center;">
+        <div id="defi-confirm-info" class="d-muted" style="margin-bottom:1rem;"></div>
+        <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
+          <button class="d-btn whatsapp" onclick="shareDefiWhatsApp()"><i class="fab fa-whatsapp"></i> Partager sur WhatsApp</button>
+          <button class="d-btn" onclick="resetDefi()"><i class="fas fa-plus"></i> Nouveau défi</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB : TOURNOI -->
+  <div id="tab-tournoi" class="tab-panel">
+    <div style="display:flex; gap:4px; margin-bottom:1.25rem;">
+      <button id="sub-tab-irl-btn" class="d-btn primary" style="flex:1;" onclick="showSubTab('irl')">
+        <i class="fas fa-trophy"></i> Tournoi IRL
+      </button>
+      <button id="sub-tab-ligne-btn" class="d-btn" style="flex:1;" onclick="showSubTab('ligne')">
+        <i class="fas fa-laptop"></i> Tournoi en ligne
+      </button>
+    </div>
+    <div id="sub-tab-irl">
+    <div id="tournoi-form">
+      <div class="d-card">
+        <div class="d-section-title"><i class="fas fa-key"></i> Identification leader</div>
+        <div class="d-section">
+          <label class="d-label">Ton token Lichess <span style="font-weight:400">(leaders uniquement)</span></label>
+          <div class="token-field">
+            <input type="password" id="tournoi-token" class="d-input" placeholder="lip_..." autocomplete="off" />
+            <button class="token-toggle" onclick="toggleToken('tournoi-token')"><i class="fas fa-eye"></i></button>
+          </div>
+          <div class="d-hint"><i class="fas fa-info-circle"></i> Génère un token sur lichess.org/account/security avec le scope <strong>team:lead</strong>. Il n'est jamais stocké.</div>
+        </div>
+        <button class="d-btn primary" id="verify-leader-btn" onclick="verifierLeader()">
+          <i class="fas fa-shield-alt"></i> Vérifier mon accès
+        </button>
+        <div id="leader-status" style="font-size:13px; margin-top:8px;"></div>
+      </div>
+
+      <div id="tournoi-fields" style="display:none;">
+        <div class="d-card">
+          <div class="d-section-title"><i class="fas fa-trophy"></i> Informations du tournoi</div>
+          <div class="d-section">
+            <label class="d-label">Nom du tournoi</label>
+            <input type="text" id="tournoi-nom" class="d-input" placeholder="ex : Tournoi mensuel ECA — Juillet" />
+          </div>
+          <div class="d-row2 d-section">
+            <div>
+              <label class="d-label">Cadence</label>
+              <select id="tournoi-cadence" class="d-select" onchange="toggleCadencePersoTournoi()">
+                <option value="1+0">1 min — bullet</option>
+                <option value="2+0">2 min — bullet</option>
+                <option value="3+0">3 min — blitz</option>
+                <option value="5+2" selected>5+2 — blitz</option>
+                <option value="10+0">10 min — rapide</option>
+                <option value="15+10">15+10 — rapide</option>
+                <option value="30+0">30 min — classique</option>
+                <option value="60+30">1h+30s — longue</option>
+                <option value="90+30">1h30+30s — longue</option>
+                <option value="custom-t">Personnalisée…</option>
+              </select>
+              <div id="cadence-perso-tournoi" style="display:none; margin-top:8px;">
+                <div class="d-row2">
+                  <div>
+                    <label class="d-label">Durée (minutes)</label>
+                    <input type="number" id="cadence-min-tournoi" class="d-input" placeholder="ex : 90" min="1" max="360" />
+                  </div>
+                  <div>
+                    <label class="d-label">Incrément (secondes)</label>
+                    <input type="number" id="cadence-inc-tournoi" class="d-input" placeholder="ex : 30" min="0" max="60" value="0" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <label class="d-label">Variante</label>
+              <select id="tournoi-variant" class="d-select">
+                <option value="Standard" selected>Standard</option>
+                <option value="Chess 960">Chess 960</option>
+                <option value="Crazyhouse">Crazyhouse</option>
+                <option value="Antichess">Antichess</option>
+                <option value="Atomic">Atomic</option>
+                <option value="Horde">Horde</option>
+              </select>
+            </div>
+          </div>
+          <div class="d-row2 d-section">
+            <div>
+              <label class="d-label"><i class="fas fa-calendar-alt"></i> Date</label>
+              <input type="date" id="tournoi-date" class="d-input" />
+            </div>
+            <div>
+              <label class="d-label"><i class="fas fa-clock"></i> Heure</label>
+              <input type="time" id="tournoi-time" class="d-input" value="19:00" />
+            </div>
+          </div>
+          <div>
+            <label class="d-label">Description (optionnelle)</label>
+            <textarea id="tournoi-desc" class="d-textarea" placeholder="Infos pratiques, format, règles…"></textarea>
+          </div>
+        </div>
+
+        <button class="d-btn primary full" id="tournoi-submit-btn" onclick="creerTournoi()">
+          <i class="fas fa-trophy"></i> Créer le tournoi et notifier le club
+        </button>
+        <div id="tournoi-error" class="d-error"></div>
+      </div>
+
+      <!-- Confirmation tournoi -->
+      <div id="tournoi-confirm" style="display:none;">
+        <div class="result-banner">
+          <i class="fas fa-trophy"></i> Tournoi créé ! Le club a été notifié.
+        </div>
+        <div class="d-card" style="text-align:center;">
+          <div id="tournoi-confirm-info" class="d-muted" style="margin-bottom:1rem;"></div>
+          <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
+            <button class="d-btn whatsapp" onclick="shareTournoiWhatsApp()"><i class="fab fa-whatsapp"></i> Partager sur WhatsApp</button>
+            <button class="d-btn" onclick="resetTournoi()"><i class="fas fa-plus"></i> Nouveau tournoi</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div><!-- fin sub-tab-irl -->
+
+    <!-- TOURNOI EN LIGNE -->
+    <div id="sub-tab-ligne" style="display:none;">
+      <div id="tournoi-ligne-form">
+        <div class="d-card">
+          <div class="d-section-title"><i class="fas fa-key"></i> Identification leader</div>
+          <div class="d-section">
+            <label class="d-label">Ton token Lichess <span style="font-weight:400">(leaders uniquement)</span></label>
+            <div class="token-field">
+              <input type="password" id="tournoi-ligne-token" class="d-input" placeholder="lip_..." autocomplete="off" />
+              <button class="token-toggle" onclick="toggleToken('tournoi-ligne-token')"><i class="fas fa-eye"></i></button>
+            </div>
+            <div class="d-hint"><i class="fas fa-info-circle"></i> Génère un token sur lichess.org/account/security avec les scopes <strong>team:lead</strong>, <strong>tournament:write</strong> et <strong>msg:write</strong>. Il n'est jamais stocké.</div>
+          </div>
+          <button class="d-btn primary" id="verify-leader-ligne-btn" onclick="verifierLeaderLigne()">
+            <i class="fas fa-shield-alt"></i> Vérifier mon accès
+          </button>
+          <div id="leader-ligne-status" style="font-size:13px; margin-top:8px;"></div>
+        </div>
+
+        <div id="tournoi-ligne-fields" style="display:none;">
+          <div class="d-card">
+            <div class="d-section-title"><i class="fas fa-laptop"></i> Parametres du tournoi en ligne</div>
+            <div class="d-section">
+              <label class="d-label">Mode</label>
+              <div style="display:flex; gap:8px;">
+                <button id="mode-arena-btn" class="d-btn primary" style="flex:1;" onclick="setMode('arena')"><i class="fas fa-fire"></i> Arena</button>
+                <button id="mode-swiss-btn" class="d-btn" style="flex:1;" onclick="setMode('swiss')"><i class="fas fa-chess-board"></i> Swiss</button>
+              </div>
+              <div class="d-hint" id="mode-hint">Arena : les joueurs jouent en continu pendant une duree fixee.</div>
+            </div>
+            <div class="d-section">
+              <label class="d-label">Nom du tournoi</label>
+              <input type="text" id="tournoi-ligne-nom" class="d-input" placeholder="ex : Tournoi ECA Juillet" />
+            </div>
+            <div class="d-row2 d-section">
+              <div>
+                <label class="d-label">Cadence</label>
+                <select id="tournoi-ligne-cadence" class="d-select" onchange="toggleCadencePersoLigne()">
+                  <option value="1+0">1 min</option>
+                  <option value="2+0">2 min</option>
+                  <option value="3+0">3 min</option>
+                  <option value="5+2" selected>5+2</option>
+                  <option value="10+0">10 min</option>
+                  <option value="15+10">15+10</option>
+                  <option value="30+0">30 min</option>
+                  <option value="custom-l">Personnalisee...</option>
+                </select>
+                <div id="cadence-perso-ligne" style="display:none; margin-top:8px;">
+                  <div class="d-row2">
+                    <div><label class="d-label">Minutes</label><input type="number" id="cadence-min-ligne" class="d-input" placeholder="10" min="1" max="60" /></div>
+                    <div><label class="d-label">Increment (s)</label><input type="number" id="cadence-inc-ligne" class="d-input" placeholder="0" min="0" max="60" value="0" /></div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label class="d-label">Variante</label>
+                <select id="tournoi-ligne-variant" class="d-select">
+                  <option value="Standard" selected>Standard</option>
+                  <option value="Chess 960">Chess 960</option>
+                  <option value="Crazyhouse">Crazyhouse</option>
+                  <option value="Antichess">Antichess</option>
+                  <option value="Atomic">Atomic</option>
+                  <option value="Horde">Horde</option>
+                  <option value="King of the Hill">King of the Hill</option>
+                  <option value="Three-check">Three-check</option>
+                </select>
+              </div>
+            </div>
+            <div class="d-row2 d-section">
+              <div>
+                <label class="d-label">Date et heure de debut</label>
+                <input type="datetime-local" id="tournoi-ligne-start" class="d-input" />
+              </div>
+              <div id="arena-duree-wrap">
+                <label class="d-label">Duree Arena (minutes)</label>
+                <input type="number" id="tournoi-ligne-duree" class="d-input" value="60" min="20" max="360" />
+              </div>
+              <div id="swiss-rondes-wrap" style="display:none;">
+                <label class="d-label">Nombre de rondes</label>
+                <input type="number" id="tournoi-ligne-rondes" class="d-input" value="7" min="3" max="20" />
+              </div>
+            </div>
+            <div>
+              <label class="d-label">Description (optionnelle)</label>
+              <textarea id="tournoi-ligne-desc" class="d-textarea" placeholder="Infos, regles, prix..."></textarea>
+            </div>
+          </div>
+          <button class="d-btn primary full" id="tournoi-ligne-submit-btn" onclick="creerTournoiLigne()">
+            <i class="fas fa-laptop"></i> Creer le tournoi en ligne
+          </button>
+          <div id="tournoi-ligne-error" class="d-error"></div>
+        </div>
+
+        <div id="tournoi-ligne-confirm" style="display:none;">
+          <div class="result-banner"><i class="fas fa-laptop"></i> Tournoi cree sur Lichess !</div>
+          <div class="d-card" style="text-align:center;">
+            <div id="tournoi-ligne-confirm-info" class="d-muted" style="margin-bottom:1rem;"></div>
+            <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
+              <a id="tournoi-ligne-link" href="#" target="_blank" class="d-btn primary"><i class="fas fa-external-link-alt"></i> Voir sur Lichess</a>
+              <button class="d-btn whatsapp" onclick="shareTournoiLigneWhatsApp()"><i class="fab fa-whatsapp"></i> Partager</button>
+              <button class="d-btn" onclick="resetTournoiLigne()"><i class="fas fa-plus"></i> Nouveau</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- fin sub-tab-ligne -->
+  </div>
+</div>
+
+<!-- MODAL : REJOINDRE UN DÉFI -->
+<div class="modal-overlay" id="modal-rejoindre">
+  <div class="modal">
+    <h3 id="modal-title">Se déclarer disponible</h3>
+    <div class="d-section">
+      <label class="d-label">Ton nom / prénom</label>
+      <input type="text" id="modal-pseudo" class="d-input" placeholder="ex : Jean Dupont" />
+    </div>
+    <div id="modal-error" class="d-error"></div>
+    <div class="modal-btns">
+      <button class="d-btn success full" onclick="confirmerRejoindre()"><i class="fas fa-handshake"></i> Confirmer</button>
+      <button class="d-btn" onclick="fermerModal()">Annuler</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL : S'INSCRIRE TOURNOI -->
+<div class="modal-overlay" id="modal-inscrire">
+  <div class="modal">
+    <h3 id="modal-tournoi-title">S'inscrire au tournoi</h3>
+    <div class="d-section">
+      <label class="d-label">Ton nom / prénom</label>
+      <input type="text" id="modal-tournoi-pseudo" class="d-input" placeholder="ex : Jean Dupont" />
+    </div>
+    <div id="modal-tournoi-error" class="d-error"></div>
+    <div class="modal-btns">
+      <button class="d-btn success full" onclick="confirmerInscription()"><i class="fas fa-user-plus"></i> S'inscrire</button>
+      <button class="d-btn" onclick="fermerModalTournoi()">Annuler</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const WORKER_URL = 'https://eca-defi-worker.scapa2a.workers.dev';
+const TEAM_ID    = 'defis-eca';
+
+// État global
+var currentDefiId        = null;
+var currentTournoiId     = null;
+var leaderToken          = null;
+var leaderUsername       = null;
+var lastCreatedDefi      = null;
+var lastCreatedTournoi   = null;
+
+// ETag pour éviter les lectures KV inutiles
+var currentETag          = null;
+var cachedEvenements     = null;
+
+// ── Init ──────────────────────────────────────────────────────────
+window.addEventListener('load', function() {
+  checkWorker();
+  loadEvenements();
+  // Rafraîchit toutes les 30 secondes — si rien n'a changé = 0 read KV grâce à l'ETag
+  setInterval(loadEvenements, 30000);
+});
+
+// ── Check worker — réutilise le cache ETag si disponible ──────────
+async function checkWorker() {
+  var dot  = document.getElementById('status-dot');
+  var text = document.getElementById('status-text');
+  try {
+    var headers = {};
+    if (currentETag) headers['If-None-Match'] = currentETag;
+    var res = await fetch(WORKER_URL + '/evenements', { headers: headers });
+    if (res.ok || res.status === 304) {
+      dot.classList.add('ok');
+      text.textContent = 'Service en ligne';
+      if (res.ok) {
+        currentETag = res.headers.get('ETag');
+        cachedEvenements = await res.json();
+      }
+    } else throw new Error();
+  } catch(e) {
+    dot.classList.add('err');
+    text.textContent = 'Service indisponible — contacte l\'administrateur';
+  }
+}
+
+// ── Tabs ──────────────────────────────────────────────────────────
+function showTab(name) {
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.closest('.tab').classList.add('active');
+  if (name === 'en-cours')   loadEvenements();
+  if (name === 'calendrier') { loadEvenements().then(renderCalendar); }
+}
+
+// ── Événements — ETag : 0 read KV si rien n'a changé ─────────────
+async function loadEvenements() {
+  var container = document.getElementById('evenements-list');
+  try {
+    var headers = {};
+    if (currentETag) headers['If-None-Match'] = currentETag;
+
+    var res = await fetch(WORKER_URL + '/evenements', { headers: headers });
+
+    // 304 = rien n'a changé, on réaffiche le cache sans toucher KV
+    if (res.status === 304 && cachedEvenements) {
+      renderEvenements(cachedEvenements, container);
+      return;
+    }
+
+    if (!res.ok) throw new Error('Erreur ' + res.status);
+
+    // Nouveau contenu — on met à jour le cache et l'ETag
+    currentETag      = res.headers.get('ETag');
+    cachedEvenements = await res.json();
+    renderEvenements(cachedEvenements, container);
+
+  } catch(e) {
+    container.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-circle"></i>Impossible de charger les événements.</div>';
+  }
+}
+
+function renderEvenements(data, container) {
+  var html = '';
+
+  if (data.defis && data.defis.length > 0) {
+    data.defis.forEach(function(d) {
+      var remaining = d.expiresAt - Date.now();
+      var h = Math.floor(remaining / 3600000);
+      var m = Math.floor((remaining % 3600000) / 60000);
+      var eloTxt = d.eloRange ? ' · Elo ' + d.eloRange : '';
+      var dispHtml = '';
+      if (d.disponibles && d.disponibles.length > 0) {
+        dispHtml = '<div style="font-size:12px; color:var(--muted); margin-bottom:4px;">Disponibles :</div><div class="inscrits-list">';
+        d.disponibles.forEach(function(p) {
+          dispHtml += '<span class="inscrit-chip">' +
+            '<i class="fas fa-user" style="font-size:10px"></i> ' + p +
+            ' <button onclick="quitterDefi(\'' + d.id + '\',\'' + p + '\')" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:11px;padding:0 0 0 4px;" title="Se retirer">✕</button>' +
+            '</span>';
+        });
+        dispHtml += '</div>';
+      }
+      html += '<div class="event-card defi-card">' +
+        '<div class="event-header">' +
+          '<div><div class="event-title">♟ Défi de ' + d.pseudo + '</div>' +
+          '<div class="event-sub">' + d.cadence + ' · ' + d.variant + eloTxt + (d.rdv ? ' · ' + d.rdv : '') + '</div></div>' +
+          '<span class="event-badge badge-defi">Expire dans ' + h + 'h' + String(m).padStart(2,'0') + '</span>' +
+        '</div>' +
+        (d.message ? '<div style="font-size:13px; color:var(--muted); font-style:italic; margin-bottom:8px;">« ' + d.message + ' »</div>' : '') +
+        dispHtml +
+        '<div class="event-actions">' +
+          '<button class="d-btn success" onclick="ouvrirModalRejoindre(\'' + d.id + '\',\'' + d.pseudo + '\')"><i class="fas fa-handshake"></i> Je suis disponible</button>' +
+          '<button class="d-btn whatsapp" onclick="shareDefiWhatsAppDirect(\'' + d.pseudo + '\',\'' + d.cadence + '\',\'' + (d.eloRange||'') + '\',\'' + (d.rdv||'') + '\')"><i class="fab fa-whatsapp"></i></button>' +
+          '<button class="d-btn danger" onclick="annulerEvenement(\'' + d.id + '\',\'' + d.pseudo + '\')"><i class="fas fa-times"></i> Annuler</button>' +
+        '</div>' +
+      '</div>';
+    });
+  }
+
+  if (data.tournois && data.tournois.length > 0) {
+    data.tournois.forEach(function(t) {
+      var inscHtml = '';
+      if (t.inscrits && t.inscrits.length > 0) {
+        inscHtml = '<div style="font-size:12px; color:var(--muted); margin-bottom:4px;">' + t.inscrits.length + ' inscrit(s) :</div><div class="inscrits-list">';
+        t.inscrits.forEach(function(p) { inscHtml += '<span class="inscrit-chip"><i class="fas fa-user" style="font-size:10px"></i> ' + p + '</span>'; });
+        inscHtml += '</div>';
+      } else {
+        inscHtml = '<div style="font-size:12px; color:var(--muted); margin-bottom:8px;">Aucun inscrit pour l\'instant.</div>';
+      }
+      html += '<div class="event-card tournoi-card">' +
+        '<div class="event-header">' +
+          '<div><div class="event-title">🏆 ' + t.nom + '</div>' +
+          '<div class="event-sub">' + t.cadence + ' · ' + t.variant + (t.rdv || t.startAt ? ' · ' + (t.rdv || t.startAt) : '') + '</div>' +
+          '<div style="font-size:12px; color:var(--muted); margin-top:2px;"><i class="fas fa-user" style="font-size:10px"></i> Organisé par ' + (t.organisateur || '') + '</div>' +
+          '</div>' +
+          '<span class="event-badge badge-tournoi">' + (t.type === 'tournoi-ligne' ? (t.mode === 'swiss' ? 'Swiss' : 'Arena') : 'IRL') + '</span>' +
+        '</div>' +
+        (t.description ? '<div style="font-size:13px; color:var(--muted); margin-bottom:8px;">' + t.description + '</div>' : '') +
+        inscHtml +
+        '<div class="event-actions">' +
+          (t.type === 'tournoi-ligne' ? '<a href="' + t.lichessUrl + '" target="_blank" class="d-btn primary"><i class="fas fa-external-link-alt"></i> Rejoindre</a>' : '<button class="d-btn success" onclick="ouvrirModalInscrire(\'' + t.id + '\',\'' + t.nom + '\')"><i class="fas fa-user-plus"></i> Je m\'inscris</button>') +
+          '<button class="d-btn whatsapp" onclick="shareTournoiWhatsAppDirect(\'' + t.nom + '\',\'' + t.cadence + '\',\'' + (t.rdv||t.startAt||'') + '\',\'' + (t.lichessUrl||'') + '\')"><i class="fab fa-whatsapp"></i></button>' +
+          (t.inscrits && t.inscrits.length > 0 ? '<button class="d-btn" onclick="exportInscrits(\'' + t.id + '\',\'' + t.nom + '\',\'txt\')"><i class="fas fa-download"></i> TXT</button>' : '') +
+          (t.inscrits && t.inscrits.length > 0 ? '<button class="d-btn" onclick="exportInscrits(\'' + t.id + '\',\'' + t.nom + '\',\'csv\')"><i class="fas fa-file-csv"></i> CSV</button>' : '') +
+        '</div>' +
+      '</div>';
+    });
+  }
+
+  if (!html) {
+    html = '<div class="empty-state"><i class="fas fa-chess"></i>Aucun événement en cours.<br><span style="font-size:12px;">Lance un défi ou crée un tournoi depuis les onglets ci-dessus.</span></div>';
+  }
+
+  container.innerHTML = html;
+}
+
+// ── Leader ────────────────────────────────────────────────────────
+async function verifierLeader() {
+  var token    = document.getElementById('tournoi-token').value.trim();
+  var statusEl = document.getElementById('leader-status');
+  var btn      = document.getElementById('verify-leader-btn');
+  if (!token) { statusEl.textContent = '⚠ Saisis ton token.'; statusEl.style.color = 'var(--orange)'; return; }
+  btn.disabled = true;
+  btn.innerHTML = '<span class="d-spinner"></span> Vérification…';
+  statusEl.textContent = '';
+  try {
+    var res  = await fetch(WORKER_URL + '/verifier-leader', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token: token })
+    });
+    var data = await res.json();
+    if (data.isLeader) {
+      leaderToken    = token;
+      leaderUsername = data.username;
+      statusEl.style.color = 'var(--roux)';
+      statusEl.textContent = '✓ Accès confirmé — bonjour ' + data.username + ' !';
+      document.getElementById('tournoi-fields').style.display = 'block';
+    } else {
+      statusEl.style.color = 'var(--red)';
+      statusEl.textContent = '✗ ' + (data.error || 'Tu n\'es pas leader de l\'équipe ' + TEAM_ID + '.');
+    }
+  } catch(e) {
+    statusEl.style.color = 'var(--red)';
+    statusEl.textContent = '✗ Erreur : ' + e.message;
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-shield-alt"></i> Vérifier mon accès';
+  }
+}
+
+function toggleToken(id) {
+  var input = document.getElementById(id);
+  input.type = input.type === 'password' ? 'text' : 'password';
+}
+
+// ── Lancer défi 1v1 ──────────────────────────────────────────────
+async function lancerDefi() {
+  var errorEl = document.getElementById('defi-error');
+  errorEl.textContent = '';
+  var pseudo  = document.getElementById('defi-pseudo').value.trim();
+  var eloMin  = document.getElementById('defi-elo-min').value;
+  var eloMax  = document.getElementById('defi-elo-max').value;
+  if (!pseudo) { errorEl.textContent = '⚠ Saisis ton nom ou prénom.'; return; }
+  if ((eloMin && !eloMax) || (!eloMin && eloMax)) { errorEl.textContent = '⚠ Remplis les deux champs Elo ou laisse-les vides.'; return; }
+  if (eloMin && eloMax && parseInt(eloMin) >= parseInt(eloMax)) { errorEl.textContent = '⚠ Elo minimum doit être inférieur au maximum.'; return; }
+
+  var btn = document.getElementById('defi-submit-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="d-spinner"></span> Envoi en cours…';
+
+  var cadence = getCadenceValue();
+  if (!cadence) { errorEl.textContent = '⚠ Saisis la durée de la cadence personnalisée.'; return; }
+  var variant = document.getElementById('defi-variant').value;
+  var date    = document.getElementById('defi-date').value;
+  var time    = document.getElementById('defi-time').value;
+  var message = document.getElementById('defi-message').value.trim();
+  var rdv = '';
+  if (date) {
+    var d = new Date(date + 'T' + time);
+    rdv = 'RDV IRL : ' + d.toLocaleDateString('fr-FR', { weekday:'long', day:'numeric', month:'long' }) + ' à ' + time;
+  }
+
+  try {
+    var res = await fetch(WORKER_URL + '/defi-1v1', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ pseudo, cadence, variant, eloRange: (eloMin && eloMax) ? eloMin + '–' + eloMax : null, rdv, message, dateISO: date || null })
+    });
+    var data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Erreur ' + res.status);
+
+    // Invalide le cache ETag pour forcer un rechargement
+    currentETag = null;
+    cachedEvenements = null;
+
+    lastCreatedDefi = { pseudo, cadence, variant, eloRange: (eloMin && eloMax) ? eloMin+'–'+eloMax : null, rdv, message };
+    var info = pseudo + ' cherche un adversaire en ' + cadence + ' ' + variant;
+    if (eloMin && eloMax) info += ' (Elo ' + eloMin + '–' + eloMax + ')';
+    if (rdv) info += '\n' + rdv;
+    document.getElementById('defi-confirm-info').textContent = info;
+    document.getElementById('defi-form').style.display    = 'none';
+    document.getElementById('defi-confirm').style.display = 'block';
+    loadEvenements();
+  } catch(e) {
+    errorEl.textContent = '⚠ ' + e.message;
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-chess-knight"></i> Lancer le défi et notifier le club';
+  }
+}
+
+function toggleCadencePerso() {
+  var val = document.getElementById('defi-cadence').value;
+  document.getElementById('cadence-perso').style.display = val === 'custom' ? 'block' : 'none';
+}
+
+function getCadenceValue() {
+  var val = document.getElementById('defi-cadence').value;
+  if (val !== 'custom') return val;
+  var min = document.getElementById('cadence-min').value;
+  var inc = document.getElementById('cadence-inc').value || '0';
+  if (!min || parseInt(min) < 1) return null;
+  // Format lisible : 90min -> "1h30" etc.
+  var h = Math.floor(parseInt(min) / 60);
+  var m = parseInt(min) % 60;
+  var label = h > 0 ? h + 'h' + (m > 0 ? m + 'min' : '') : m + 'min';
+  if (parseInt(inc) > 0) label += '+' + inc + 's';
+  return label;
+}
+
+function resetDefi() {
+  document.getElementById('defi-form').style.display    = 'block';
+  document.getElementById('defi-confirm').style.display = 'none';
+  document.getElementById('defi-pseudo').value = '';
+  document.getElementById('defi-elo-min').value = '';
+  document.getElementById('defi-elo-max').value = '';
+  document.getElementById('defi-message').value = '';
+  document.getElementById('defi-error').textContent = '';
+  document.getElementById('defi-cadence').value = '5+2';
+  document.getElementById('cadence-perso').style.display = 'none';
+  document.getElementById('cadence-min').value = '';
+  document.getElementById('cadence-inc').value = '0';
+}
+
+// ── Créer tournoi ─────────────────────────────────────────────────
+async function creerTournoi() {
+  var errorEl = document.getElementById('tournoi-error');
+  errorEl.textContent = '';
+  var nom  = document.getElementById('tournoi-nom').value.trim();
+  var date = document.getElementById('tournoi-date').value;
+  var time = document.getElementById('tournoi-time').value;
+  if (!nom)  { errorEl.textContent = '⚠ Donne un nom au tournoi.'; return; }
+  if (!date) { errorEl.textContent = '⚠ Indique la date du tournoi.'; return; }
+
+  var btn = document.getElementById('tournoi-submit-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="d-spinner"></span> Création…';
+
+  var cadence = getCadenceTournoiValue();
+  if (!cadence) { errorEl.textContent = '⚠ Saisis la durée de la cadence personnalisée.'; return; }
+  var variant = document.getElementById('tournoi-variant').value;
+  var desc    = document.getElementById('tournoi-desc').value.trim();
+  var rdv = '';
+  if (date) {
+    var d = new Date(date + 'T' + time);
+    rdv = d.toLocaleDateString('fr-FR', { weekday:'long', day:'numeric', month:'long' }) + ' à ' + time;
+  }
+
+  try {
+    var res = await fetch(WORKER_URL + '/creer-tournoi', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token: leaderToken, nom, cadence, variant, rdv, description: desc, dateISO: date })
+    });
+    var data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Erreur ' + res.status);
+
+    // Invalide le cache ETag
+    currentETag = null;
+    cachedEvenements = null;
+
+    lastCreatedTournoi = { nom, cadence, variant, rdv, description: desc };
+    var info = nom + '\n' + cadence + ' · ' + variant + (rdv ? '\n' + rdv : '');
+    if (data.defisAnnules > 0) info += '\n\n' + data.defisAnnules + ' défi(s) prévu(s) ce jour ont été annulés.';
+    document.getElementById('tournoi-confirm-info').textContent = info;
+    document.getElementById('tournoi-form').style.display    = 'none';
+    document.getElementById('tournoi-confirm').style.display = 'block';
+    loadEvenements();
+  } catch(e) {
+    errorEl.textContent = '⚠ ' + e.message;
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-trophy"></i> Créer le tournoi et notifier le club';
+  }
+}
+
+function toggleCadencePersoTournoi() {
+  var val = document.getElementById('tournoi-cadence').value;
+  document.getElementById('cadence-perso-tournoi').style.display = val === 'custom-t' ? 'block' : 'none';
+}
+
+function getCadenceTournoiValue() {
+  var val = document.getElementById('tournoi-cadence').value;
+  if (val !== 'custom-t') return val;
+  var min = document.getElementById('cadence-min-tournoi').value;
+  var inc = document.getElementById('cadence-inc-tournoi').value || '0';
+  if (!min || parseInt(min) < 1) return null;
+  var h = Math.floor(parseInt(min) / 60);
+  var m = parseInt(min) % 60;
+  var label = h > 0 ? h + 'h' + (m > 0 ? m + 'min' : '') : m + 'min';
+  if (parseInt(inc) > 0) label += '+' + inc + 's';
+  return label;
+}
+
+function resetTournoi() {
+  document.getElementById('tournoi-form').style.display    = 'block';
+  document.getElementById('tournoi-confirm').style.display = 'none';
+  document.getElementById('tournoi-nom').value  = '';
+  document.getElementById('tournoi-desc').value = '';
+  document.getElementById('tournoi-error').textContent = '';
+  document.getElementById('tournoi-cadence').value = '5+2';
+  document.getElementById('cadence-perso-tournoi').style.display = 'none';
+  document.getElementById('cadence-min-tournoi').value = '';
+  document.getElementById('cadence-inc-tournoi').value = '0';
+}
+
+// ── Modals rejoindre ──────────────────────────────────────────────
+function ouvrirModalRejoindre(defiId, pseudo) {
+  currentDefiId = defiId;
+  document.getElementById('modal-title').textContent = 'Se déclarer disponible contre ' + pseudo;
+  document.getElementById('modal-pseudo').value = '';
+  document.getElementById('modal-error').textContent = '';
+  document.getElementById('modal-rejoindre').classList.add('open');
+}
+function fermerModal() { document.getElementById('modal-rejoindre').classList.remove('open'); }
+
+async function confirmerRejoindre() {
+  var pseudo  = document.getElementById('modal-pseudo').value.trim();
+  var errorEl = document.getElementById('modal-error');
+  errorEl.textContent = '';
+  if (!pseudo) { errorEl.textContent = '⚠ Saisis ton nom ou prénom.'; return; }
+  try {
+    var res = await fetch(WORKER_URL + '/rejoindre-defi', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ defiId: currentDefiId, pseudo })
+    });
+    var data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Erreur');
+    currentETag = null; cachedEvenements = null;
+    fermerModal();
+    loadEvenements();
+    showTab('en-cours');
+  } catch(e) { errorEl.textContent = '⚠ ' + e.message; }
+}
+
+// ── Modals inscrire tournoi ───────────────────────────────────────
+function ouvrirModalInscrire(tournoiId, nom) {
+  currentTournoiId = tournoiId;
+  document.getElementById('modal-tournoi-title').textContent = 'S\'inscrire : ' + nom;
+  document.getElementById('modal-tournoi-pseudo').value = '';
+  document.getElementById('modal-tournoi-error').textContent = '';
+  document.getElementById('modal-inscrire').classList.add('open');
+}
+function fermerModalTournoi() { document.getElementById('modal-inscrire').classList.remove('open'); }
+
+async function confirmerInscription() {
+  var pseudo  = document.getElementById('modal-tournoi-pseudo').value.trim();
+  var errorEl = document.getElementById('modal-tournoi-error');
+  errorEl.textContent = '';
+  if (!pseudo) { errorEl.textContent = '⚠ Saisis ton nom ou prénom.'; return; }
+  try {
+    var res = await fetch(WORKER_URL + '/inscrire-tournoi', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ tournoiId: currentTournoiId, pseudo })
+    });
+    var data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Erreur');
+    currentETag = null; cachedEvenements = null;
+    fermerModalTournoi();
+    loadEvenements();
+  } catch(e) { errorEl.textContent = '⚠ ' + e.message; }
+}
+
+// ── WhatsApp ──────────────────────────────────────────────────────
+function shareDefiWhatsApp() {
+  if (!lastCreatedDefi) return;
+  var d = lastCreatedDefi;
+  shareDefiWhatsAppDirect(d.pseudo, d.cadence, d.eloRange||'', d.rdv||'');
+}
+function shareDefiWhatsAppDirect(pseudo, cadence, eloRange, rdv) {
+  var text = '♟ *Défi IRL — Échecs Club Ajaccien*\n' + pseudo + ' cherche un adversaire !\nCadence : ' + cadence + '\n';
+  if (eloRange) text += 'Niveau : ' + eloRange + ' Elo\n';
+  if (rdv)      text += rdv + '\n';
+  if (lichessUrl) text += '\nRejoins : ' + lichessUrl;
+  else text += '\nInscris-toi sur echecs-club-ajaccien.com/defi-club.html';
+  window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+}
+function shareTournoiWhatsApp() {
+  if (!lastCreatedTournoi) return;
+  var t = lastCreatedTournoi;
+  shareTournoiWhatsAppDirect(t.nom, t.cadence, t.rdv||'');
+}
+function shareTournoiWhatsAppDirect(nom, cadence, rdv, lichessUrl) {
+  var text = '🏆 *Tournoi IRL — Échecs Club Ajaccien*\n' + nom + '\nCadence : ' + cadence + '\n';
+  if (rdv) text += rdv + '\n';
+  if (lichessUrl) text += '\nRejoins : ' + lichessUrl;
+  else text += '\nInscris-toi sur echecs-club-ajaccien.com/defi-club.html';
+  window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+}
+
+// ── Annuler un événement ──────────────────────────────────────────
+async function annulerEvenement(id, createur) {
+  var pseudo = prompt('Saisis ton nom pour confirmer l\'annulation :');
+  if (!pseudo) return;
+  if (pseudo.toLowerCase() !== createur.toLowerCase()) {
+    alert('Seul le créateur (' + createur + ') peut annuler cet événement.');
+    return;
+  }
+  try {
+    var res = await fetch(WORKER_URL + '/annuler-evenement', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, pseudo })
+    });
+    var data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Erreur ' + res.status);
+    currentETag = null; cachedEvenements = null;
+    loadEvenements();
+  } catch(e) { alert('Erreur : ' + e.message); }
+}
+
+
+// Sub-tabs tournoi
+var tournoiMode = 'arena';
+var leaderTokenLigne = null;
+var lastCreatedTournoiLigne = null;
+
+function showSubTab(tab) {
+  document.getElementById('sub-tab-irl').style.display   = tab === 'irl'   ? 'block' : 'none';
+  document.getElementById('sub-tab-ligne').style.display = tab === 'ligne' ? 'block' : 'none';
+  document.getElementById('sub-tab-irl-btn').className   = 'd-btn' + (tab === 'irl'   ? ' primary' : '');
+  document.getElementById('sub-tab-ligne-btn').className = 'd-btn' + (tab === 'ligne' ? ' primary' : '');
+}
+
+function setMode(mode) {
+  tournoiMode = mode;
+  document.getElementById('mode-arena-btn').className = 'd-btn' + (mode === 'arena' ? ' primary' : '');
+  document.getElementById('mode-swiss-btn').className = 'd-btn' + (mode === 'swiss' ? ' primary' : '');
+  document.getElementById('mode-hint').textContent = mode === 'arena'
+    ? 'Arena : les joueurs jouent en continu pendant une duree fixee.'
+    : 'Swiss : rondes programmees, chaque joueur affronte un adversaire de meme niveau.';
+  document.getElementById('arena-duree-wrap').style.display  = mode === 'arena' ? 'block' : 'none';
+  document.getElementById('swiss-rondes-wrap').style.display = mode === 'swiss' ? 'block' : 'none';
+}
+
+function toggleCadencePersoLigne() {
+  var val = document.getElementById('tournoi-ligne-cadence').value;
+  document.getElementById('cadence-perso-ligne').style.display = val === 'custom-l' ? 'block' : 'none';
+}
+
+function getCadenceLigneValue() {
+  var val = document.getElementById('tournoi-ligne-cadence').value;
+  if (val !== 'custom-l') return val;
+  var min = document.getElementById('cadence-min-ligne').value;
+  var inc = document.getElementById('cadence-inc-ligne').value || '0';
+  if (!min || parseInt(min) < 1) return null;
+  return min + '+' + inc;
+}
+
+async function verifierLeaderLigne() {
+  var token    = document.getElementById('tournoi-ligne-token').value.trim();
+  var statusEl = document.getElementById('leader-ligne-status');
+  var btn      = document.getElementById('verify-leader-ligne-btn');
+  if (!token) { statusEl.textContent = 'Saisis ton token.'; statusEl.style.color = 'var(--orange)'; return; }
+  btn.disabled = true;
+  btn.innerHTML = '<span class="d-spinner"></span> Verification...';
+  try {
+    var res  = await fetch(WORKER_URL + '/verifier-leader', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token: token })
+    });
+    var data = await res.json();
+    if (data.isLeader) {
+      leaderTokenLigne = token;
+      statusEl.style.color = 'var(--roux)';
+      statusEl.textContent = 'Acces confirme - bonjour ' + data.username + ' !';
+      document.getElementById('tournoi-ligne-fields').style.display = 'block';
+    } else {
+      statusEl.style.color = 'var(--red)';
+      statusEl.textContent = data.error || 'Tu n\'es pas leader de l\'equipe.';
+    }
+  } catch(e) {
+    statusEl.style.color = 'var(--red)';
+    statusEl.textContent = 'Erreur : ' + e.message;
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-shield-alt"></i> Vérifier mon accès';
+  }
+}
+
+async function creerTournoiLigne() {
+  var errorEl = document.getElementById('tournoi-ligne-error');
+  errorEl.textContent = '';
+  var nom     = document.getElementById('tournoi-ligne-nom').value.trim();
+  var cadence = getCadenceLigneValue();
+  var startAt = document.getElementById('tournoi-ligne-start').value;
+  if (!nom)     { errorEl.textContent = 'Donne un nom au tournoi.'; return; }
+  if (!cadence) { errorEl.textContent = 'Saisis la cadence.'; return; }
+  if (!startAt) { errorEl.textContent = 'Indique la date et heure de debut.'; return; }
+  var btn = document.getElementById('tournoi-ligne-submit-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="d-spinner"></span> Creation sur Lichess...';
+  var variant = document.getElementById('tournoi-ligne-variant').value;
+  var desc    = document.getElementById('tournoi-ligne-desc').value.trim();
+  var duree   = document.getElementById('tournoi-ligne-duree').value   || 60;
+  var rondes  = document.getElementById('tournoi-ligne-rondes').value  || 7;
+  try {
+    var res = await fetch(WORKER_URL + '/creer-tournoi-ligne', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        token: leaderTokenLigne, mode: tournoiMode,
+        nom: nom, cadence: cadence, variant: variant,
+        startAt: startAt, description: desc,
+        duree: parseInt(duree), nbRounds: parseInt(rondes)
+      })
+    });
+    var data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Erreur ' + res.status);
+    currentETag = null; cachedEvenements = null;
+    lastCreatedTournoiLigne = { nom: nom, cadence: cadence, lichessUrl: data.lichessUrl, startAt: startAt };
+    document.getElementById('tournoi-ligne-link').href = data.lichessUrl;
+    document.getElementById('tournoi-ligne-confirm-info').textContent = nom + ' - ' + cadence + ' - ' + (tournoiMode === 'arena' ? 'Arena' : 'Swiss') + (data.defisAnnules > 0 ? ' (' + data.defisAnnules + ' defi(s) annule(s) ce jour)' : '');
+    document.getElementById('tournoi-ligne-form').style.display    = 'none';
+    document.getElementById('tournoi-ligne-confirm').style.display = 'block';
+    loadEvenements();
+  } catch(e) {
+    errorEl.textContent = e.message;
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-laptop"></i> Creer le tournoi en ligne';
+  }
+}
+
+function resetTournoiLigne() {
+  document.getElementById('tournoi-ligne-form').style.display    = 'block';
+  document.getElementById('tournoi-ligne-confirm').style.display = 'none';
+  document.getElementById('tournoi-ligne-nom').value   = '';
+  document.getElementById('tournoi-ligne-desc').value  = '';
+  document.getElementById('tournoi-ligne-start').value = '';
+  document.getElementById('tournoi-ligne-error').textContent = '';
+}
+
+function shareTournoiLigneWhatsApp() {
+  if (!lastCreatedTournoiLigne) return;
+  var t = lastCreatedTournoiLigne;
+  var text = 'Tournoi en ligne - Echecs Club Ajaccien\n' + t.nom + '\nCadence : ' + t.cadence;
+  if (t.startAt) text += '\nDebut : ' + new Date(t.startAt).toLocaleString('fr-FR');
+  text += '\nRejoins : ' + t.lichessUrl;
+  window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+}
+
+function exportInscrits(tournoiId, nom, format) {
+  if (!cachedEvenements) return;
+  var tournoi = cachedEvenements.tournois.find(function(t) { return t.id === tournoiId; });
+  if (!tournoi || !tournoi.inscrits || tournoi.inscrits.length === 0) return;
+
+  var date = new Date().toLocaleDateString('fr-FR');
+  var filename = 'inscrits-' + nom.replace(/[^a-z0-9]/gi, '-').toLowerCase();
+  var blob, url, a;
+
+  if (format === 'csv') {
+    var rows = [['N°', 'Nom', 'Profil Lichess']];
+    tournoi.inscrits.forEach(function(p, i) {
+      rows.push([(i + 1), p, 'https://lichess.org/@/' + p]);
+    });
+    rows.push(['', '', '']);
+    rows.push(['Export', date, '']);
+    rows.push(['Total', tournoi.inscrits.length + ' inscrit(s)', '']);
+    var csv = rows.map(function(r) { return r.map(function(c) { return '"' + String(c).replace(/"/g, '""') + '"'; }).join(','); }).join('\n');
+    blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8' });
+    filename += '.csv';
+  } else {
+    var lines = ['Liste des inscrits - ' + nom, 'Export du ' + date, ''];
+    tournoi.inscrits.forEach(function(p, i) { lines.push((i + 1) + '. ' + p + ' - https://lichess.org/@/' + p); });
+    lines.push('', 'Total : ' + tournoi.inscrits.length + ' inscrit(s)');
+    blob = new Blob([lines.join('\n')], { type: 'text/plain;charset=utf-8' });
+    filename += '.txt';
+  }
+
+  url = URL.createObjectURL(blob);
+  a   = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+async function quitterDefi(defiId, nom) {
+  if (!confirm('Retirer "' + nom + '" de la liste des disponibles ?')) return;
+  try {
+    var res = await fetch(WORKER_URL + '/quitter-defi', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ defiId: defiId, pseudo: nom })
+    });
+    var data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Erreur');
+    currentETag = null; cachedEvenements = null;
+    loadEvenements();
+  } catch(e) {
+    alert('Erreur : ' + e.message);
+  }
+}
+
+
+
+
+// ===== CALENDRIER =====
+var calCurrentMonth = new Date().getMonth();
+var calCurrentYear  = new Date().getFullYear();
+var calPopoverTimer = null;
+
+function calNavMonth(delta) {
+  calCurrentMonth += delta;
+  if (calCurrentMonth > 11) { calCurrentMonth = 0; calCurrentYear++; }
+  if (calCurrentMonth < 0)  { calCurrentMonth = 11; calCurrentYear--; }
+  renderCalendar();
+}
+
+function getEventDateKey(item) {
+  // Renvoie YYYY-MM-DD a partir du champ dateISO en priorite, sinon startAt (tournoi en ligne)
+  var raw = item.dateISO || item.startAt || null;
+  if (!raw) return null;
+  var m = String(raw).match(/^\d{4}-\d{2}-\d{2}/);
+  return m ? m[0] : null;
+}
+
+function renderCalendar() {
+  var grid  = document.getElementById('cal-grid');
+  var label = document.getElementById('cal-month-label');
+  if (!grid || !cachedEvenements) return;
+
+  var moisNoms = ['Janvier','Fevrier','Mars','Avril','Mai','Juin','Juillet','Aout','Septembre','Octobre','Novembre','Decembre'];
+  label.textContent = moisNoms[calCurrentMonth] + ' ' + calCurrentYear;
+
+  // Regroupe les evenements par date
+  var byDate = {};
+  (cachedEvenements.defis || []).forEach(function(d) {
+    var key = getEventDateKey(d);
+    if (!key) return;
+    if (!byDate[key]) byDate[key] = { defis: [], tournois: [] };
+    byDate[key].defis.push(d);
+  });
+  (cachedEvenements.tournois || []).forEach(function(t) {
+    var key = getEventDateKey(t);
+    if (!key) return;
+    if (!byDate[key]) byDate[key] = { defis: [], tournois: [] };
+    byDate[key].tournois.push(t);
+  });
+
+  var firstDay = new Date(calCurrentYear, calCurrentMonth, 1);
+  var startOffset = (firstDay.getDay() + 6) % 7; // lundi = 0
+  var daysInMonth = new Date(calCurrentYear, calCurrentMonth + 1, 0).getDate();
+  var todayKey = new Date().toISOString().slice(0, 10);
+
+  var html = '';
+  ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'].forEach(function(d) { html += '<div class="cal-dow">' + d + '</div>'; });
+
+  for (var i = 0; i < startOffset; i++) html += '<div class="cal-day empty"></div>';
+
+  for (var day = 1; day <= daysInMonth; day++) {
+    var dateKey = calCurrentYear + '-' + String(calCurrentMonth + 1).padStart(2,'0') + '-' + String(day).padStart(2,'0');
+    var dayData = byDate[dateKey];
+    var hasTournoi = dayData && dayData.tournois.length > 0;
+    var hasDefi     = dayData && dayData.defis.length > 0 && !hasTournoi;
+    var count = dayData ? (dayData.defis.length + dayData.tournois.length) : 0;
+    var cls = 'cal-day' + (hasTournoi ? ' has-tournoi' : (hasDefi ? ' has-defi' : '')) + (dateKey === todayKey ? ' is-today' : '');
+
+    html += '<div class="' + cls + '" data-date="' + dateKey + '" ' +
+      'onmouseenter="calShowPopover(event,\'' + dateKey + '\')" onmouseleave="calHidePopover()" ' +
+      'onmousedown="calPopoverTouch(event,\'' + dateKey + '\')" onmouseup="calHidePopover()" ' +
+      'onclick="calDayClick(\'' + dateKey + '\')">' +
+      '<span class="cal-day-num">' + day + '</span>' +
+      (count > 0 ? '<span class="cal-day-badge">' + count + '</span>' : '') +
+      '</div>';
+  }
+
+  grid.innerHTML = html;
+}
+
+function calShowPopover(evt, dateKey) {
+  calBuildPopover(evt, dateKey);
+}
+
+function calPopoverTouch(evt, dateKey) {
+  calPopoverTimer = setTimeout(function() { calBuildPopover(evt, dateKey); }, 300);
+}
+
+function calBuildPopover(evt, dateKey) {
+  if (!cachedEvenements) return;
+  var defis    = (cachedEvenements.defis    || []).filter(function(d) { return getEventDateKey(d) === dateKey; });
+  var tournois = (cachedEvenements.tournois || []).filter(function(t) { return getEventDateKey(t) === dateKey; });
+  if (defis.length === 0 && tournois.length === 0) return;
+
+  var pop = document.getElementById('cal-popover');
+  var html = '<div class="cal-popover-title">' + new Date(dateKey).toLocaleDateString('fr-FR', { weekday:'long', day:'numeric', month:'long' }) + '</div>';
+
+  tournois.forEach(function(t) {
+    html += '<div class="cal-popover-item">🏆 ' + t.nom + ' — ' + t.cadence + '</div>';
+  });
+  defis.forEach(function(d) {
+    html += '<div class="cal-popover-item">♟ ' + d.pseudo + ' — ' + d.cadence + '</div>';
+  });
+
+  pop.innerHTML = html;
+  pop.style.display = 'block';
+  var rect = evt.target.closest('.cal-day').getBoundingClientRect();
+  pop.style.left = Math.min(rect.left, window.innerWidth - 290) + 'px';
+  pop.style.top  = (rect.bottom + 6) + 'px';
+}
+
+function calHidePopover() {
+  if (calPopoverTimer) { clearTimeout(calPopoverTimer); calPopoverTimer = null; }
+  document.getElementById('cal-popover').style.display = 'none';
+}
+
+function calDayClick(dateKey) {
+  if (!cachedEvenements) return;
+  var defis    = (cachedEvenements.defis    || []).filter(function(d) { return getEventDateKey(d) === dateKey; });
+  var tournois = (cachedEvenements.tournois || []).filter(function(t) { return getEventDateKey(t) === dateKey; });
+
+  // Jour avec tournoi -> pas d'ajout de defi possible, juste affichage
+  if (tournois.length > 0) {
+    showTab('en-cours');
+    var ev = { target: document.querySelector('.tab[onclick*="en-cours"]') };
+    showTabProgrammatic('en-cours');
+    return;
+  }
+
+  // Jour avec defi(s) existants -> affiche la liste filtree (onglet En cours, scroll vers le jour)
+  if (defis.length > 0) {
+    showTabProgrammatic('en-cours');
+    return;
+  }
+
+  // Jour vide -> ouvre le formulaire defi avec la date pre-remplie
+  showTabProgrammatic('defi');
+  var d = new Date(dateKey + 'T00:00:00');
+  document.getElementById('defi-date').value = dateKey;
+}
+
+// Version programmatique de showTab (sans dependre de window.event)
+function showTabProgrammatic(name) {
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+  document.getElementById('tab-' + name).classList.add('active');
+  document.querySelectorAll('.tab').forEach(function(t) {
+    if (t.getAttribute('onclick') && t.getAttribute('onclick').indexOf("'" + name + "'") !== -1) {
+      t.classList.add('active');
+    }
+  });
+  if (name === 'en-cours')   loadEvenements();
+  if (name === 'calendrier') { loadEvenements().then(renderCalendar); }
+}
+
+// Ferme les modals en cliquant en dehors
+document.getElementById('modal-rejoindre').addEventListener('click', function(e) { if (e.target === this) fermerModal(); });
+document.getElementById('modal-inscrire').addEventListener('click', function(e) { if (e.target === this) fermerModalTournoi(); });
+</script>
+</body>
+</html>
