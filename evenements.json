@@ -1,32 +1,9 @@
 [
   {
-    "date": "2026-07-06",
-    "date-fin": "2026-07-17",
-    "titre": "Stage d'été",
-    "description": "L’Échecs Club Ajaccien organise ses stages d’été 2026 du 6 au 17 juillet à Ajaccio. Deux semaines de découverte, d’apprentissage et de perfectionnement sont proposées aux joueurs de tous niveaux, dans une ambiance conviviale et pédagogique.",
-    "image": "/images/Event_Temporaire/Stages.jpg",
-    "lien": "/evenements/Stages-2026.html"
-  },
-  {
-    "date": "2026-06-23",
-    "titre": "Assemblée Générale",
-    "description": "Découvrez la convocation à l'Assemblée Générale de l'Échecs Club Ajaccien, un moment clé pour les membres du club. Cette réunion annuelle est l'occasion de faire le point sur les activités passées, de discuter des projets futurs et de renforcer les liens au sein de notre communauté échiquéenne. Ne manquez pas cette opportunité de participer activement à la vie du club et de contribuer à son développement.",
-    "image": "/images/Logo_du_club.jpeg",
-    "lien": "/evenements/Assemblee-Generale-2026.html"
-  },
-  {
-    "date": "2026-08-01",
-    "titre": "Open de Ciamannacce",
-    "description": "Le samedi 1 août 2026, Ciamannacce vibrera au rythme des échecs avec un grand tournoi de blitz ouvert à tous, organisé dans une ambiance conviviale et festive. Entre compétition, animations et soirée grillade, cette journée réunira joueurs passionnés, familles et amateurs autour du jeu d’échecs.",
-    "image": "/images/Event_Temporaire/ciamannacce.jpg",
-    "lien": "/evenements/Open-Ciamannacce-2026.html"
-  },
-  {
-    "date": "2026-06-27",
-    "date-fin": "2026-07-03",
-    "titre": "Open de Purtichju",
-    "description": "Le Corsican Circuit 2026 s’ouvrira une nouvelle fois à Purtichju avec le très attendu Open International Marina Viva, devenu au fil des éditions un rendez-vous incontournable du calendrier échiquéen estival. Dans un cadre exceptionnel en bord de mer, joueurs titrés, grands maîtres et passionnés venus du monde entier se retrouveront pour une semaine de compétition intense et conviviale.",
-    "image": "/images/Event_Temporaire/Purtichju_2026.jpg",
-    "lien": "/evenements/Open-Purtichju-2026.html"
+    "date": "2026-09-01",
+    "titre": "Nouvelle Horraires",
+    "description": "Découvrez les horaires, les cours et les activités proposés par le Club d'Échecs d'Ajaccio pour la saison. Ouvert à tous, du joueur débutant au compétiteur confirmé, le club propose une offre complète d'apprentissage, de perfectionnement et de jeu libre dans une ambiance conviviale.",
+    "image": "/images/Event_Temporaire/horraires-2026.jpg",
+    "lien": "/evenements/Horraires-2026-2027.html"
   }
 ]
