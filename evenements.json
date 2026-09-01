@@ -1,16 +1,30 @@
 [
   {
-    "date": "2026-09-01",
-    "titre": "Nouveaux Horaires",
-    "description": "Découvrez les horaires, les cours et les activités proposés par le Club d'Échecs d'Ajaccio pour la saison. Ouvert à tous, du joueur débutant au compétiteur confirmé, le club propose une offre complète d'apprentissage, de perfectionnement et de jeu libre dans une ambiance conviviale.",
-    "image": "/images/Event_Temporaire/horraires-2026.jpg",
-    "lien": "/evenements/Horraires-2026-2027.html"
+    "date": "2026-09-04",
+    "titre": "Blitz Mensuel",
+    "description": "Venez nombreux participer à notre tournoi Blitz Mensuel ! Un tournoi rapide et convivial, ouvert à tous les niveaux.",
+    "image": "/images/Actu/blitz-mensuel-2026.jpg",
+    "lien": "/actualitees/Blitz-Mensuel-2026.html"
   },
   {
-    "date": "2026-09-04",
-    "titre": "Blitz Pizza",
-    "description": "Venez nombreux participer à notre tournoi Blitz Pizza ! Un tournoi rapide et convivial, ouvert à tous les niveaux.",
-    "image": "",
-    "lien": "/actualitees/Blitz-Pizza-2026.html"
+    "date": "2026-09-12",
+    "titre": "Associ in Festa",
+    "description": "L'Échecs Club Ajaccien vous donnent rendez-vous au Casone pour une belle journée de rencontres, de découvertes et de parties d’échecs !",
+    "image": "/images/Event_Temporaire/Associ-in-festa.jpg",
+    "lien": "/evenements/Associ-in-festa-2026.html"
+  },
+  {
+    "date": "2026-11-22",
+    "titre": "Coupe Parité",
+    "description": "Une compétition où la mixité est à l’honneur : rendez-vous à Corte le 22 novembre pour la phase interdépartementale de la Coupe de la Parité !",
+    "image": "/images/Event_Temporaire/Coupe-Parite-2026.jpg",
+    "lien": "/evenements/Coupe-Parite-2026.html"
+  },
+  {
+    "date": "2027-01-10",
+    "titre": "Championnat Équipes",
+    "description": "25 équipes, 6 rondes et une nouvelle formule : le Championnat de Corse par équipes 2026-2027 s’ouvre à Prunelli avec un grand rendez-vous réunissant les formateurs des clubs insulaires.",
+    "image": "/images/Event_Temporaire/Championnat-Equipe-2027.jpg",
+    "lien": "/evenements/Championnat-Equipe-2027.html"
   }
 ]
