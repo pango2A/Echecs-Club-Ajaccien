@@ -7,6 +7,27 @@
     "lien": "/actualitees/Blitz-Mensuel-2026.html"
   },
   {
+    "date": "2026-09-19",
+    "titre": "Tournoi de Rapides",
+    "description": "Le samedi 19 septembre 2026, Ajaccio devient la capitale du jeu rapide ! Inscriptions dès 13h pour un tournoi FIDE intense en 10 min + 3 sec. Êtes-vous prêt à défier le chrono ?",
+    "image": "/images/Event_Temporaire/Tournoi-Rapides.jpg",
+    "lien": "/evenements/Tournoi-Rapides-2026.html"
+  },
+  {
+    "date": "2026-09-15",
+    "titre": "Tournoi Lichess Mensuel",
+    "description": "Mardi 15 septembre à 20h, les Corses se retrouvent sur Lichess ! Tournoi 3+2 réservé aux licenciés. Rejoignez l'équipe I Scacchi Aiaccini et venez défendre vos couleurs en ligne !",
+    "image": "/images/Event_Temporaire/Tournoi-Lichess.jpg",
+    "lien": "/evenements/Tournoi-Lichess-2026.html"
+  },
+  {
+    "date": "2026-09-26",
+    "titre": "Tournoi Inseme",
+    "description": "Le samedi 26 septembre 2026, jouez pour la bonne cause ! Le 6ᵉ Tournoi ECA-INSEME vous attend à Ajaccio : 9 rondes en 5 min + 3 sec, 100 % au profit de l'association INSEME. Inscrivez-vous dès maintenant !",
+    "image": "/images/Event_Temporaire/Tournoi-Inseme.jpg",
+    "lien": "/evenements/Tournoi-Inseme-2026.html"
+  },
+  {
     "date": "2026-09-12",
     "titre": "Associ in Festa",
     "description": "L'Échecs Club Ajaccien vous donnent rendez-vous au Casone pour une belle journée de rencontres, de découvertes et de parties d’échecs !",
